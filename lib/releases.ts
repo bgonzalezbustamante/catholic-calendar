@@ -46,8 +46,8 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with visible composed-display controls, rule details and active-period output.',
-          'Added a browsable year overview showing observed, transferred and impeded entries.',
+          'Added an interactive date tester with two/three-item composed-display controls, preferred-period toggles for Lent, St Michael’s Lent and Advent, rule details and complete diagnostic cards.',
+          'Added a bilingual year overview showing English and Spanish celebration names alongside observed, transferred and impeded entries.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
       },
