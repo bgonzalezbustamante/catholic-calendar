@@ -235,6 +235,24 @@ describe('display summary', () => {
     }
   })
 
+  it('uses the rosary icon for the Annunciation as a specific override', () => {
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-03-25')).items[0]
+    ).toMatchObject({
+      id: 'annunciation',
+      icon: 'rosary',
+    })
+
+    const countdown = getCalendarDisplaySummary(
+      getCatholicCalendarState('2026-03-24')
+    ).items.find((item) => item.kind === 'countdown')
+
+    expect(countdown).toMatchObject({
+      id: 'countdown:annunciation',
+      icon: 'rosary',
+    })
+  })
+
   it('uses the rosary icon for Marian observances and countdowns', () => {
     const marianDates = [
       ['2026-01-01', 'mary-mother-of-god'],
