@@ -144,7 +144,7 @@ describe('display summary', () => {
   })
 
   it('combines active periods and countdown when no discrete observance is active', () => {
-    const state = getCatholicCalendarState('2024-12-03')
+    const state = getCatholicCalendarState('2026-12-03')
     expect(formatCalendarStateSummary(state)).toBe(
       'Advent · 5 days until Immaculate Conception'
     )
