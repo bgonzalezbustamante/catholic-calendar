@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Added both annual spans of Ordinary Time so the active-period layer now covers all six Roman liturgical seasons; impeded diagnostic callouts are now confined to Year Overview rather than the Calendar state tester.
+- Confined impeded diagnostic callouts to Year Overview rather than the Calendar state tester, and removed raw precedence-number pills from the Primary observance card.
 - Current year now mirrors the Return to today action with a coral treatment, small return icon and right alignment beneath Year Overview pagination.
 - Refined the Christicons footer acknowledgement with the existing bible-1 Christicon and a new-tab link, reused rank pills inside the rank guide, right-aligned the tester Date label, and moved the selected date into Display configuration.
 - Rendered liturgical ranks as colour-coded pill labels in Year Overview using the existing visual palette, and added a discreet Christicons acknowledgement in the site footer.
