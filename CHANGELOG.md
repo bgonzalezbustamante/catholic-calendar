@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Holy Week now uses the calvary Christicon; Year Overview now uses a consistent subsection heading pattern for celebrations, periods and rank guidance, with safer pill spacing/wrapping in the rank explanation.
 - Corrected celebration icons: Baptism of the Lord → dove, Ash Wednesday → calvary, Holy Thursday → bread, Good Friday → calvary, Saints Peter and Paul → Saint Peter, and All Souls → tombstone.
 - Added a second Year Overview table for the modelled liturgical/devotional periods, including semantic icons, period kind, annual boundaries and an explicit note that Ordinary Time is not modelled.
 - Fixed Year Overview icon visibility by giving the shared masked-icon element an explicit inline-block box outside flex layouts.
