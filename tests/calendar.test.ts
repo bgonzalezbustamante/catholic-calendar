@@ -73,6 +73,33 @@ describe('fixed observances', () => {
     })
   })
 
+  it('includes Saint Bernadette and Saint Benedict', () => {
+    expect(getCatholicCalendarState('2026-04-16').primaryObservance).toMatchObject({
+      id: 'st-bernadette-soubirous',
+      name: 'Saint Bernadette Soubirous',
+      nameEs: 'Santa Bernardita Soubirous',
+      rank: 'optional-memorial',
+      status: 'observed',
+    })
+
+    expect(getCatholicCalendarState('2026-07-11').primaryObservance).toMatchObject({
+      id: 'st-benedict-nursia',
+      name: 'Saint Benedict of Nursia',
+      nameEs: 'San Benito de Nursia',
+      rank: 'memorial',
+      status: 'observed',
+    })
+
+    expect(
+      getCatholicCalendarState('2027-07-11').nominalObservances.find(
+        (observance) => observance.id === 'st-benedict-nursia'
+      )
+    ).toMatchObject({
+      status: 'impeded',
+      impededBy: 'Sunday',
+    })
+  })
+
   it('includes the Transfiguration and Holy Family', () => {
     expect(getCatholicCalendarState('2026-08-06').primaryObservance).toMatchObject({
       id: 'transfiguration',
