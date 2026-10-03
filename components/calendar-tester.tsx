@@ -138,9 +138,6 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           </select>
         </label>
 
-        <div className="display-policy-note">
-          Lent, St Michael&apos;s Lent and Advent are always prioritised when active.
-        </div>
       </div>
 
       <blockquote className="state-quotation">

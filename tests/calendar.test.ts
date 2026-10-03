@@ -163,13 +163,6 @@ describe('display summary', () => {
     ])
   })
 
-  it('always keeps Advent in a two-item display', () => {
-    const state = getCatholicCalendarState('2026-12-08')
-    expect(formatCalendarStateSummary(state)).toBe(
-      'Immaculate Conception · Advent'
-    )
-  })
-
   it('supports a three-item composed display without changing diagnostic state', () => {
     const state = getCatholicCalendarState('2026-04-02')
     const display = getCalendarDisplaySummary(state, {
@@ -188,16 +181,26 @@ describe('display summary', () => {
     ])
   })
 
-  it('keeps core compact-display periods visible at overlapping boundaries', () => {
-    const lentState = getCatholicCalendarState('2026-04-02')
+  it('uses the engine period order without display-specific prioritisation', () => {
+    const holyThursday = getCatholicCalendarState('2026-04-02')
+    expect(formatCalendarStateSummary(holyThursday)).toBe(
+      'Holy Thursday · Lent'
+    )
+
+    const easter = getCatholicCalendarState('2026-04-05')
+    expect(formatCalendarStateSummary(easter)).toBe(
+      'Easter Sunday of the Resurrection of the Lord · Sacred Paschal Triduum'
+    )
     expect(
-      formatCalendarStateSummary(lentState)
-    ).toBe('Holy Thursday · Lent')
+      formatCalendarStateSummary(easter, { maxItems: 3 })
+    ).toBe(
+      'Easter Sunday of the Resurrection of the Lord · Sacred Paschal Triduum · Easter Time'
+    )
 
     const michaelState = getCatholicCalendarState('2026-08-15')
-    expect(
-      formatCalendarStateSummary(michaelState)
-    ).toBe("Assumption of the Blessed Virgin Mary · St Michael's Lent")
+    expect(formatCalendarStateSummary(michaelState)).toBe(
+      "Assumption of the Blessed Virgin Mary · St Michael's Lent"
+    )
   })
 
   it('exposes only the compact display length as a package option', () => {

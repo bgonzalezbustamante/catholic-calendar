@@ -2,21 +2,10 @@ import type {
   CalendarDisplayItem,
   CalendarDisplayOptions,
   CalendarDisplaySummary,
-  CalendarPeriod,
   CatholicCalendarState,
 } from './types'
 
 export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
-
-export const CALENDAR_DISPLAY_PRIORITY_PERIOD_IDS = [
-  'lent',
-  'st-michaels-lent',
-  'advent',
-] as const
-
-const priorityPeriodOrder = new Map<string, number>(
-  CALENDAR_DISPLAY_PRIORITY_PERIOD_IDS.map((periodId, index) => [periodId, index])
-)
 
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
   if (!state.countdown) return null
@@ -28,30 +17,6 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
     id: `countdown:${state.countdown.observance.id}`,
     label: `${state.countdown.daysUntil} ${unit} until ${state.countdown.observance.name}`,
   }
-}
-
-function orderedPeriods(state: CatholicCalendarState): CalendarPeriod[] {
-  const periods = [...state.liturgicalPeriods, ...state.devotionalPeriods]
-
-  return periods
-    .map((period, sourceIndex) => ({
-      period,
-      sourceIndex,
-      priorityIndex: priorityPeriodOrder.get(period.id),
-    }))
-    .sort((a, b) => {
-      const aPriority = a.priorityIndex !== undefined
-      const bPriority = b.priorityIndex !== undefined
-
-      if (aPriority && bPriority) {
-        return a.priorityIndex! - b.priorityIndex!
-      }
-
-      if (aPriority) return -1
-      if (bPriority) return 1
-      return a.sourceIndex - b.sourceIndex
-    })
-    .map(({ period }) => period)
 }
 
 export function getCalendarDisplaySummary(
@@ -69,7 +34,7 @@ export function getCalendarDisplaySummary(
     })
   }
 
-  for (const period of orderedPeriods(state)) {
+  for (const period of [...state.liturgicalPeriods, ...state.devotionalPeriods]) {
     if (items.length >= maxItems) break
 
     items.push({

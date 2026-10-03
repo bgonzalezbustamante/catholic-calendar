@@ -215,7 +215,7 @@ h1 {
 
 .display-config {
   display: grid;
-  grid-template-columns: minmax(180px, 1fr) auto minmax(260px, auto);
+  grid-template-columns: minmax(180px, 1fr) auto;
   gap: 0.75rem 1rem;
   align-items: end;
   margin: 0 0 0.75rem;
@@ -258,15 +258,6 @@ h1 {
   background: var(--paper);
   padding: 0.35rem 1.8rem 0.35rem 0.55rem;
   color: var(--blue);
-}
-
-.display-policy-note {
-  align-self: center;
-  max-width: 360px;
-  color: var(--ash);
-  font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.68rem;
-  line-height: 1.4;
 }
 
 .state-quotation {
