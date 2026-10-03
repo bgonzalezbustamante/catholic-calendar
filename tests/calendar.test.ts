@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   firstSundayOfAdvent,
+  formatCalendarStateSummary,
   getCatholicCalendarState,
   getYearOverview,
   gregorianEasterSunday,
@@ -130,5 +131,40 @@ describe('year overview', () => {
     )
 
     expect(john?.date).toBe('2022-06-23')
+  })
+})
+
+
+describe('display summary', () => {
+  it('combines a primary observance with active periods', () => {
+    const state = getCatholicCalendarState('2026-09-08')
+    expect(formatCalendarStateSummary(state)).toBe(
+      "Nativity of the Blessed Virgin Mary · St Michael's Lent"
+    )
+  })
+
+  it('combines active periods and countdown when no discrete observance is active', () => {
+    const state = getCatholicCalendarState('2026-12-03')
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Advent · 5 days until Immaculate Conception'
+    )
+  })
+
+  it('uses the final display names for selected celebrations', () => {
+    expect(getCatholicCalendarState('2026-04-12').primaryObservance?.name).toBe(
+      'Divine Mercy Sunday'
+    )
+    expect(getCatholicCalendarState('2026-06-04').primaryObservance?.name).toBe(
+      'Corpus Christi'
+    )
+    expect(getCatholicCalendarState('2026-11-02').primaryObservance?.name).toBe(
+      'All Souls'
+    )
+    expect(getCatholicCalendarState('2026-12-08').primaryObservance?.name).toBe(
+      'Immaculate Conception'
+    )
+    expect(getCatholicCalendarState('2026-12-25').primaryObservance?.name).toBe(
+      'Christmas'
+    )
   })
 })

@@ -1,6 +1,6 @@
 # Catholic Calendar
 
-**v0.1.0-alpha.1 “Calm Bridge” — pre-release, 3 October 2026**
+**v0.1.0-alpha.1 “Calm Bridge” — In Development**
 
 A standalone proof of concept for a reusable Roman Catholic calendar engine and presentation component. The project derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the result through an interactive tester and year overview.
 

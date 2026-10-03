@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 
 import {
+  formatCalendarStateSummary,
   getCatholicCalendarState,
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
@@ -56,6 +57,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status !== 'observed'
   )
+  const displaySummary = formatCalendarStateSummary(state)
 
   return (
     <section className="tester" aria-labelledby="tester-title">
@@ -108,6 +110,11 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         <span>Selected date</span>
         <strong>{formatDate(date)}</strong>
       </div>
+
+      <blockquote className="state-quotation">
+        <p>{displaySummary}</p>
+        <footer>Composed calendar display</footer>
+      </blockquote>
 
       <div className="layer-grid">
         <article className="layer-card">
