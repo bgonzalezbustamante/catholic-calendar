@@ -212,6 +212,38 @@ describe('display summary', () => {
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
   })
 
+  it('maps Christicons onto calendar display semantics', () => {
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-12-03')).items).toMatchObject([
+      { id: 'advent', icon: 'candle' },
+      { id: 'countdown:immaculate-conception', icon: null },
+    ])
+
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-12-25')).items[0]).toMatchObject({
+      id: 'christmas',
+      icon: 'star',
+    })
+
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-05-24')).items[0]).toMatchObject({
+      id: 'pentecost',
+      icon: 'fire',
+    })
+
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-06-04')).items[0]).toMatchObject({
+      id: 'corpus-christi',
+      icon: 'chalice',
+    })
+
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-06-12')).items[0]).toMatchObject({
+      id: 'sacred-heart',
+      icon: 'sacred-heart',
+    })
+
+    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-10-07')).items[0]).toMatchObject({
+      id: 'our-lady-of-the-rosary',
+      icon: 'rosary',
+    })
+  })
+
   it('provides Spanish names for every year-overview observance', () => {
     const overview = getYearOverview(2026)
     expect(overview.length).toBeGreaterThan(0)
