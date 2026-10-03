@@ -14,7 +14,7 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Exposes a composed display API that defaults to two reader-facing items and supports a two- or three-item limit. The display follows the engine’s natural state order—primary observance, liturgical periods, devotional periods, then countdown when space remains—without a separate presentation-precedence layer.
 - Adds semantic Christicons metadata to display items while keeping the calendar engine UI-agnostic. First Sunday of Advent uses the candle icon and Christmas Time uses the star icon. Specific mappings use the selected Christicons; otherwise Marian observances and Marian countdown targets use `rosary`, other unmapped observances/countdowns use `cross`, and unmapped periods use `church-1`, so every composed-display item always has an icon. The reusable renderer uses CSS masks, so hosts can theme icons through `--catholic-calendar-icon-color` without duplicating SVG assets. The demonstration app falls back to the neutral ash colour; a host such as the Academic Website can set `--catholic-calendar-icon-color: #fe615a` for coral icons.
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
-- Retains selected observances that are impeded by a higher-ranking day as nominal diagnostic entries instead of falsely reporting them as observed.
+- Distinguishes genuinely impeded observances from memorials that may be commemorated on privileged weekdays. Eligible memorials remain on their date with status `commemorated`; genuinely displaced lower-ranking observances remain nominal diagnostic entries.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.
 - Models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
 - Uses the universal Roman dates for Epiphany, Ascension and Corpus Christi rather than national transfers.
@@ -104,9 +104,10 @@ getCatholicCalendarState('2026-10-03').countdown
 
 ## Transfer and overlap model
 
-The engine distinguishes three states:
+The engine distinguishes four states:
 
 - `observed` — celebrated on its nominal date.
+- `commemorated` — a memorial remains attached to its nominal date in a privileged weekday while the seasonal weekday retains liturgical precedence.
 - `transferred` — nominal and observed dates differ; the transfer reason is retained.
 - `impeded` — the selected nominal observance is retained for inspection but has no observed date because a higher-ranking day takes precedence.
 
