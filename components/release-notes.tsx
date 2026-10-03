@@ -3,19 +3,17 @@ import { currentRelease } from '@/lib/releases'
 export default function ReleaseNotes() {
   return (
     <section className="release-notes" aria-labelledby="release-notes-title">
-      <div className="section-heading release-notes-heading">
-        <div>
-          <p className="eyebrow">Release notes</p>
-          <h2 id="release-notes-title">{currentRelease.codename}</h2>
-        </div>
-        <span className="release-status">{currentRelease.status}</span>
-      </div>
-      <article className="release-card">
+      <p className="eyebrow">Release notes</p>
+      <div className="release-card">
         <div className="release-heading">
-          <strong>{currentRelease.version}</strong>
-          <span>{currentRelease.codename}</span>
+          <h2 id="release-notes-title">
+            {currentRelease.version} “{currentRelease.codename}”
+          </h2>
+          <span className="release-tag">{currentRelease.status}</span>
         </div>
+
         <p className="release-summary">{currentRelease.summary}</p>
+
         <div className="release-sections">
           {currentRelease.sections.map((section) => (
             <div key={section.title}>
@@ -28,7 +26,7 @@ export default function ReleaseNotes() {
             </div>
           ))}
         </div>
-      </article>
+      </div>
     </section>
   )
 }
