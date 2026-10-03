@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Added a `commemorated` status for memorials permitted on privileged weekdays, so dates such as Our Lady of Lourdes on 11 February 2027 remain in the main calendar state instead of being incorrectly marked impeded.
+- Hardened manual date entry against incomplete/out-of-range typed years, removed the decorative bubble from the three diagnostic cards, and replaced Year Overview's numeric year field with right-aligned previous/next year pagination.
 - Added Saint Francis of Assisi on 4 October as a memorial in the General Roman Calendar baseline.
 - Added explicit regression coverage for Our Lady of Lourdes on 11 February and corrected display icon mappings for the First Sunday of Advent (candle) and Christmas Time (star).
 - The Annunciation now uses the rosary Christicon as an explicit display override while remaining categorised as a Lord observance in the calendar model.

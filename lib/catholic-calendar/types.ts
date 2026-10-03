@@ -13,7 +13,7 @@ export type LiturgicalRank =
   | 'optional-memorial'
   | 'commemoration'
 
-export type ObservanceStatus = 'observed' | 'transferred' | 'impeded'
+export type ObservanceStatus = 'observed' | 'commemorated' | 'transferred' | 'impeded'
 
 export type PeriodKind = 'liturgical' | 'devotional'
 
@@ -29,6 +29,7 @@ export interface CalendarObservance {
   status: ObservanceStatus
   transferred: boolean
   transferReason: string | null
+  commemorationReason: string | null
   impededBy: string | null
   effectiveFrom?: number
 }

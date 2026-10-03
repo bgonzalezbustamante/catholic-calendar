@@ -44,6 +44,14 @@ The PoC uses the universal Thursday dates for Ascension and Corpus Christi rathe
 
 The First Sunday of Advent is derived as the Sunday occurring from 27 November through 3 December. Christ the King is the immediately preceding Sunday. Advent runs from the First Sunday of Advent through 24 December at civil-date granularity.
 
+### Memorials on privileged weekdays
+
+GIRM 355 permits an Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemorated` status rather than treating these cases as fully impeded.
+
+References:
+- USCCB, General Instruction of the Roman Missal, no. 355: https://www.usccb.org/prayer-and-worship/the-mass/general-instruction-of-the-roman-missal/girm-chapter-7
+- Holy See, General Instruction of the Roman Missal, no. 355: https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html
+
 ## Transfers and collisions
 
 ### General rule
