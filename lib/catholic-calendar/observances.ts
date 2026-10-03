@@ -1,5 +1,5 @@
 import { compareDates, dateFromParts } from './date-utils'
-import { baptismOfTheLord } from './computus'
+import { baptismOfTheLord, holyFamily } from './computus'
 import { assertSupportedYear, seasonDates } from './calendar'
 import { applyCalendarRules } from './rules'
 import type { CalendarObservance, LiturgicalRank, ObservanceCategory } from './types'
@@ -31,6 +31,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'nativity-john-baptist': 'Natividad de San Juan Bautista',
   'peter-and-paul': 'Santos Pedro y Pablo, apóstoles',
   'our-lady-of-mount-carmel': 'Nuestra Señora del Carmen',
+  'transfiguration': 'Transfiguración del Señor',
   'assumption': 'Asunción de la Bienaventurada Virgen María',
   'queenship-of-mary': 'Bienaventurada Virgen María Reina',
   'nativity-of-mary': 'Natividad de la Santísima Virgen María',
@@ -48,6 +49,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'our-lady-of-loreto': 'Nuestra Señora de Loreto',
   'our-lady-of-guadalupe': 'Nuestra Señora de Guadalupe',
   'christmas': 'Navidad',
+  'holy-family': 'Sagrada Familia de Jesús, María y José',
 }
 
 function observance(input: {
@@ -290,6 +292,13 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       rank: 'optional-memorial',
       precedence: 12,
     }),
+    fixed(year, 8, 6, {
+      id: 'transfiguration',
+      name: 'Transfiguration of the Lord',
+      category: 'lord',
+      rank: 'feast',
+      precedence: 5,
+    }),
     fixed(year, 8, 15, {
       id: 'assumption',
       name: 'Assumption of the Blessed Virgin Mary',
@@ -412,6 +421,14 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       category: 'lord',
       rank: 'principal-day',
       precedence: 2,
+    }),
+    observance({
+      id: 'holy-family',
+      name: 'Holy Family of Jesus, Mary and Joseph',
+      category: 'lord',
+      rank: 'feast',
+      precedence: 5,
+      nominalDate: holyFamily(year),
     }),
   ]
 
