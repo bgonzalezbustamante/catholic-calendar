@@ -209,10 +209,12 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <h3>{state.primaryObservance?.name ?? 'No selected discrete observance'}</h3>
           {state.primaryObservance ? (
             <div className="chip-row">
-              <span className="state-chip">{titleCase(state.primaryObservance.rank)}</span>
-              {state.primaryObservance.status === 'commemorated' ? (
-                <span className="state-chip commemorated">Commemorated</span>
-              ) : null}
+              <span className={`rank-pill is-${state.primaryObservance.rank}`}>
+                {titleCase(state.primaryObservance.rank)}
+              </span>
+              <span className={`status-pill is-${state.primaryObservance.status}`}>
+                {titleCase(state.primaryObservance.status)}
+              </span>
             </div>
           ) : (
             <p className="card-copy">The period and countdown layers remain active independently.</p>
@@ -231,12 +233,12 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           </h3>
           <div className="chip-row">
             {state.liturgicalPeriods.map((period) => (
-              <span className="state-chip" key={period.id}>
+              <span className="period-pill is-liturgical" key={period.id}>
                 Liturgical
               </span>
             ))}
             {state.devotionalPeriods.map((period) => (
-              <span className="state-chip devotional" key={period.id}>
+              <span className="period-pill is-devotional" key={period.id}>
                 Devotional
               </span>
             ))}
@@ -250,6 +252,12 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
             <>
               <h3>{state.countdown.daysUntil} day{state.countdown.daysUntil === 1 ? '' : 's'} until {state.countdown.observance.name}</h3>
               <p className="card-copy">Observed on {formatDate(state.countdown.date)}.</p>
+              <div className="chip-row">
+                <span className={`rank-pill is-${state.countdown.observance.rank}`}>
+                  {titleCase(state.countdown.observance.rank)}
+                </span>
+                <span className="status-pill is-upcoming">Upcoming</span>
+              </div>
             </>
           ) : (
             <>
