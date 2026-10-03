@@ -27,6 +27,10 @@ function titleCase(value: string) {
     .join(' ')
 }
 
+function statusLabel(status: CalendarObservance['status']) {
+  return status === 'commemoration-eligible' ? 'Commemorated' : titleCase(status)
+}
+
 function shiftDate(value: string, days: number) {
   const date = new Date(`${value}T00:00:00Z`)
   date.setUTCDate(date.getUTCDate() + days)
@@ -213,7 +217,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
                 {titleCase(state.primaryObservance.rank)}
               </span>
               <span className={`status-pill is-${state.primaryObservance.status}`}>
-                {titleCase(state.primaryObservance.status)}
+                {statusLabel(state.primaryObservance.status)}
               </span>
             </div>
           ) : (
