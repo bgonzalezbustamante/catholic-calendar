@@ -235,13 +235,38 @@ describe('display summary', () => {
     }
   })
 
+  it('uses the rosary icon for Marian observances and countdowns', () => {
+    const marianDates = [
+      ['2026-01-01', 'mary-mother-of-god'],
+      ['2026-02-11', 'our-lady-of-lourdes'],
+      ['2026-08-15', 'assumption'],
+      ['2026-09-08', 'nativity-of-mary'],
+      ['2026-12-08', 'immaculate-conception'],
+    ] as const
+
+    for (const [date, id] of marianDates) {
+      expect(
+        getCalendarDisplaySummary(getCatholicCalendarState(date)).items[0]
+      ).toMatchObject({ id, icon: 'rosary' })
+    }
+
+    const countdown = getCalendarDisplaySummary(
+      getCatholicCalendarState('2026-12-07')
+    ).items.find((item) => item.kind === 'countdown')
+
+    expect(countdown).toMatchObject({
+      id: 'countdown:immaculate-conception',
+      icon: 'rosary',
+    })
+  })
+
   it('guarantees an icon for every composed display item', () => {
     const unmappedObservance = getCalendarDisplaySummary(
       getCatholicCalendarState('2026-09-08')
     )
     expect(unmappedObservance.items[0]).toMatchObject({
       id: 'nativity-of-mary',
-      icon: 'cross',
+      icon: 'rosary',
     })
 
     const christmasTime = getCalendarDisplaySummary(
