@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Corrected celebration icons: Baptism of the Lord → dove, Ash Wednesday → calvary, Holy Thursday → bread, Good Friday → calvary, Saints Peter and Paul → Saint Peter, and All Souls → tombstone.
+- Added a second Year Overview table for the modelled liturgical/devotional periods, including semantic icons, period kind, annual boundaries and an explicit note that Ordinary Time is not modelled.
 - Fixed Year Overview icon visibility by giving the shared masked-icon element an explicit inline-block box outside flex layouts.
 - Nativity of Saint John the Baptist now uses the dove Christicon and Saints Peter and Paul use the fishes Christicon; Year Overview now displays each celebration's semantic icon.
 - Primary observance, Active periods and Countdown now use the same colour-coded pill system as Year Overview, including rank/status, period-kind and upcoming-state pills.
