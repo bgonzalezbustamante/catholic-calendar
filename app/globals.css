@@ -757,11 +757,11 @@ tbody tr:last-child td {
   color: var(--ash);
 }
 
-.period-overview {
+.year-subsection {
   margin: 1.1rem 0 1.4rem;
 }
 
-.period-overview-heading {
+.year-subsection-heading {
   display: grid;
   grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
   gap: 1rem 1.4rem;
@@ -769,12 +769,12 @@ tbody tr:last-child td {
   margin-bottom: 0.75rem;
 }
 
-.period-overview-heading h3 {
+.year-subsection-heading h3 {
   margin: 0;
   font-size: 0.96rem;
 }
 
-.period-overview-heading > p {
+.year-subsection-heading > p {
   margin: 0;
   color: var(--ash);
   font-size: 0.78rem;
@@ -784,7 +784,7 @@ tbody tr:last-child td {
   min-width: 660px;
 }
 
-.period-overview-note {
+.year-subsection-note {
   margin: 0.55rem 0 0;
   color: var(--ash);
   font-size: 0.7rem;
@@ -792,33 +792,27 @@ tbody tr:last-child td {
 }
 
 .rank-guide {
-  display: grid;
-  grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1.65fr);
-  gap: 1rem 1.4rem;
-  margin: 1rem 0 2.4rem;
+  margin-bottom: 2.4rem;
   border-top: 1px solid var(--stone);
   border-bottom: 1px solid var(--stone);
   padding: 1rem 0;
 }
 
-.rank-guide .eyebrow {
-  margin-bottom: 0.18rem;
+.rank-guide .year-subsection-heading {
+  margin-bottom: 0.5rem;
 }
 
-.rank-guide h3 {
-  margin: 0;
-  font-size: 0.96rem;
-}
-
-.rank-guide > p {
+.rank-guide-copy {
   margin: 0;
   color: var(--ash);
   font-size: 0.8rem;
+  line-height: 2.15;
 }
 
 .rank-guide .rank-pill {
-  margin: 0 0.08rem;
-  vertical-align: 0.08em;
+  margin: 0.14rem 0.12rem;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 .notes-grid {
@@ -1033,8 +1027,7 @@ tbody tr:last-child td {
     flex-basis: 18px;
   }
 
-  .period-overview-heading,
-  .rank-guide {
+  .year-subsection-heading {
     grid-template-columns: 1fr;
   }
 
