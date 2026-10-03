@@ -478,8 +478,8 @@ h1 {
   color: var(--blue);
 }
 
-.state-chip.commemorated,
-.status-pill.is-commemorated {
+.state-chip.commemoration-eligible,
+.status-pill.is-commemoration-eligible {
   border-color: rgba(0, 170, 180, 0.34);
   background: rgba(0, 170, 180, 0.08);
   color: var(--blue);
