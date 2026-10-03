@@ -101,8 +101,20 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
         </div>
       </div>
 
-      <div className="table-scroll" tabIndex={0}>
-        <table>
+      <section className="year-subsection" aria-labelledby="celebrations-overview-title">
+        <div className="year-subsection-heading">
+          <div>
+            <p className="eyebrow">Celebrations</p>
+            <h3 id="celebrations-overview-title">Celebrations in this model</h3>
+          </div>
+          <p>
+            The curated observances for the selected year, including transferred,
+            commemorated and impeded entries.
+          </p>
+        </div>
+
+        <div className="table-scroll" tabIndex={0}>
+          <table>
           <thead>
             <tr>
               <th>Date</th>
@@ -153,11 +165,12 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
+      </section>
 
-      <section className="period-overview" aria-labelledby="period-overview-title">
-        <div className="period-overview-heading">
+      <section className="year-subsection" aria-labelledby="period-overview-title">
+        <div className="year-subsection-heading">
           <div>
             <p className="eyebrow">Periods</p>
             <h3 id="period-overview-title">Periods in this model</h3>
@@ -203,17 +216,22 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             </tbody>
           </table>
         </div>
-        <p className="period-overview-note">
+        <p className="year-subsection-note">
           Ordinary Time is intentionally not modelled in this curated implementation.
         </p>
       </section>
 
-      <aside className="rank-guide" aria-labelledby="rank-guide-title">
-        <div>
+      <aside className="rank-guide year-subsection" aria-labelledby="rank-guide-title">
+        <div className="year-subsection-heading">
+          <div>
           <p className="eyebrow">Rank</p>
           <h3 id="rank-guide-title">How to read liturgical rank</h3>
+          </div>
+          <p>
+            Rank labels describe the classification used in the table below.
+          </p>
         </div>
-        <p>
+        <p className="rank-guide-copy">
           Rank describes a celebration&apos;s liturgical classification, not its spiritual
           importance. In this curated model,{' '}
           <span className="rank-pill is-principal-day">Principal day</span> marks the highest
