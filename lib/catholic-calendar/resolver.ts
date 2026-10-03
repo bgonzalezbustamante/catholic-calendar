@@ -6,7 +6,11 @@ import {
   yearOf,
 } from './date-utils'
 import { firstSundayOfAdvent, gregorianEasterSunday } from './computus'
-import { buildPeriods, MAX_SUPPORTED_YEAR, MIN_SUPPORTED_YEAR } from './calendar'
+import {
+  buildPeriodContext,
+  MAX_SUPPORTED_YEAR,
+  MIN_SUPPORTED_YEAR,
+} from './calendar'
 import { buildYearObservances } from './observances'
 import type {
   CalendarObservance,
@@ -37,8 +41,10 @@ export function getCatholicCalendarState(value: string): CatholicCalendarState {
   }
 
   const years = yearsAround(year)
+  const periodYears =
+    year === MIN_SUPPORTED_YEAR ? [MIN_SUPPORTED_YEAR - 1, ...years] : years
   const observances = years.flatMap(buildYearObservances)
-  const periods = years.flatMap(buildPeriods)
+  const periods = periodYears.flatMap(buildPeriodContext)
 
   const observedObservances = sortObserved(
     observances.filter((event) => event.observedDate === date)

@@ -35,23 +35,30 @@ describe('computus', () => {
 })
 
 describe('fixed observances', () => {
-  it('commemorates Lourdes on a Lenten weekday instead of impeding it', () => {
+  it('marks Lourdes as commemoration-eligible on a Lenten weekday without changing display output', () => {
     const state = getCatholicCalendarState('2027-02-11')
 
     expect(state.primaryObservance).toMatchObject({
       id: 'our-lady-of-lourdes',
-      status: 'commemorated',
+      status: 'commemoration-eligible',
       observedDate: '2027-02-11',
     })
     expect(state.liturgicalPeriods.map((period) => period.id)).toContain('lent')
     expect(formatCalendarStateSummary(state)).toBe(
       'Our Lady of Lourdes · Lent'
     )
+    expect(getCalendarDisplaySummary(state).items.map((item) => item.label)).toEqual([
+      'Our Lady of Lourdes',
+      'Lent',
+    ])
+    expect(state.primaryObservance?.commemorationEligibilityReason).toContain(
+      'may be commemorated'
+    )
     expect(
       getYearOverview(2027).find(
         ({ observance }) => observance.id === 'our-lady-of-lourdes'
       )?.observance.status
-    ).toBe('commemorated')
+    ).toBe('commemoration-eligible')
   })
 
 
@@ -180,6 +187,23 @@ describe('fixed observances', () => {
 })
 
 describe('periods and countdown', () => {
+  it('carries Christmas Time into the minimum supported year', () => {
+    const state = getCatholicCalendarState('2000-01-01')
+
+    expect(state.liturgicalPeriods).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 'christmas-time',
+          startDate: '1999-12-25',
+          endDate: '2000-01-09',
+        }),
+      ])
+    )
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Mary, the Holy Mother of God · Christmas Time'
+    )
+  })
+
   it('keeps the curated period set without Ordinary Time', () => {
     const periods = buildPeriods(2026)
 

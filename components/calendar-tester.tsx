@@ -27,6 +27,10 @@ function titleCase(value: string) {
     .join(' ')
 }
 
+function statusLabel(status: CalendarObservance['status']) {
+  return status === 'commemoration-eligible' ? 'Commemorated' : titleCase(status)
+}
+
 function shiftDate(value: string, days: number) {
   const date = new Date(`${value}T00:00:00Z`)
   date.setUTCDate(date.getUTCDate() + days)
@@ -39,7 +43,7 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
   const label =
     observance.status === 'transferred'
       ? 'Transferred'
-      : observance.status === 'commemorated'
+      : observance.status === 'commemoration-eligible'
         ? 'Commemorated'
         : 'Impeded'
 
@@ -47,15 +51,15 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
     <div className={`rule-callout is-${observance.status}`}>
       <strong>{label}</strong>
       <span>
-        {observance.status === 'commemorated' ? 'Date' : 'Nominal date'}:{' '}
+        {observance.status === 'commemoration-eligible' ? 'Date' : 'Nominal date'}:{' '}
         {formatDate(observance.nominalDate)}
-        {observance.status !== 'commemorated' && observance.observedDate
+        {observance.status !== 'commemoration-eligible' && observance.observedDate
           ? ` · Observed: ${formatDate(observance.observedDate)}`
           : ''}
       </span>
       {observance.transferReason ? <span>{observance.transferReason}</span> : null}
-      {observance.commemorationReason ? (
-        <span>{observance.commemorationReason}</span>
+      {observance.commemorationEligibilityReason ? (
+        <span>{observance.commemorationEligibilityReason}</span>
       ) : null}
       {observance.impededBy ? <span>Impeded by: {observance.impededBy}.</span> : null}
     </div>
@@ -213,7 +217,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
                 {titleCase(state.primaryObservance.rank)}
               </span>
               <span className={`status-pill is-${state.primaryObservance.status}`}>
-                {titleCase(state.primaryObservance.status)}
+                {statusLabel(state.primaryObservance.status)}
               </span>
             </div>
           ) : (

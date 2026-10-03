@@ -36,6 +36,10 @@ function titleCase(value: string) {
     .join(' ')
 }
 
+function statusLabel(status: string) {
+  return status === 'commemoration-eligible' ? 'Commemorated' : titleCase(status)
+}
+
 export default function YearOverview({ initialYear }: { initialYear: number }) {
   const [year, setYear] = useState(initialYear)
   const entries = useMemo(() => getYearOverview(year), [year])
@@ -148,7 +152,7 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                 </td>
                 <td>
                   <span className={`status-pill is-${observance.status}`}>
-                    {titleCase(observance.status)}
+                    {statusLabel(observance.status)}
                   </span>
                 </td>
                 <td>

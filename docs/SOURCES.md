@@ -46,7 +46,7 @@ The First Sunday of Advent is derived as the Sunday occurring from 27 November t
 
 ### Memorials on privileged weekdays
 
-GIRM 355 permits an Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemorated` status rather than treating these cases as fully impeded.
+GIRM 355 permits an Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemoration-eligible` status rather than asserting that the optional commemoration was actually chosen. For continuity, the demonstration UI renders this state with the existing “Commemorated” label and leaves the composed display unchanged.
 
 References:
 - USCCB, General Instruction of the Roman Missal, no. 355: https://www.usccb.org/prayer-and-worship/the-mass/general-instruction-of-the-roman-missal/girm-chapter-7
