@@ -165,6 +165,25 @@ describe('display summary', () => {
     ])
   })
 
+  it('supports a three-item composed display without changing diagnostic state', () => {
+    const state = getCatholicCalendarState('2026-04-02')
+    const display = getCalendarDisplaySummary(state, {
+      maxItems: 3,
+      preferredPeriodIds: ['lent'],
+    })
+
+    expect(display.items.map((item) => item.label)).toEqual([
+      'Holy Thursday',
+      'Lent',
+      'Holy Week',
+    ])
+    expect(state.liturgicalPeriods.map((period) => period.name)).toEqual([
+      'Lent',
+      'Holy Week',
+      'Sacred Paschal Triduum',
+    ])
+  })
+
   it('keeps personally preferred penitential periods visible at overlapping boundaries', () => {
     const lentState = getCatholicCalendarState('2026-04-02')
     expect(
@@ -185,10 +204,19 @@ describe('display summary', () => {
     const state = getCatholicCalendarState('2026-04-02')
     expect(
       getCalendarDisplaySummary(state, {
-        maxItems: 1,
+        maxItems: 3,
         preferredPeriodIds: ['lent'],
       }).items.map((item) => item.label)
-    ).toEqual(['Holy Thursday'])
+    ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
+  })
+
+  it('provides Spanish names for every year-overview observance', () => {
+    const overview = getYearOverview(2026)
+    expect(overview.length).toBeGreaterThan(0)
+    expect(overview.every(({ observance }) => observance.nameEs.length > 0)).toBe(true)
+    expect(
+      overview.find(({ observance }) => observance.id === 'all-souls')?.observance.nameEs
+    ).toBe('Conmemoración de todos los fieles difuntos')
   })
 
   it('uses the final display names for selected celebrations', () => {
