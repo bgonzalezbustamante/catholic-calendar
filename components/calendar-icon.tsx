@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 
 import angelIcon from '@/assets/christicons/angel.svg'
+import breadIcon from '@/assets/christicons/bread.svg'
 import calvaryIcon from '@/assets/christicons/calvary.svg'
 import candleIcon from '@/assets/christicons/candle.svg'
 import chaliceIcon from '@/assets/christicons/chalice.svg'
@@ -9,15 +10,17 @@ import crossIcon from '@/assets/christicons/cross.svg'
 import doveIcon from '@/assets/christicons/dove.svg'
 import easterEggIcon from '@/assets/christicons/easter-egg.svg'
 import fireIcon from '@/assets/christicons/fire.svg'
-import fishesIcon from '@/assets/christicons/fishes.svg'
 import rosaryIcon from '@/assets/christicons/rosary.svg'
 import sacredHeartIcon from '@/assets/christicons/sacred-heart.svg'
+import stPeterIcon from '@/assets/christicons/st-peter.svg'
 import starIcon from '@/assets/christicons/star.svg'
+import tombstoneIcon from '@/assets/christicons/tombstone.svg'
 import trinityIcon from '@/assets/christicons/trinity.svg'
 import type { CalendarDisplayIcon } from '@/lib/catholic-calendar'
 
 const CHRISTICON_SOURCES = {
   angel: angelIcon,
+  bread: breadIcon,
   calvary: calvaryIcon,
   candle: candleIcon,
   chalice: chaliceIcon,
@@ -26,10 +29,11 @@ const CHRISTICON_SOURCES = {
   dove: doveIcon,
   'easter-egg': easterEggIcon,
   fire: fireIcon,
-  fishes: fishesIcon,
   rosary: rosaryIcon,
   'sacred-heart': sacredHeartIcon,
+  'st-peter': stPeterIcon,
   star: starIcon,
+  tombstone: tombstoneIcon,
   trinity: trinityIcon,
 } satisfies Record<CalendarDisplayIcon, { src: string }>
 
