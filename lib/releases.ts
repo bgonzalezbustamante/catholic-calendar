@@ -7,7 +7,6 @@ export type ReleaseNote = {
   version: string
   codename: string
   status: string
-  releasedOn: string
   summary: string
   sections: ReleaseNoteSection[]
 }
@@ -16,8 +15,7 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v0.1.0-alpha.1',
     codename: 'Calm Bridge',
-    status: 'Pre-release',
-    releasedOn: '3 October 2026',
+    status: 'In Development',
     summary:
       'Calm Bridge establishes the first reusable Catholic Calendar proof of concept: deterministic Roman-calendar calculations, a separate Franciscan devotional layer, explicit transfer and impediment states, and interactive validation surfaces.',
     sections: [
@@ -48,7 +46,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with rule details and active-period output.',
+          'Added an interactive date tester with a composed display preview, rule details and active-period output.',
           'Added a browsable year overview showing observed, transferred and impeded entries.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
