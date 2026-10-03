@@ -20,6 +20,8 @@ No unreleased changes.
 - Added the interactive Calendar state tester and bilingual Year Overview, including celebration icons, modelled-period boundaries, rank/status pills, transfer diagnostics and year navigation.
 - Added regression coverage for computus, periods, countdowns, transfers, impediments, collisions, display composition, icon semantics and bilingual observance metadata.
 - Added GitHub Actions validation for linting, type-checking, tests and production builds.
+- Added a publishable `@bgonzalezbustamante/catholic-calendar` package boundary under `packages/catholic-calendar/`, compiled from the existing UI-agnostic engine with CommonJS output, TypeScript declarations and zero runtime dependencies.
+- Added package smoke testing and `npm pack --dry-run` validation to the standard CI workflow.
 
 ### Changed
 

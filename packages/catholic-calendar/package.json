@@ -1,0 +1,46 @@
+{
+  "name": "@bgonzalezbustamante/catholic-calendar",
+  "version": "0.1.0-alpha.1",
+  "description": "Curated TypeScript engine for selected Roman Catholic calendar calculations, observances, periods and display summaries.",
+  "license": "MIT",
+  "author": "Bastián González-Bustamante",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bgonzalezbustamante/catholic-calendar.git"
+  },
+  "homepage": "https://github.com/bgonzalezbustamante/catholic-calendar#readme",
+  "bugs": {
+    "url": "https://github.com/bgonzalezbustamante/catholic-calendar/issues"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "catholic",
+    "calendar",
+    "liturgical",
+    "roman",
+    "church",
+    "typescript",
+    "easter",
+    "advent"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
