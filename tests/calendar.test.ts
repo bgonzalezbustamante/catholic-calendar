@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  buildPeriods,
   firstSundayOfAdvent,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
@@ -178,6 +179,22 @@ describe('fixed observances', () => {
 })
 
 describe('periods and countdown', () => {
+  it('keeps the curated period set without Ordinary Time', () => {
+    const periods = buildPeriods(2026)
+
+    expect(periods.map((period) => period.id)).toEqual([
+      'christmas-time',
+      'lent',
+      'holy-week',
+      'paschal-triduum',
+      'easter-time',
+      'st-michaels-lent',
+      'advent',
+    ])
+    expect(periods.some((period) => period.id === 'ordinary-time')).toBe(false)
+  })
+
+
   it('retains a Marian feast alongside St Michael’s Lent', () => {
     const state = getCatholicCalendarState('2026-09-08')
 
@@ -420,15 +437,20 @@ describe('display summary', () => {
       ['2026-03-01', 'lent', 'calvary'],
       ['2026-04-20', 'easter-time', 'easter-egg'],
       ['2026-09-08', 'st-michaels-lent', 'angel'],
+      ['2026-01-11', 'baptism-of-the-lord', 'dove'],
+      ['2026-02-18', 'ash-wednesday', 'calvary'],
+      ['2026-04-02', 'holy-thursday', 'bread'],
+      ['2026-04-03', 'good-friday', 'calvary'],
       ['2026-09-29', 'archangels', 'angel'],
       ['2026-06-24', 'nativity-john-baptist', 'dove'],
-      ['2026-06-29', 'peter-and-paul', 'fishes'],
+      ['2026-06-29', 'peter-and-paul', 'st-peter'],
       ['2026-12-25', 'christmas', 'star'],
       ['2026-06-12', 'sacred-heart', 'sacred-heart'],
       ['2026-05-24', 'pentecost', 'fire'],
       ['2026-06-04', 'corpus-christi', 'chalice'],
       ['2026-05-31', 'trinity-sunday', 'trinity'],
       ['2026-10-07', 'our-lady-of-the-rosary', 'rosary'],
+      ['2026-11-02', 'all-souls', 'tombstone'],
     ] as const
 
     for (const [date, id, icon] of expectations) {
