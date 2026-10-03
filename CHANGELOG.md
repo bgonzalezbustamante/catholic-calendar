@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Fixed Year Overview icon visibility by giving the shared masked-icon element an explicit inline-block box outside flex layouts.
 - Nativity of Saint John the Baptist now uses the dove Christicon and Saints Peter and Paul use the fishes Christicon; Year Overview now displays each celebration's semantic icon.
 - Primary observance, Active periods and Countdown now use the same colour-coded pill system as Year Overview, including rank/status, period-kind and upcoming-state pills.
 - Added regression coverage clarifying that Saint Benedict is displayed normally on 11 July 2026 but is impeded by Sunday on 11 July 2027 and therefore appears only in Year Overview that year.
