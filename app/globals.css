@@ -260,38 +260,13 @@ h1 {
   color: var(--blue);
 }
 
-.display-period-options {
-  min-width: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.42rem 0.8rem;
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.display-period-options legend {
-  width: 100%;
-  margin-bottom: 0.18rem;
-  padding: 0;
-  color: var(--blue);
-  font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.66rem;
-  font-weight: 700;
-}
-
-.display-period-options label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.32rem;
+.display-policy-note {
+  align-self: center;
+  max-width: 360px;
   color: var(--ash);
   font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.7rem;
-  cursor: pointer;
-}
-
-.display-period-options input {
-  accent-color: var(--aqua);
+  font-size: 0.68rem;
+  line-height: 1.4;
 }
 
 .state-quotation {

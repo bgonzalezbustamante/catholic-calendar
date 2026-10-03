@@ -53,19 +53,8 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
   const [maxDisplayItems, setMaxDisplayItems] = useState<2 | 3>(2)
-  const [preferLent, setPreferLent] = useState(true)
-  const [preferStMichaelsLent, setPreferStMichaelsLent] = useState(true)
-  const [preferAdvent, setPreferAdvent] = useState(true)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
-  const preferredPeriodIds = useMemo(
-    () => [
-      ...(preferLent ? ['lent'] : []),
-      ...(preferStMichaelsLent ? ['st-michaels-lent'] : []),
-      ...(preferAdvent ? ['advent'] : []),
-    ],
-    [preferAdvent, preferLent, preferStMichaelsLent]
-  )
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status !== 'observed'
   )
@@ -73,9 +62,8 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
     () =>
       formatCalendarStateSummary(state, {
         maxItems: maxDisplayItems,
-        preferredPeriodIds,
       }),
-    [maxDisplayItems, preferredPeriodIds, state]
+    [maxDisplayItems, state]
   )
 
   return (
@@ -150,33 +138,9 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           </select>
         </label>
 
-        <fieldset className="display-period-options">
-          <legend>Preferred periods</legend>
-          <label>
-            <input
-              type="checkbox"
-              checked={preferLent}
-              onChange={(event) => setPreferLent(event.target.checked)}
-            />
-            Lent
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={preferStMichaelsLent}
-              onChange={(event) => setPreferStMichaelsLent(event.target.checked)}
-            />
-            St Michael&apos;s Lent
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={preferAdvent}
-              onChange={(event) => setPreferAdvent(event.target.checked)}
-            />
-            Advent
-          </label>
-        </fieldset>
+        <div className="display-policy-note">
+          Lent, St Michael&apos;s Lent and Advent are always prioritised when active.
+        </div>
       </div>
 
       <blockquote className="state-quotation">

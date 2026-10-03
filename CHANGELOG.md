@@ -4,11 +4,12 @@
 
 ### Changed
 
-- Kept all three diagnostic cards independent from the composed-display limit, changed the tester limit choices to two or three items, and added Advent to preferred periods.
+- Removed preferred-period controls from the tester and package API. Lent, St Michael's Lent and Advent are now built-in compact-display priority periods, so a two-item display always retains the active one of those periods.
+- Kept all three diagnostic cards independent from the composed-display limit and changed the tester limit choices to two or three items.
 - Added Spanish celebration names to the calendar observance metadata and display them as lighter secondary labels in Year Overview.
-- Added visible tester controls for the core composed-display configuration, including the one/two-item cap and preferred-period toggles for Lent and St Michael's Lent.
+- Added visible tester controls for the core composed-display length.
 - Realigned the in-app Release Notes card with the Weekly Penguin Timeline pattern: eyebrow outside the card, version/codename heading and status pill inside, full-width summary, and two-column detail sections.
-- Added a two-item core display policy with configurable preferred periods; the application prioritises Lent and St Michael's Lent so personally observed penitential periods remain visible when active.
+- Added a compact-display priority policy that automatically retains Lent, St Michael's Lent and Advent whenever active.
 - Added a prominent composed calendar display preview above the three diagnostic cards and reduced the diagnostic card footprint.
 - Simplified selected celebration labels to Divine Mercy Sunday, Corpus Christi, All Souls, Immaculate Conception, and Christmas.
 - Marked Calm Bridge release notes as `In Development` without a release date.
