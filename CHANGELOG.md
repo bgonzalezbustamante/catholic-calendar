@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Saints Michael, Gabriel and Raphael, Archangels now use the angel Christicon as an explicit display mapping.
 - Confined impeded diagnostic callouts to Year Overview rather than the Calendar state tester, and removed raw precedence-number pills from the Primary observance card.
 - Current year now mirrors the Return to today action with a coral treatment, small return icon and right alignment beneath Year Overview pagination.
 - Refined the Christicons footer acknowledgement with the existing bible-1 Christicon and a new-tab link, reused rank pills inside the rank guide, right-aligned the tester Date label, and moved the selected date into Display configuration.
