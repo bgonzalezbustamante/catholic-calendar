@@ -78,7 +78,7 @@ Validate the package locally with:
 npm run check:package
 ```
 
-This rebuilds the package, runs a smoke test against the compiled public API and finishes with `npm pack --dry-run` so the publishable file list can be inspected without creating a release tarball.
+This runs `npm pack --dry-run`; the package’s `prepack` lifecycle automatically rebuilds `dist/` before npm determines the tarball contents, and the compiled public API is then smoke-tested. The same automatic build therefore runs before a real `npm pack` or `npm publish`.
 
 ## Core API
 
