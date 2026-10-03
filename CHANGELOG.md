@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Fixed the lower supported-range boundary so Christmas Time beginning on 25 December 1999 remains active in early January 2000 without making 1999 a supported public calendar year.
+- Renamed the package-level privileged-weekday state from `commemorated` to `commemoration-eligible` and its reason metadata accordingly; the demonstration UI and composed display retain the existing reader-facing “Commemorated” behaviour.
 - Holy Week now uses the calvary Christicon; Year Overview now uses a consistent subsection heading pattern for celebrations, periods and rank guidance, with safer pill spacing/wrapping in the rank explanation.
 - Corrected celebration icons: Baptism of the Lord → dove, Ash Wednesday → calvary, Holy Thursday → bread, Good Friday → calvary, Saints Peter and Paul → Saint Peter, and All Souls → tombstone.
 - Added a second Year Overview table for the modelled liturgical/devotional periods, including semantic icons, period kind, annual boundaries and an explicit note that Ordinary Time is not modelled.
