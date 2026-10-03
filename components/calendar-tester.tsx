@@ -57,7 +57,10 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status !== 'observed'
   )
-  const displaySummary = formatCalendarStateSummary(state)
+  const displaySummary = formatCalendarStateSummary(state, {
+    maxItems: 2,
+    preferredPeriodIds: ['lent', 'st-michaels-lent'],
+  })
 
   return (
     <section className="tester" aria-labelledby="tester-title">

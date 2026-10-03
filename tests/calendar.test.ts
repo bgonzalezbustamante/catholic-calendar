@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   firstSundayOfAdvent,
   formatCalendarStateSummary,
+  getCalendarDisplaySummary,
   getCatholicCalendarState,
   getYearOverview,
   gregorianEasterSunday,
@@ -148,6 +149,46 @@ describe('display summary', () => {
     expect(formatCalendarStateSummary(state)).toBe(
       'Advent · 5 days until Immaculate Conception'
     )
+  })
+
+
+  it('caps the composed display at two items', () => {
+    const state = getCatholicCalendarState('2026-04-02')
+    const display = getCalendarDisplaySummary(state, {
+      preferredPeriodIds: ['lent', 'st-michaels-lent'],
+    })
+
+    expect(display.items).toHaveLength(2)
+    expect(display.items.map((item) => item.label)).toEqual([
+      'Holy Thursday',
+      'Lent',
+    ])
+  })
+
+  it('keeps personally preferred penitential periods visible at overlapping boundaries', () => {
+    const lentState = getCatholicCalendarState('2026-04-02')
+    expect(
+      formatCalendarStateSummary(lentState, {
+        preferredPeriodIds: ['lent', 'st-michaels-lent'],
+      })
+    ).toBe('Holy Thursday · Lent')
+
+    const michaelState = getCatholicCalendarState('2026-08-15')
+    expect(
+      formatCalendarStateSummary(michaelState, {
+        preferredPeriodIds: ['lent', 'st-michaels-lent'],
+      })
+    ).toBe("Assumption of the Blessed Virgin Mary · St Michael's Lent")
+  })
+
+  it('exposes a configurable package-level display policy', () => {
+    const state = getCatholicCalendarState('2026-04-02')
+    expect(
+      getCalendarDisplaySummary(state, {
+        maxItems: 1,
+        preferredPeriodIds: ['lent'],
+      }).items.map((item) => item.label)
+    ).toEqual(['Holy Thursday'])
   })
 
   it('uses the final display names for selected celebrations', () => {
