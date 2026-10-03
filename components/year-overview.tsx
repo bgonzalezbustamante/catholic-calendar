@@ -36,6 +36,10 @@ function titleCase(value: string) {
     .join(' ')
 }
 
+function statusLabel(status: string) {
+  return status === 'commemoration-eligible' ? 'Commemorated' : titleCase(status)
+}
+
 export default function YearOverview({ initialYear }: { initialYear: number }) {
   const [year, setYear] = useState(initialYear)
   const entries = useMemo(() => getYearOverview(year), [year])
@@ -108,8 +112,7 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             <h3 id="celebrations-overview-title">Celebrations in this model</h3>
           </div>
           <p>
-            The curated observances for the selected year, including transferred,
-            commemorated and impeded entries.
+            The curated observances for the selected year, including transferred, commemoration-eligible and impeded entries.
           </p>
         </div>
 
@@ -148,7 +151,7 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                 </td>
                 <td>
                   <span className={`status-pill is-${observance.status}`}>
-                    {titleCase(observance.status)}
+                    {statusLabel(observance.status)}
                   </span>
                 </td>
                 <td>
