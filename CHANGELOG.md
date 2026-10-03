@@ -4,6 +4,9 @@
 
 ### Changed
 
+- Added a prominent composed calendar display preview above the three diagnostic cards and reduced the diagnostic card footprint.
+- Simplified selected celebration labels to Divine Mercy Sunday, Corpus Christi, All Souls, Immaculate Conception, and Christmas.
+- Marked Calm Bridge release notes as `In Development` without a release date.
 - Added the npm lockfile, switched CI to `npm ci`, pinned npm 11.21.0 as the package manager, and generate Next.js route types before TypeScript checks.
 - Stopped tracking generated `next-env.d.ts`; Next.js recreates it during type generation and builds.
 
@@ -16,7 +19,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and the project uses Semantic Versioning for its release line.
 
-## [0.1.0-alpha.1] - 2026-10-03 — Calm Bridge
+## [0.1.0-alpha.1] — Calm Bridge — In Development
 
 ### Added
 
