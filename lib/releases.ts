@@ -38,7 +38,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Precedence and transfers',
         items: [
-          'Tracks observed, commemorated, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy; impeded diagnostics are surfaced in Year Overview.',
+          'Tracks observed, commemoration-eligible, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy; the demonstration UI retains the “Commemorated” label and impeded diagnostics are surfaced in Year Overview.',
           'Covers the selected transfer cases for Saint Joseph, the Annunciation and the Immaculate Conception.',
           'Resolves same-date selected solemnities, including the Sacred Heart and Nativity of Saint John the Baptist collision.',
         ],
