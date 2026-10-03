@@ -37,6 +37,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'exaltation-holy-cross': 'Exaltación de la Santa Cruz',
   'our-lady-of-sorrows': 'Nuestra Señora de los Dolores',
   'archangels': 'Santos Miguel, Gabriel y Rafael, arcángeles',
+  'st-francis-assisi': 'San Francisco de Asís',
   'our-lady-of-the-rosary': 'Nuestra Señora del Rosario',
   'all-saints': 'Todos los Santos',
   'all-souls': 'Conmemoración de todos los fieles difuntos',
@@ -327,6 +328,13 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       category: 'saint',
       rank: 'feast',
       precedence: 7,
+    }),
+    fixed(year, 10, 4, {
+      id: 'st-francis-assisi',
+      name: 'Saint Francis of Assisi',
+      category: 'saint',
+      rank: 'memorial',
+      precedence: 10,
     }),
     fixed(year, 10, 7, {
       id: 'our-lady-of-the-rosary',
