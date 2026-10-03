@@ -52,15 +52,29 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
+  const [maxDisplayItems, setMaxDisplayItems] = useState<1 | 2>(2)
+  const [preferLent, setPreferLent] = useState(true)
+  const [preferStMichaelsLent, setPreferStMichaelsLent] = useState(true)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
+  const preferredPeriodIds = useMemo(
+    () => [
+      ...(preferLent ? ['lent'] : []),
+      ...(preferStMichaelsLent ? ['st-michaels-lent'] : []),
+    ],
+    [preferLent, preferStMichaelsLent]
+  )
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status !== 'observed'
   )
-  const displaySummary = formatCalendarStateSummary(state, {
-    maxItems: 2,
-    preferredPeriodIds: ['lent', 'st-michaels-lent'],
-  })
+  const displaySummary = useMemo(
+    () =>
+      formatCalendarStateSummary(state, {
+        maxItems: maxDisplayItems,
+        preferredPeriodIds,
+      }),
+    [maxDisplayItems, preferredPeriodIds, state]
+  )
 
   return (
     <section className="tester" aria-labelledby="tester-title">
@@ -112,6 +126,47 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
       <div className="selected-date-bar">
         <span>Selected date</span>
         <strong>{formatDate(date)}</strong>
+      </div>
+
+      <div className="display-config" aria-label="Composed display configuration">
+        <div className="display-config-heading">
+          <strong>Display configuration</strong>
+          <span>Package preview</span>
+        </div>
+
+        <label className="display-config-field" htmlFor="display-max-items">
+          <span>Maximum items</span>
+          <select
+            id="display-max-items"
+            value={maxDisplayItems}
+            onChange={(event) =>
+              setMaxDisplayItems(Number(event.target.value) as 1 | 2)
+            }
+          >
+            <option value={1}>1 item</option>
+            <option value={2}>2 items</option>
+          </select>
+        </label>
+
+        <fieldset className="display-period-options">
+          <legend>Preferred periods</legend>
+          <label>
+            <input
+              type="checkbox"
+              checked={preferLent}
+              onChange={(event) => setPreferLent(event.target.checked)}
+            />
+            Lent
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={preferStMichaelsLent}
+              onChange={(event) => setPreferStMichaelsLent(event.target.checked)}
+            />
+            St Michael&apos;s Lent
+          </label>
+        </fieldset>
       </div>
 
       <blockquote className="state-quotation">

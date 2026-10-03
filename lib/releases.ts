@@ -46,7 +46,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with a composed display preview, rule details and active-period output.',
+          'Added an interactive date tester with visible composed-display controls, rule details and active-period output.',
           'Added a browsable year overview showing observed, transferred and impeded entries.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
