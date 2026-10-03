@@ -13,22 +13,22 @@ function transfer(
     status: 'transferred',
     transferred: observedDate !== event.nominalDate,
     transferReason,
-    commemorationReason: null,
+    commemorationEligibilityReason: null,
     impededBy: null,
   }
 }
 
-function commemorate(
+function markCommemorationEligible(
   event: CalendarObservance,
-  commemorationReason: string
+  commemorationEligibilityReason: string
 ): CalendarObservance {
   return {
     ...event,
     observedDate: event.nominalDate,
-    status: 'commemorated',
+    status: 'commemoration-eligible',
     transferred: false,
     transferReason: null,
-    commemorationReason,
+    commemorationEligibilityReason,
     impededBy: null,
   }
 }
@@ -40,7 +40,7 @@ function impede(event: CalendarObservance, impededBy: string): CalendarObservanc
     status: 'impeded',
     transferred: false,
     transferReason: null,
-    commemorationReason: null,
+    commemorationEligibilityReason: null,
     impededBy,
   }
 }
@@ -258,7 +258,7 @@ function resolveImpediments(events: CalendarObservance[]) {
         (event.rank === 'memorial' || event.rank === 'optional-memorial')
 
       resolved[index] = canBeCommemorated
-        ? commemorate(
+        ? markCommemorationEligible(
             event,
             `The ${baseline.label} retains liturgical precedence; the memorial may be commemorated according to GIRM 355.`
           )
