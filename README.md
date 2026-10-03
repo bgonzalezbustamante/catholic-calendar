@@ -12,6 +12,7 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Computes the First Sunday of Advent from the 27 November–3 December window and derives Christ the King and Advent.
 - Resolves three independent layers for a date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when no discrete observance is active.
 - Exposes a composed display API that defaults to two reader-facing items and supports a two- or three-item limit. The display follows the engine’s natural state order—primary observance, liturgical periods, devotional periods, then countdown when space remains—without a separate presentation-precedence layer.
+- Adds semantic Christicons metadata to selected display items while keeping the calendar engine UI-agnostic. The reusable renderer uses CSS masks, so hosts can theme icons through `--catholic-calendar-icon-color` without duplicating SVG assets. The demonstration app falls back to the neutral ash colour; a host such as the Academic Website can set `--catholic-calendar-icon-color: #fe615a` for coral icons.
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
 - Retains selected observances that are impeded by a higher-ranking day as nominal diagnostic entries instead of falsely reporting them as observed.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.

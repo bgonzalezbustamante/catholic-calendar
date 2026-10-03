@@ -212,6 +212,29 @@ describe('display summary', () => {
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
   })
 
+  it('maps the complete Christicon set onto calendar display semantics', () => {
+    const expectations = [
+      ['2026-12-03', 'advent', 'candle'],
+      ['2026-03-01', 'lent', 'calvary'],
+      ['2026-04-20', 'easter-time', 'easter-egg'],
+      ['2026-09-08', 'st-michaels-lent', 'angel'],
+      ['2026-12-25', 'christmas', 'star'],
+      ['2026-06-12', 'sacred-heart', 'sacred-heart'],
+      ['2026-05-24', 'pentecost', 'fire'],
+      ['2026-06-04', 'corpus-christi', 'chalice'],
+      ['2026-05-31', 'trinity-sunday', 'trinity'],
+      ['2026-10-07', 'our-lady-of-the-rosary', 'rosary'],
+    ] as const
+
+    for (const [date, id, icon] of expectations) {
+      const items = getCalendarDisplaySummary(
+        getCatholicCalendarState(date),
+        { maxItems: 3 }
+      ).items
+      expect(items.find((item) => item.id === id)).toMatchObject({ icon })
+    }
+  })
+
   it('provides Spanish names for every year-overview observance', () => {
     const overview = getYearOverview(2026)
     expect(overview.length).toBeGreaterThan(0)

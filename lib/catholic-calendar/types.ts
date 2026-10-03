@@ -49,10 +49,23 @@ export interface NextObservance {
 
 export type CalendarDisplayItemKind = 'observance' | 'period' | 'countdown'
 
+export type CalendarDisplayIcon =
+  | 'angel'
+  | 'calvary'
+  | 'candle'
+  | 'chalice'
+  | 'easter-egg'
+  | 'fire'
+  | 'rosary'
+  | 'sacred-heart'
+  | 'star'
+  | 'trinity'
+
 export interface CalendarDisplayItem {
   kind: CalendarDisplayItemKind
   id: string
   label: string
+  icon: CalendarDisplayIcon | null
 }
 
 export interface CalendarDisplayOptions {

@@ -3,12 +3,13 @@
 import { useMemo, useState } from 'react'
 
 import {
-  formatCalendarStateSummary,
+  getCalendarDisplaySummary,
   getCatholicCalendarState,
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
 } from '@/lib/catholic-calendar'
 import type { CalendarObservance } from '@/lib/catholic-calendar'
+import CalendarDisplay from './calendar-display'
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
@@ -60,7 +61,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
   )
   const displaySummary = useMemo(
     () =>
-      formatCalendarStateSummary(state, {
+      getCalendarDisplaySummary(state, {
         maxItems: maxDisplayItems,
       }),
     [maxDisplayItems, state]
@@ -141,7 +142,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
       </div>
 
       <blockquote className="state-quotation">
-        <p>{displaySummary}</p>
+        <CalendarDisplay items={displaySummary.items} />
         <footer>Composed calendar display</footer>
       </blockquote>
 

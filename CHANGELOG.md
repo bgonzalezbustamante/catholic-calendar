@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Added semantic Christicons to the composed calendar display, normalised the curated SVG assets for themeable rendering, and exposed icon identifiers in package display items.
 - Removed compact-display period prioritisation. The composed display now follows the engine's natural state order and only applies the selected two- or three-item truncation.
 - Kept all three diagnostic cards independent from the composed-display limit and changed the tester limit choices to two or three items.
 - Added Spanish celebration names to the calendar observance metadata and display them as lighter secondary labels in Year Overview.
