@@ -34,7 +34,7 @@ function shiftDate(value: string, days: number) {
 }
 
 function TransferDetails({ observance }: { observance: CalendarObservance }) {
-  if (observance.status === 'observed') return null
+  if (observance.status === 'observed' || observance.status === 'impeded') return null
 
   const label =
     observance.status === 'transferred'
@@ -92,7 +92,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
   }
 
   const visibleNominalExceptions = state.nominalObservances.filter(
-    (event) => event.status === 'transferred' || event.status === 'impeded'
+    (event) => event.status === 'transferred'
   )
   const displaySummary = useMemo(
     () =>

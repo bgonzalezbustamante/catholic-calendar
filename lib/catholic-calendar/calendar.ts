@@ -64,6 +64,13 @@ export function buildPeriods(year: number): CalendarPeriod[] {
       endDate: baptismOfTheLord(year + 1),
     },
     {
+      id: 'ordinary-time',
+      name: 'Ordinary Time',
+      kind: 'liturgical',
+      startDate: addDays(baptismOfTheLord(year), 1),
+      endDate: addDays(dates.ashWednesday, -1),
+    },
+    {
       id: 'lent',
       name: 'Lent',
       kind: 'liturgical',
@@ -90,6 +97,13 @@ export function buildPeriods(year: number): CalendarPeriod[] {
       kind: 'liturgical',
       startDate: dates.easter,
       endDate: dates.pentecost,
+    },
+    {
+      id: 'ordinary-time',
+      name: 'Ordinary Time',
+      kind: 'liturgical',
+      startDate: addDays(dates.pentecost, 1),
+      endDate: addDays(dates.advent, -1),
     },
     {
       id: 'st-michaels-lent',

@@ -16,7 +16,7 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
 - Distinguishes genuinely impeded observances from memorials that may be commemorated on privileged weekdays. Eligible memorials remain on their date with status `commemorated`; genuinely displaced lower-ranking observances remain nominal diagnostic entries.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.
-- Models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
+- Covers all six Roman liturgical seasons, including both annual spans of Ordinary Time, and models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
 - Uses the universal Roman dates for Epiphany, Ascension and Corpus Christi rather than national transfers.
 - Includes an interactive date tester and a complete year overview for visual QA.
 - Carries Spanish celebration labels in observance metadata and displays them beneath the English names in the Year Overview.
@@ -26,7 +26,7 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 
 The current alpha includes the following selected celebrations and boundaries:
 
-- Christmas cycle: Mary, Mother of God; Epiphany; Baptism of the Lord; First Sunday of Advent; Immaculate Conception; Christmas; Christmas Time.
+- Liturgical seasons: Advent; Christmas Time; Ordinary Time; Lent; Sacred Paschal Triduum; Easter Time. Holy Week is also exposed as an overlapping contextual sub-period.
 - Early year: Presentation of the Lord; Our Lady of Lourdes.
 - Lent and Holy Week: Ash Wednesday; Saint Joseph; Annunciation; Palm Sunday; Holy Thursday; Good Friday; Holy Saturday; Lent; Holy Week; Sacred Paschal Triduum.
 - Easter cycle: Easter Sunday; Second Sunday of Easter / Divine Mercy Sunday; Ascension; Pentecost; Mary, Mother of the Church; Visitation; Trinity Sunday; Corpus Christi; Sacred Heart; Immaculate Heart; Easter Time.
@@ -125,6 +125,7 @@ The engine resolves civil dates, not hours of the liturgical day. To preserve us
 - Holy Week is Palm Sunday through Holy Saturday inclusive.
 - the Sacred Paschal Triduum is Holy Thursday through Easter Sunday inclusive.
 - Easter Time is Easter Sunday through Pentecost inclusive.
+- Ordinary Time is represented in two spans: the day after the Baptism of the Lord through the Tuesday before Ash Wednesday, and the Monday after Pentecost through the day before the First Sunday of Advent.
 
 This deliberately permits meaningful boundary overlaps on Holy Thursday and Easter Sunday. A future package may expose time-aware boundaries separately if a consumer needs them.
 

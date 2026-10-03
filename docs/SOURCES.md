@@ -44,6 +44,16 @@ The PoC uses the universal Thursday dates for Ascension and Corpus Christi rathe
 
 The First Sunday of Advent is derived as the Sunday occurring from 27 November through 3 December. Christ the King is the immediately preceding Sunday. Advent runs from the First Sunday of Advent through 24 December at civil-date granularity.
 
+### Ordinary Time
+
+Universal Norms nos. 43–44 identify Ordinary Time as the thirty-three or thirty-four weeks outside the seasons with their own distinctive character. In the universal calendar it runs from the Monday after the Sunday following 6 January through the Tuesday before Ash Wednesday, then resumes on the Monday after Pentecost and ends before the First Sunday of Advent.
+
+Because this PoC fixes Epiphany on 6 January and derives the Baptism of the Lord as the following Sunday, the implementation uses the day after the Baptism through the Tuesday before Ash Wednesday, then Monday after Pentecost through the day before Advent.
+
+References:
+- Universal Norms nos. 43–44: https://www.liturgyoffice.org.uk/Resources/GIRM/Documents/GNLY.pdf
+- Liturgy Office, Ordinary Time: https://www.liturgyoffice.org.uk/Calendar/Seasons/OrdinaryTime.shtml
+
 ### Memorials on privileged weekdays
 
 GIRM 355 permits an Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemorated` status rather than treating these cases as fully impeded.
