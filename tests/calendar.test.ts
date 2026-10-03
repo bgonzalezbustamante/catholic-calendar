@@ -351,7 +351,7 @@ describe('display summary', () => {
       getCatholicCalendarState('2026-01-03')
     )
     expect(christmasTime.items).toMatchObject([
-      { id: 'christmas-time', icon: 'church-1' },
+      { id: 'christmas-time', icon: 'star' },
       { id: 'countdown:epiphany', icon: 'cross' },
     ])
 
