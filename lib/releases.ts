@@ -46,8 +46,8 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with guarded manual date entry, integrated selected-date/configuration controls, two/three-item composed-display controls, natural engine-order truncation, themeable Christicons including explicit Bernadette, Benedict, Archangels, John the Baptist and Peter/Paul mappings, and simplified diagnostic cards.',
-          'Added a bilingual year overview with year pagination, visible semantic celebration icons, a coral Current year shortcut, English/Spanish celebration names, colour-coded liturgical-rank/status labels, a Nominal / reason column and a concise rank guide.',
+          'Added an interactive date tester with guarded manual date entry, integrated selected-date/configuration controls, two/three-item composed-display controls, natural engine-order truncation, themeable Christicons including explicit Bernadette, Benedict, Archangels, Baptism, John the Baptist, Peter/Paul, Holy Week and All Souls mappings, and simplified diagnostic cards.',
+          'Added a bilingual year overview with year pagination, visible semantic celebration icons, a modelled-periods table with icons and boundaries, a coral Current year shortcut, English/Spanish celebration names, colour-coded liturgical-rank/status labels, a Nominal / reason column and a concise rank guide.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
       },

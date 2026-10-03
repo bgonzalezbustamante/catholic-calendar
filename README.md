@@ -12,13 +12,13 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Computes the First Sunday of Advent from the 27 November–3 December window and derives Christ the King and Advent.
 - Resolves three independent layers for a date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when no discrete observance is active.
 - Exposes a composed display API that defaults to two reader-facing items and supports a two- or three-item limit. The display follows the engine’s natural state order—primary observance, liturgical periods, devotional periods, then countdown when space remains—without a separate presentation-precedence layer.
-- Adds semantic Christicons metadata to display items while keeping the calendar engine UI-agnostic. First Sunday of Advent uses the candle icon, Christmas Time uses the star icon, the Nativity of Saint John the Baptist uses the dove icon, and Saints Peter and Paul use the fishes icon. Specific mappings use the selected Christicons; otherwise Marian observances and Marian countdown targets use `rosary`, other unmapped observances/countdowns use `cross`, and unmapped periods use `church-1`, so every composed-display item always has an icon. The reusable renderer uses CSS masks, so hosts can theme icons through `--catholic-calendar-icon-color` without duplicating SVG assets. The demonstration app falls back to the neutral ash colour; a host such as the Academic Website can set `--catholic-calendar-icon-color: #fe615a` for coral icons.
+- Adds semantic Christicons metadata to display items while keeping the calendar engine UI-agnostic. First Sunday of Advent uses the candle icon, Christmas Time uses the star icon, Baptism of the Lord and the Nativity of Saint John the Baptist use the dove icon, Ash Wednesday and Good Friday use calvary, Holy Thursday uses bread, Saints Peter and Paul use the Saint Peter icon, and All Souls uses the tombstone icon. Specific mappings use the selected Christicons; otherwise Marian observances and Marian countdown targets use `rosary`, other unmapped observances/countdowns use `cross`, and unmapped periods use `church-1`, so every composed-display item always has an icon. The reusable renderer uses CSS masks, so hosts can theme icons through `--catholic-calendar-icon-color` without duplicating SVG assets. The demonstration app falls back to the neutral ash colour; a host such as the Academic Website can set `--catholic-calendar-icon-color: #fe615a` for coral icons.
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
 - Distinguishes genuinely impeded observances from memorials that may be commemorated on privileged weekdays. Eligible memorials remain on their date with status `commemorated`; genuinely displaced lower-ranking observances remain nominal diagnostic entries.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.
 - Models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
 - Uses the universal Roman dates for Epiphany, Ascension and Corpus Christi rather than national transfers.
-- Includes an interactive date tester and a complete year overview for visual QA, including the semantic icon assigned to every curated celebration.
+- Includes an interactive date tester and a complete year overview for visual QA, including the semantic icon assigned to every curated celebration and a second table listing the modelled periods with their icons and annual boundaries.
 - Carries Spanish celebration labels in observance metadata and displays them beneath the English names in the Year Overview.
 - Keeps the calendar engine free of React, Next.js, network calls and database state so it can later be extracted into a package.
 
@@ -35,6 +35,7 @@ The current alpha includes the following selected celebrations and boundaries:
 - Summer and autumn: Nativity of Saint John the Baptist; Saints Peter and Paul; Our Lady of Mount Carmel; Assumption; Queenship of Mary; Nativity of Mary; Exaltation of the Holy Cross; Our Lady of Sorrows; Saints Michael, Gabriel and Raphael; Saint Francis of Assisi; Our Lady of the Rosary; All Saints; All Souls; Christ the King.
 - Additional Marian observances: Our Lady of Fatima, Presentation of the Blessed Virgin Mary, Our Lady of Loreto and Our Lady of Guadalupe.
 - Devotional layer: St Michael’s Lent, 15 August–29 September inclusive.
+- Ordinary Time is intentionally not modelled in this curated implementation.
 
 ## Architecture
 

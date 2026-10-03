@@ -757,6 +757,40 @@ tbody tr:last-child td {
   color: var(--ash);
 }
 
+.period-overview {
+  margin: 1.1rem 0 1.4rem;
+}
+
+.period-overview-heading {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
+  gap: 1rem 1.4rem;
+  align-items: end;
+  margin-bottom: 0.75rem;
+}
+
+.period-overview-heading h3 {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.period-overview-heading > p {
+  margin: 0;
+  color: var(--ash);
+  font-size: 0.78rem;
+}
+
+.period-table {
+  min-width: 660px;
+}
+
+.period-overview-note {
+  margin: 0.55rem 0 0;
+  color: var(--ash);
+  font-size: 0.7rem;
+  font-style: italic;
+}
+
 .rank-guide {
   display: grid;
   grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1.65fr);
@@ -999,6 +1033,7 @@ tbody tr:last-child td {
     flex-basis: 18px;
   }
 
+  .period-overview-heading,
   .rank-guide {
     grid-template-columns: 1fr;
   }

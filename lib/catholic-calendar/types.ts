@@ -52,6 +52,7 @@ export type CalendarDisplayItemKind = 'observance' | 'period' | 'countdown'
 
 export type CalendarDisplayIcon =
   | 'angel'
+  | 'bread'
   | 'calvary'
   | 'candle'
   | 'chalice'
@@ -59,11 +60,12 @@ export type CalendarDisplayIcon =
   | 'cross'
   | 'dove'
   | 'easter-egg'
-  | 'fishes'
   | 'fire'
   | 'rosary'
   | 'sacred-heart'
+  | 'st-peter'
   | 'star'
+  | 'tombstone'
   | 'trinity'
 
 export interface CalendarDisplayItem {
