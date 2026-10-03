@@ -400,6 +400,7 @@ describe('display summary', () => {
       ['2026-03-01', 'lent', 'calvary'],
       ['2026-04-20', 'easter-time', 'easter-egg'],
       ['2026-09-08', 'st-michaels-lent', 'angel'],
+      ['2026-09-29', 'archangels', 'angel'],
       ['2026-12-25', 'christmas', 'star'],
       ['2026-06-12', 'sacred-heart', 'sacred-heart'],
       ['2026-05-24', 'pentecost', 'fire'],
