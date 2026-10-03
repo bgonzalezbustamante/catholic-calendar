@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Added visible tester controls for the core composed-display configuration, including the one/two-item cap and preferred-period toggles for Lent and St Michael's Lent.
+- Realigned the in-app Release Notes card with the Weekly Penguin Timeline pattern: eyebrow outside the card, version/codename heading and status pill inside, full-width summary, and two-column detail sections.
 - Added a two-item core display policy with configurable preferred periods; the application prioritises Lent and St Michael's Lent so personally observed penitential periods remain visible when active.
 - Added a prominent composed calendar display preview above the three diagnostic cards and reduced the diagnostic card footprint.
 - Simplified selected celebration labels to Divine Mercy Sunday, Corpus Christi, All Souls, Immaculate Conception, and Christmas.
