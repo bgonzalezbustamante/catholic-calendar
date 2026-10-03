@@ -57,7 +57,6 @@ export interface CalendarDisplayItem {
 
 export interface CalendarDisplayOptions {
   maxItems?: 2 | 3
-  preferredPeriodIds?: readonly string[]
 }
 
 export interface CalendarDisplaySummary {
