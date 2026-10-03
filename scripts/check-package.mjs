@@ -22,8 +22,9 @@ assert.ok(
 )
 
 const packageManifest = require('../packages/catholic-calendar/package.json')
+const rootManifest = require('../package.json')
 assert.equal(packageManifest.name, '@bgonzalezbustamante/catholic-calendar')
-assert.equal(packageManifest.version, '0.1.0-alpha.1')
+assert.equal(packageManifest.version, rootManifest.version)
 assert.equal(packageManifest.dependencies, undefined)
 
 console.log('Package smoke check passed.')
