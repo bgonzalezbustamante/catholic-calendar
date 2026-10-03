@@ -47,8 +47,9 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
     <div className={`rule-callout is-${observance.status}`}>
       <strong>{label}</strong>
       <span>
-        Nominal date: {formatDate(observance.nominalDate)}
-        {observance.observedDate
+        {observance.status === 'commemorated' ? 'Date' : 'Nominal date'}:{' '}
+        {formatDate(observance.nominalDate)}
+        {observance.status !== 'commemorated' && observance.observedDate
           ? ` · Observed: ${formatDate(observance.observedDate)}`
           : ''}
       </span>
