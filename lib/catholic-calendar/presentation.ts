@@ -22,6 +22,8 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'st-bernadette-soubirous': 'rosary',
   'st-benedict-nursia': 'cross',
   archangels: 'angel',
+  'nativity-john-baptist': 'dove',
+  'peter-and-paul': 'fishes',
   'first-sunday-advent': 'candle',
   christmas: 'star',
   'sacred-heart': 'sacred-heart',
@@ -31,11 +33,11 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'our-lady-of-the-rosary': 'rosary',
 }
 
-function iconForPeriod(periodId: string): CalendarDisplayIcon {
+export function getPeriodDisplayIcon(periodId: string): CalendarDisplayIcon {
   return PERIOD_ICONS[periodId] ?? 'church-1'
 }
 
-function iconForObservance(
+export function getObservanceDisplayIcon(
   observance: Pick<CalendarObservance, 'id' | 'category'>
 ): CalendarDisplayIcon {
   return (
@@ -53,7 +55,7 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
     kind: 'countdown',
     id: `countdown:${state.countdown.observance.id}`,
     label: `${state.countdown.daysUntil} ${unit} until ${state.countdown.observance.name}`,
-    icon: iconForObservance(state.countdown.observance),
+    icon: getObservanceDisplayIcon(state.countdown.observance),
   }
 }
 
@@ -69,7 +71,7 @@ export function getCalendarDisplaySummary(
       kind: 'observance',
       id: state.primaryObservance.id,
       label: state.primaryObservance.name,
-      icon: iconForObservance(state.primaryObservance),
+      icon: getObservanceDisplayIcon(state.primaryObservance),
     })
   }
 
@@ -80,7 +82,7 @@ export function getCalendarDisplaySummary(
       kind: 'period',
       id: period.id,
       label: period.name,
-      icon: iconForPeriod(period.id),
+      icon: getPeriodDisplayIcon(period.id),
     })
   }
 

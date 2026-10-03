@@ -433,7 +433,8 @@ h1 {
 
 .state-chip,
 .status-pill,
-.rank-pill {
+.rank-pill,
+.period-pill {
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -456,6 +457,24 @@ h1 {
 .state-chip.devotional {
   border-color: rgba(254, 97, 90, 0.3);
   background: rgba(254, 97, 90, 0.07);
+}
+
+.period-pill.is-liturgical {
+  border-color: rgba(0, 170, 180, 0.45);
+  background: rgba(0, 170, 180, 0.1);
+  color: var(--blue);
+}
+
+.period-pill.is-devotional {
+  border-color: rgba(254, 97, 90, 0.4);
+  background: rgba(254, 97, 90, 0.08);
+  color: var(--blue-dark);
+}
+
+.status-pill.is-upcoming {
+  border-color: rgba(0, 33, 71, 0.24);
+  background: var(--blue-wash);
+  color: var(--blue);
 }
 
 .state-chip.commemorated,
@@ -647,6 +666,19 @@ td strong {
   color: var(--charcoal);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.78rem;
+}
+
+.year-icon-cell {
+  width: 44px;
+  text-align: center;
+}
+
+.year-overview-icon {
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+  margin-inline: auto;
+  background: var(--catholic-calendar-icon-color, var(--ash));
 }
 
 .nominal-reason {

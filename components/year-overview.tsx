@@ -3,10 +3,12 @@
 import { useMemo, useState } from 'react'
 
 import {
+  getObservanceDisplayIcon,
   getYearOverview,
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
 } from '@/lib/catholic-calendar'
+import CalendarIcon from './calendar-icon'
 
 function formatShortDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
@@ -89,6 +91,7 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <thead>
             <tr>
               <th>Date</th>
+              <th>Icon</th>
               <th>Celebration</th>
               <th>Rank</th>
               <th>Status</th>
@@ -99,6 +102,12 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             {entries.map(({ date, observance }) => (
               <tr key={`${observance.id}-${date}`}>
                 <td>{formatShortDate(date)}</td>
+                <td className="year-icon-cell">
+                  <CalendarIcon
+                    className="year-overview-icon"
+                    icon={getObservanceDisplayIcon(observance)}
+                  />
+                </td>
                 <td>
                   <strong>{observance.name}</strong>
                   <span className="celebration-translation" lang="es">
