@@ -19,11 +19,15 @@ const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
 
 const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   annunciation: 'rosary',
+  'baptism-of-the-lord': 'dove',
+  'ash-wednesday': 'calvary',
+  'holy-thursday': 'bread',
+  'good-friday': 'calvary',
   'st-bernadette-soubirous': 'rosary',
   'st-benedict-nursia': 'cross',
   archangels: 'angel',
   'nativity-john-baptist': 'dove',
-  'peter-and-paul': 'fishes',
+  'peter-and-paul': 'st-peter',
   'first-sunday-advent': 'candle',
   christmas: 'star',
   'sacred-heart': 'sacred-heart',
@@ -31,6 +35,7 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'corpus-christi': 'chalice',
   'trinity-sunday': 'trinity',
   'our-lady-of-the-rosary': 'rosary',
+  'all-souls': 'tombstone',
 }
 
 export function getPeriodDisplayIcon(periodId: string): CalendarDisplayIcon {
