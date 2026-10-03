@@ -90,7 +90,6 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                   <span className="celebration-translation" lang="es">
                     {observance.nameEs}
                   </span>
-                  {observance.impededBy ? <small>Impeded by {observance.impededBy}</small> : null}
                 </td>
                 <td>{titleCase(observance.rank)}</td>
                 <td>
@@ -99,9 +98,15 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                   </span>
                 </td>
                 <td>
-                  {observance.nominalDate === date
-                    ? '—'
-                    : formatShortDate(observance.nominalDate)}
+                  {observance.status === 'impeded' && observance.impededBy ? (
+                    <span className="nominal-reason">
+                      Impeded by {observance.impededBy}
+                    </span>
+                  ) : observance.nominalDate === date ? (
+                    '—'
+                  ) : (
+                    formatShortDate(observance.nominalDate)
+                  )}
                 </td>
               </tr>
             ))}

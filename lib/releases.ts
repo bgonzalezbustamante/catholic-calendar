@@ -31,7 +31,7 @@ export const releases: ReleaseNote[] = [
         title: 'Observance model',
         items: [
           'Introduced simultaneous primary-observance, active-period and countdown layers.',
-          'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel and Guadalupe, plus Saint Francis of Assisi on 4 October.',
+          'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel, the Presentation of Mary, Loreto and Guadalupe, plus Saint Francis of Assisi on 4 October.',
           'Modelled St Michael’s Lent as a devotional period from the Assumption through the feast of the Archangels, subordinate to liturgical precedence.',
         ],
       },
@@ -47,7 +47,7 @@ export const releases: ReleaseNote[] = [
         title: 'Validation surfaces',
         items: [
           'Added an interactive date tester with guarded manual date entry, two/three-item composed-display controls, natural engine-order truncation, themeable Christicons and simplified diagnostic cards.',
-          'Added a bilingual year overview showing English and Spanish celebration names alongside observed, transferred and impeded entries.',
+          'Added a bilingual year overview with year pagination, English/Spanish celebration names, and impediment reasons consolidated in the Nominal date column.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
       },

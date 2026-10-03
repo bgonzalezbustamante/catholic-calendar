@@ -104,8 +104,14 @@ The curated set includes universal Marian observances relevant to the intended s
 - Our Lady of Lourdes — 11 February, optional memorial. The Holy See continues to identify 11 February as the liturgical memorial of Our Lady of Lourdes; the PoC includes an explicit regression test ensuring it is observed on an ordinary weekday such as 11 February 2026.
 - Our Lady of Fatima — 13 May, optional memorial; represented from 2002 in this PoC.
 - Our Lady of Mount Carmel — 16 July, optional memorial.
+- Presentation of the Blessed Virgin Mary — 21 November, memorial.
+- Our Lady of Loreto — 10 December, optional memorial; represented from 2019, when it was inscribed in the General Roman Calendar.
 - Our Lady of Guadalupe — 12 December, optional memorial in the General Roman Calendar; represented from 2002 in this PoC.
 - Blessed Virgin Mary, Mother of the Church — Monday after Pentecost; represented from 2018.
+
+Vatican News, Presentation of the Blessed Virgin Mary (21 November): https://www.vaticannews.va/en/liturgical-holidays/presentation-of-the-blessed-virgin-mary-.html
+
+Holy See decree adding Our Lady of Loreto to the General Roman Calendar (10 December, optional memorial): https://www.vatican.va/content/dam/wss/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20191007_decreto-celebrazione-verginediloreto_en.html
 
 Holy See reference for Our Lady of Lourdes (11 February 2026): https://press.vatican.va/content/salastampa/en/bollettino/pubblico/2026/02/11/260211e.html
 

@@ -39,11 +39,13 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'archangels': 'Santos Miguel, Gabriel y Rafael, arcángeles',
   'st-francis-assisi': 'San Francisco de Asís',
   'our-lady-of-the-rosary': 'Nuestra Señora del Rosario',
+  'presentation-of-mary': 'Presentación de la Santísima Virgen María',
   'all-saints': 'Todos los Santos',
   'all-souls': 'Conmemoración de todos los fieles difuntos',
   'christ-the-king': 'Nuestro Señor Jesucristo, Rey del Universo',
   'first-sunday-advent': 'Primer Domingo de Adviento',
   'immaculate-conception': 'Inmaculada Concepción',
+  'our-lady-of-loreto': 'Nuestra Señora de Loreto',
   'our-lady-of-guadalupe': 'Nuestra Señora de Guadalupe',
   'christmas': 'Navidad',
 }
@@ -358,6 +360,13 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       rank: 'commemoration',
       precedence: 3,
     }),
+    fixed(year, 11, 21, {
+      id: 'presentation-of-mary',
+      name: 'Presentation of the Blessed Virgin Mary',
+      category: 'marian',
+      rank: 'memorial',
+      precedence: 10,
+    }),
     observance({
       id: 'christ-the-king',
       name: 'Our Lord Jesus Christ, King of the Universe',
@@ -380,6 +389,14 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       category: 'marian',
       rank: 'solemnity',
       precedence: 3,
+    }),
+    fixed(year, 12, 10, {
+      id: 'our-lady-of-loreto',
+      name: 'Our Lady of Loreto',
+      category: 'marian',
+      rank: 'optional-memorial',
+      precedence: 12,
+      effectiveFrom: 2019,
     }),
     fixed(year, 12, 12, {
       id: 'our-lady-of-guadalupe',

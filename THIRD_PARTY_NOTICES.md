@@ -17,3 +17,16 @@ The licence does not permit redistribution of the icons as a standalone icon col
 Only the curated icons actually used by Catholic Calendar should be committed to this repository. They are incorporated as supporting application/package assets rather than distributed as a standalone icon library.
 
 Copyright and other rights in the Christicons assets remain with their respective rights holder.
+
+
+## Flaticon favicon
+
+The application favicon at `app/icon.png` is a 512 × 512 rosary icon sourced from **Flaticon.com** and used under Flaticon's free-use terms requiring attribution.
+
+- Platform: https://www.flaticon.com/
+- Asset use: application favicon / app icon
+- Attribution: icon sourced from Flaticon.com
+
+Flaticon's free downloads require attribution. The original asset page and creator name are not recorded in this repository at present; if those details are available, they should be added here so the creator-specific attribution can be preserved.
+
+Copyright and other rights in the favicon remain with the original Flaticon contributor/rightsholder.

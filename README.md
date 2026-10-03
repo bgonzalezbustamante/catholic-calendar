@@ -31,7 +31,7 @@ The current alpha includes the following selected celebrations and boundaries:
 - Lent and Holy Week: Ash Wednesday; Saint Joseph; Annunciation; Palm Sunday; Holy Thursday; Good Friday; Holy Saturday; Lent; Holy Week; Sacred Paschal Triduum.
 - Easter cycle: Easter Sunday; Second Sunday of Easter / Divine Mercy Sunday; Ascension; Pentecost; Mary, Mother of the Church; Visitation; Trinity Sunday; Corpus Christi; Sacred Heart; Immaculate Heart; Easter Time.
 - Summer and autumn: Nativity of Saint John the Baptist; Saints Peter and Paul; Our Lady of Mount Carmel; Assumption; Queenship of Mary; Nativity of Mary; Exaltation of the Holy Cross; Our Lady of Sorrows; Saints Michael, Gabriel and Raphael; Saint Francis of Assisi; Our Lady of the Rosary; All Saints; All Souls; Christ the King.
-- Additional Marian observances: Our Lady of Fatima and Our Lady of Guadalupe.
+- Additional Marian observances: Our Lady of Fatima, Presentation of the Blessed Virgin Mary, Our Lady of Loreto and Our Lady of Guadalupe.
 - Devotional layer: St Michael’s Lent, 15 August–29 September inclusive.
 
 ## Architecture
@@ -128,7 +128,7 @@ This deliberately permits meaningful boundary overlaps on Holy Thursday and East
 
 ## Historical scope
 
-The supported range is 2000–2100. The purpose is current and forward-looking site use, not a complete historical reconstruction of every revision to the Roman Calendar. Known additions that materially affect this curated set are gated where useful: Divine Mercy Sunday from 2000, Fatima and Guadalupe from 2002, and Mary, Mother of the Church from 2018.
+The supported range is 2000–2100. The purpose is current and forward-looking site use, not a complete historical reconstruction of every revision to the Roman Calendar. Known additions that materially affect this curated set are gated where useful: Divine Mercy Sunday from 2000, Fatima and Guadalupe from 2002, Mary, Mother of the Church from 2018, and Our Lady of Loreto from 2019.
 
 ## Local setup
 

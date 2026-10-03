@@ -66,6 +66,40 @@ describe('fixed observances', () => {
     })
   })
 
+  it('includes the Presentation of Mary and Our Lady of Loreto', () => {
+    expect(getCatholicCalendarState('2026-11-21').primaryObservance).toMatchObject({
+      id: 'presentation-of-mary',
+      name: 'Presentation of the Blessed Virgin Mary',
+      nameEs: 'Presentación de la Santísima Virgen María',
+      rank: 'memorial',
+    })
+
+    expect(getCatholicCalendarState('2026-12-10').primaryObservance).toMatchObject({
+      id: 'our-lady-of-loreto',
+      name: 'Our Lady of Loreto',
+      nameEs: 'Nuestra Señora de Loreto',
+      rank: 'optional-memorial',
+    })
+
+    expect(
+      getYearOverview(2018).some(
+        ({ observance }) => observance.id === 'our-lady-of-loreto'
+      )
+    ).toBe(false)
+    expect(
+      getYearOverview(2019).some(
+        ({ observance }) => observance.id === 'our-lady-of-loreto'
+      )
+    ).toBe(true)
+
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-11-21')).items[0]
+    ).toMatchObject({ id: 'presentation-of-mary', icon: 'rosary' })
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-12-10')).items[0]
+    ).toMatchObject({ id: 'our-lady-of-loreto', icon: 'rosary' })
+  })
+
   it('includes Saint Francis of Assisi on 4 October', () => {
     expect(getCatholicCalendarState('2027-10-04').primaryObservance).toMatchObject({
       id: 'st-francis-assisi',
