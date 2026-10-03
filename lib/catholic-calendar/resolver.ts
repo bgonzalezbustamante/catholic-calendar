@@ -6,12 +6,8 @@ import {
   yearOf,
 } from './date-utils'
 import { firstSundayOfAdvent, gregorianEasterSunday } from './computus'
-import {
-  buildPeriods,
-  buildYearObservances,
-  MAX_SUPPORTED_YEAR,
-  MIN_SUPPORTED_YEAR,
-} from './observances'
+import { buildPeriods, MAX_SUPPORTED_YEAR, MIN_SUPPORTED_YEAR } from './calendar'
+import { buildYearObservances } from './observances'
 import type {
   CalendarObservance,
   CatholicCalendarState,

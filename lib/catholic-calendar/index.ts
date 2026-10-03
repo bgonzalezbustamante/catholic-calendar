@@ -1,11 +1,7 @@
 export { firstSundayOfAdvent, gregorianEasterSunday } from './computus'
 export { todayInTimeZone } from './date-utils'
-export {
-  buildPeriods,
-  buildYearObservances,
-  MAX_SUPPORTED_YEAR,
-  MIN_SUPPORTED_YEAR,
-} from './observances'
+export { buildPeriods, MAX_SUPPORTED_YEAR, MIN_SUPPORTED_YEAR } from './calendar'
+export { buildYearObservances } from './observances'
 export { getCatholicCalendarState, getYearOverview } from './resolver'
 export type {
   CalendarObservance,
