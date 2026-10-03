@@ -4,6 +4,8 @@ import angelIcon from '@/assets/christicons/angel.svg'
 import calvaryIcon from '@/assets/christicons/calvary.svg'
 import candleIcon from '@/assets/christicons/candle.svg'
 import chaliceIcon from '@/assets/christicons/chalice.svg'
+import churchIcon from '@/assets/christicons/church-1.svg'
+import crossIcon from '@/assets/christicons/cross.svg'
 import easterEggIcon from '@/assets/christicons/easter-egg.svg'
 import fireIcon from '@/assets/christicons/fire.svg'
 import rosaryIcon from '@/assets/christicons/rosary.svg'
@@ -20,6 +22,8 @@ const CHRISTICON_SOURCES = {
   calvary: calvaryIcon,
   candle: candleIcon,
   chalice: chaliceIcon,
+  'church-1': churchIcon,
+  cross: crossIcon,
   'easter-egg': easterEggIcon,
   fire: fireIcon,
   rosary: rosaryIcon,
@@ -63,7 +67,7 @@ export default function CalendarDisplay({
             </span>
           ) : null}
           <span className="calendar-display-item">
-            {item.icon ? <DisplayIcon icon={item.icon} /> : null}
+            <DisplayIcon icon={item.icon} />
             <span>{item.label}</span>
           </span>
         </span>
