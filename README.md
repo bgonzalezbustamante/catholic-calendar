@@ -60,6 +60,26 @@ The demonstration shell is separate:
 
 This separation keeps the engine independent of React, Next.js, network calls and database state.
 
+The publishable npm package is defined in `packages/catholic-calendar/`. Its generated `dist/` output is built from the same `lib/catholic-calendar/` source, so the package and demonstration application do not maintain separate calendar implementations.
+
+## npm package
+
+The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Once published, consumers can install it with:
+
+```bash
+npm install @bgonzalezbustamante/catholic-calendar
+```
+
+The first alpha publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+
+Validate the package locally with:
+
+```bash
+npm run check:package
+```
+
+This rebuilds the package, runs a smoke test against the compiled public API and finishes with `npm pack --dry-run` so the publishable file list can be inspected without creating a release tarball.
+
 ## Core API
 
 ```ts
@@ -125,6 +145,7 @@ Run the standard validation suite with:
 
 ```bash
 npm run check
+npm run check:package
 npm run build
 ```
 
