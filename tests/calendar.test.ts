@@ -7,6 +7,7 @@ import {
   getCalendarDisplaySummary,
   getCatholicCalendarState,
   getObservanceDisplayIcon,
+  getPeriodDisplayIcon,
   getYearOverview,
   gregorianEasterSunday,
   holyFamily,
@@ -412,6 +413,10 @@ describe('display summary', () => {
         maxItems: 3,
       }).items.map((item) => item.label)
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
+  })
+
+  it('uses calvary for Holy Week', () => {
+    expect(getPeriodDisplayIcon('holy-week')).toBe('calvary')
   })
 
   it('uses candle for the First Sunday of Advent and star for Christmas Time', () => {
