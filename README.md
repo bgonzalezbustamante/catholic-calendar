@@ -164,4 +164,4 @@ The PoC is based principally on the Universal Norms on the Liturgical Year and t
 
 ## Licence
 
-Source code and repository documentation are released under the MIT License. See `LICENSE`.
+Source code and repository documentation are released under the MIT License. See `LICENSE`. Selected third-party assets retain their own licence terms; see `THIRD_PARTY_NOTICES.md`.
