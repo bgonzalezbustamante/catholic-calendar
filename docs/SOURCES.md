@@ -89,6 +89,22 @@ Reference: https://www.liturgyoffice.org.uk/Calendar/2022/Ordo-2022.pdf
 
 The alpha generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
 
+## Major feast audit
+
+A review against the Universal Calendar identified two structurally important omissions that fit the curated scope without expanding to the complete sanctoral calendar:
+
+- Transfiguration of the Lord — 6 August, feast.
+- Holy Family of Jesus, Mary and Joseph — feast on the Sunday within the Octave of the Nativity; when there is no Sunday within the octave, 30 December.
+
+References:
+- Universal Calendar, August: https://www.liturgyoffice.org.uk/Calendar/Universal/AugUC.shtml
+- Universal Calendar, December: https://www.liturgyoffice.org.uk/Calendar/Universal/DecUC.shtml
+
+The broader sanctoral calendar remains deliberately incomplete. For example, Saint John Henry Newman was inscribed in the General Roman Calendar as an optional memorial on 9 October by decree dated 9 November 2025 and published in 2026; it is a candidate for a future expansion of the saints layer rather than part of this major-feast audit.
+
+Holy See reference:
+- Saint John Henry Newman decree: https://press.vatican.va/content/salastampa/en/bollettino/pubblico/2026/02/03/260203a.html
+
 ## Saint Francis of Assisi
 
 Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.

@@ -30,6 +30,7 @@ The current alpha includes the following selected celebrations and boundaries:
 - Early year: Presentation of the Lord; Our Lady of Lourdes.
 - Lent and Holy Week: Ash Wednesday; Saint Joseph; Annunciation; Palm Sunday; Holy Thursday; Good Friday; Holy Saturday; Lent; Holy Week; Sacred Paschal Triduum.
 - Easter cycle: Easter Sunday; Second Sunday of Easter / Divine Mercy Sunday; Ascension; Pentecost; Mary, Mother of the Church; Visitation; Trinity Sunday; Corpus Christi; Sacred Heart; Immaculate Heart; Easter Time.
+- Major additional feasts of the Lord: Transfiguration of the Lord and the Holy Family of Jesus, Mary and Joseph.
 - Summer and autumn: Nativity of Saint John the Baptist; Saints Peter and Paul; Our Lady of Mount Carmel; Assumption; Queenship of Mary; Nativity of Mary; Exaltation of the Holy Cross; Our Lady of Sorrows; Saints Michael, Gabriel and Raphael; Saint Francis of Assisi; Our Lady of the Rosary; All Saints; All Souls; Christ the King.
 - Additional Marian observances: Our Lady of Fatima, Presentation of the Blessed Virgin Mary, Our Lady of Loreto and Our Lady of Guadalupe.
 - Devotional layer: St Michael’s Lent, 15 August–29 September inclusive.

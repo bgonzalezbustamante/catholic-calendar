@@ -190,12 +190,30 @@ h1 {
 
 .today-button {
   min-height: 32px !important;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.3rem;
   border: 0 !important;
   background: transparent !important;
-  color: var(--ash) !important;
+  padding-inline: 0 !important;
+  color: var(--coral) !important;
   font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.today-button:hover,
+.today-button:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.18em;
+}
+
+.today-button-icon {
+  width: 0.78rem;
+  height: 0.78rem;
+  flex: 0 0 0.78rem;
 }
 
 .selected-date-bar {
@@ -651,6 +669,37 @@ tbody tr:last-child td {
   color: var(--ash);
 }
 
+.rank-guide {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1.65fr);
+  gap: 1rem 1.4rem;
+  margin: 1rem 0 2.4rem;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+  padding: 1rem 0;
+}
+
+.rank-guide .eyebrow {
+  margin-bottom: 0.18rem;
+}
+
+.rank-guide h3 {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.rank-guide > p {
+  margin: 0;
+  color: var(--ash);
+  font-size: 0.8rem;
+}
+
+.rank-guide strong {
+  color: var(--charcoal);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.96em;
+}
+
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -821,6 +870,10 @@ tbody tr:last-child td {
     width: 18px;
     height: 18px;
     flex-basis: 18px;
+  }
+
+  .rank-guide {
+    grid-template-columns: 1fr;
   }
 
   .layer-grid,
