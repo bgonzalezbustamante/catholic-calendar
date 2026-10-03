@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Added a two-item core display policy with configurable preferred periods; the application prioritises Lent and St Michael's Lent so personally observed penitential periods remain visible when active.
 - Added a prominent composed calendar display preview above the three diagnostic cards and reduced the diagnostic card footprint.
 - Simplified selected celebration labels to Divine Mercy Sunday, Corpus Christi, All Souls, Immaculate Conception, and Christmas.
 - Marked Calm Bridge release notes as `In Development` without a release date.
