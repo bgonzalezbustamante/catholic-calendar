@@ -579,13 +579,31 @@ h1 {
 }
 
 .year-current-button {
-  min-height: 28px !important;
+  min-height: 32px !important;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.3rem;
   border: 0 !important;
   background: transparent !important;
-  color: var(--ash) !important;
-  font-size: 0.66rem;
+  padding-inline: 0 !important;
+  color: var(--coral) !important;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.year-current-button:not(:disabled):hover,
+.year-current-button:not(:disabled):focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.18em;
+}
+
+.year-current-icon {
+  width: 0.78rem;
+  height: 0.78rem;
+  flex: 0 0 0.78rem;
 }
 
 .table-scroll {
@@ -931,6 +949,10 @@ tbody tr:last-child td {
 
   .year-control {
     justify-items: stretch;
+  }
+
+  .year-current-button {
+    justify-self: end;
   }
 
   .year-pagination {
