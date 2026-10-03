@@ -2,6 +2,7 @@ node_modules/
 .next/
 next-env.d.ts
 out/
+packages/catholic-calendar/dist/
 .env*
 !.env.example
 *.tsbuildinfo
