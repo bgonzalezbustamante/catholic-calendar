@@ -112,7 +112,8 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             <h3 id="celebrations-overview-title">Celebrations in this model</h3>
           </div>
           <p>
-            The curated observances for the selected year, including transferred, commemoration-eligible and impeded entries.
+            The curated observances for the selected year, including transferred,
+            commemorated and impeded entries.
           </p>
         </div>
 
