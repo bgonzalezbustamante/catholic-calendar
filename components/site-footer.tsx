@@ -1,10 +1,31 @@
+import type { CSSProperties } from 'react'
+
+import bibleIcon from '@/assets/christicons/bible-1.svg'
+
 export default function SiteFooter() {
+  const bibleStyle = {
+    '--footer-credit-icon': `url("${bibleIcon.src}")`,
+  } as CSSProperties
+
   return (
     <footer className="site-footer">
       <div className="shell footer-inner">
         <span className="footer-credit">
-          Display icons by{' '}
-          <a href="https://christicons.com/">Christicons</a>
+          <span
+            aria-hidden="true"
+            className="footer-credit-icon"
+            style={bibleStyle}
+          />
+          <span>
+            Display icons by{' '}
+            <a
+              href="https://christicons.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Christicons
+            </a>
+          </span>
         </span>
         <a
           className="footer-license"
