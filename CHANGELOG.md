@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Security
+
+- Explicitly deny the currently unnecessary `unrs-resolver` install script and fail installs when future dependency lifecycle scripts have not been reviewed.
+
+
 All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and the project uses Semantic Versioning for its release line.
