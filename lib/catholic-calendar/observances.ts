@@ -19,6 +19,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'holy-saturday': 'Sábado Santo',
   'easter-sunday': 'Domingo de Pascua de la Resurrección del Señor',
   'divine-mercy-sunday': 'Domingo de la Divina Misericordia',
+  'st-bernadette-soubirous': 'Santa Bernardita Soubirous',
   'our-lady-of-fatima': 'Nuestra Señora de Fátima',
   'ascension': 'Ascensión del Señor',
   'pentecost': 'Domingo de Pentecostés',
@@ -30,6 +31,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'immaculate-heart': 'Inmaculado Corazón de la Bienaventurada Virgen María',
   'nativity-john-baptist': 'Natividad de San Juan Bautista',
   'peter-and-paul': 'Santos Pedro y Pablo, apóstoles',
+  'st-benedict-nursia': 'San Benito de Nursia',
   'our-lady-of-mount-carmel': 'Nuestra Señora del Carmen',
   'transfiguration': 'Transfiguración del Señor',
   'assumption': 'Asunción de la Bienaventurada Virgen María',
@@ -199,6 +201,13 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       nominalDate: dates.divineMercySunday,
       effectiveFrom: 2000,
     }),
+    fixed(year, 4, 16, {
+      id: 'st-bernadette-soubirous',
+      name: 'Saint Bernadette Soubirous',
+      category: 'saint',
+      rank: 'optional-memorial',
+      precedence: 12,
+    }),
     fixed(year, 5, 13, {
       id: 'our-lady-of-fatima',
       name: 'Our Lady of Fatima',
@@ -284,6 +293,13 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       category: 'saint',
       rank: 'solemnity',
       precedence: 3,
+    }),
+    fixed(year, 7, 11, {
+      id: 'st-benedict-nursia',
+      name: 'Saint Benedict of Nursia',
+      category: 'saint',
+      rank: 'memorial',
+      precedence: 10,
     }),
     fixed(year, 7, 16, {
       id: 'our-lady-of-mount-carmel',
