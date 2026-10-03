@@ -69,6 +69,7 @@ function observance(input: {
     status: 'observed',
     transferred: false,
     transferReason: null,
+    commemorationReason: null,
     impededBy: null,
   }
 }
