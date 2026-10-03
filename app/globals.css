@@ -169,7 +169,8 @@ h1 {
 
 .date-control button,
 .date-control input,
-.year-control input {
+.year-pagination button,
+.year-current-button {
   min-height: 40px;
   border: 1px solid var(--stone);
   border-radius: 0.48rem;
@@ -182,8 +183,7 @@ h1 {
   font-weight: 700;
 }
 
-.date-control input,
-.year-control input {
+.date-control input {
   padding: 0.42rem 0.6rem;
 }
 
@@ -358,17 +358,6 @@ h1 {
   box-shadow: 0 5px 15px rgba(0, 33, 71, 0.035);
 }
 
-.layer-card::after {
-  content: '';
-  position: absolute;
-  inset: auto -2rem -4rem auto;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  background: var(--blue-wash);
-  opacity: 0.7;
-}
-
 .layer-number {
   position: relative;
   z-index: 1;
@@ -437,6 +426,13 @@ h1 {
 .state-chip.devotional {
   border-color: rgba(254, 97, 90, 0.3);
   background: rgba(254, 97, 90, 0.07);
+}
+
+.state-chip.commemorated,
+.status-pill.is-commemorated {
+  border-color: rgba(0, 170, 180, 0.34);
+  background: rgba(0, 170, 180, 0.08);
+  color: var(--blue);
 }
 
 .exceptions {
@@ -518,8 +514,48 @@ h1 {
   padding-top: 2rem;
 }
 
-.year-control input {
-  width: 110px;
+.year-control {
+  justify-items: end;
+}
+
+.year-pagination {
+  display: grid;
+  grid-template-columns: 38px minmax(72px, auto) 38px;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.year-pagination strong {
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--stone);
+  border-radius: 0.48rem;
+  background: var(--paper);
+  padding: 0 0.75rem;
+  color: var(--blue);
+  font-size: 0.82rem;
+}
+
+.year-pagination button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.year-pagination button:disabled,
+.year-current-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.year-current-button {
+  min-height: 28px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--ash) !important;
+  font-size: 0.66rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
 
 .table-scroll {
@@ -753,8 +789,12 @@ tbody tr:last-child td {
     width: 100%;
   }
 
-  .year-control input {
-    width: 100%;
+  .year-control {
+    justify-items: stretch;
+  }
+
+  .year-pagination {
+    grid-template-columns: 38px 1fr 38px;
   }
 
   .calendar-display-icon {
