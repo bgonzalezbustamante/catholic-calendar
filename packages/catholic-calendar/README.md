@@ -5,7 +5,7 @@ A small, UI-agnostic TypeScript engine for the curated Roman Catholic calendar m
 ## Install
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar
+npm install @bgonzalezbustamante/catholic-calendar@alpha
 ```
 
 ## Usage
