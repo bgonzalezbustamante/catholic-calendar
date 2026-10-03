@@ -154,9 +154,7 @@ describe('display summary', () => {
 
   it('caps the composed display at two items', () => {
     const state = getCatholicCalendarState('2026-04-02')
-    const display = getCalendarDisplaySummary(state, {
-      preferredPeriodIds: ['lent', 'st-michaels-lent'],
-    })
+    const display = getCalendarDisplaySummary(state)
 
     expect(display.items).toHaveLength(2)
     expect(display.items.map((item) => item.label)).toEqual([
@@ -165,11 +163,17 @@ describe('display summary', () => {
     ])
   })
 
+  it('always keeps Advent in a two-item display', () => {
+    const state = getCatholicCalendarState('2026-12-08')
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Immaculate Conception · Advent'
+    )
+  })
+
   it('supports a three-item composed display without changing diagnostic state', () => {
     const state = getCatholicCalendarState('2026-04-02')
     const display = getCalendarDisplaySummary(state, {
       maxItems: 3,
-      preferredPeriodIds: ['lent'],
     })
 
     expect(display.items.map((item) => item.label)).toEqual([
@@ -184,28 +188,23 @@ describe('display summary', () => {
     ])
   })
 
-  it('keeps personally preferred penitential periods visible at overlapping boundaries', () => {
+  it('keeps core compact-display periods visible at overlapping boundaries', () => {
     const lentState = getCatholicCalendarState('2026-04-02')
     expect(
-      formatCalendarStateSummary(lentState, {
-        preferredPeriodIds: ['lent', 'st-michaels-lent'],
-      })
+      formatCalendarStateSummary(lentState)
     ).toBe('Holy Thursday · Lent')
 
     const michaelState = getCatholicCalendarState('2026-08-15')
     expect(
-      formatCalendarStateSummary(michaelState, {
-        preferredPeriodIds: ['lent', 'st-michaels-lent'],
-      })
+      formatCalendarStateSummary(michaelState)
     ).toBe("Assumption of the Blessed Virgin Mary · St Michael's Lent")
   })
 
-  it('exposes a configurable package-level display policy', () => {
+  it('exposes only the compact display length as a package option', () => {
     const state = getCatholicCalendarState('2026-04-02')
     expect(
       getCalendarDisplaySummary(state, {
         maxItems: 3,
-        preferredPeriodIds: ['lent'],
       }).items.map((item) => item.label)
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
   })
