@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Current year now mirrors the Return to today action with a coral treatment, small return icon and right alignment beneath Year Overview pagination.
 - Refined the Christicons footer acknowledgement with the existing bible-1 Christicon and a new-tab link, reused rank pills inside the rank guide, right-aligned the tester Date label, and moved the selected date into Display configuration.
 - Rendered liturgical ranks as colour-coded pill labels in Year Overview using the existing visual palette, and added a discreet Christicons acknowledgement in the site footer.
 - Saint Bernadette now uses the rosary Christicon and Saint Benedict uses the cross Christicon as explicit display mappings; the Flaticon favicon notice now credits Magnific with the supplied source link.
