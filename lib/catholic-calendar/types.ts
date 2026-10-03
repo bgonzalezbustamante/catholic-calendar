@@ -46,6 +46,24 @@ export interface NextObservance {
   daysUntil: number
 }
 
+export type CalendarDisplayItemKind = 'observance' | 'period' | 'countdown'
+
+export interface CalendarDisplayItem {
+  kind: CalendarDisplayItemKind
+  id: string
+  label: string
+}
+
+export interface CalendarDisplayOptions {
+  maxItems?: 1 | 2
+  preferredPeriodIds?: readonly string[]
+}
+
+export interface CalendarDisplaySummary {
+  items: CalendarDisplayItem[]
+  text: string
+}
+
 export interface CatholicCalendarState {
   date: string
   primaryObservance: CalendarObservance | null
