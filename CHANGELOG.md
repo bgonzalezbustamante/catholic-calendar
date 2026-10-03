@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Saint Bernadette now uses the rosary Christicon and Saint Benedict uses the cross Christicon as explicit display mappings; the Flaticon favicon notice now credits Magnific with the supplied source link.
 - Added Saint Bernadette Soubirous on 16 April as a curated optional memorial and Saint Benedict of Nursia on 11 July as a universal memorial.
 - Added the Transfiguration of the Lord on 6 August and the Holy Family of Jesus, Mary and Joseph within the Christmas Octave after auditing major universal feasts missing from the curated set.
 - Restyled Return to today as a right-aligned coral action with a small return icon, renamed Year Overview's final column to Nominal / reason, and added a concise liturgical-rank guide beneath the table.

@@ -24,9 +24,11 @@ Copyright and other rights in the Christicons assets remain with their respectiv
 The application favicon at `app/icon.png` is a 512 × 512 rosary icon sourced from **Flaticon.com** and used under Flaticon's free-use terms requiring attribution.
 
 - Platform: https://www.flaticon.com/
+- Source category: https://www.flaticon.com/free-icons/rosary
 - Asset use: application favicon / app icon
-- Attribution: icon sourced from Flaticon.com
+- Creator: **Magnific**
+- Required credit: **Rosary icons created by Magnific - Flaticon**
 
-Flaticon's free downloads require attribution. The original asset page and creator name are not recorded in this repository at present; if those details are available, they should be added here so the creator-specific attribution can be preserved.
+Flaticon's free downloads require attribution. The repository preserves the supplied creator-specific credit and source-category link for the favicon.
 
-Copyright and other rights in the favicon remain with the original Flaticon contributor/rightsholder.
+Copyright and other rights in the favicon remain with Magnific and/or the applicable Flaticon rightsholder.
