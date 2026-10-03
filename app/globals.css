@@ -93,7 +93,8 @@ h1 {
 }
 
 .hero-copy {
-  max-width: 920px;
+  width: 100%;
+  max-width: none;
   margin: 1.1rem 0 0;
   color: var(--ash);
   font-size: 1.03rem;
@@ -274,16 +275,27 @@ h1 {
   box-shadow: 0 8px 24px rgba(0, 33, 71, 0.06);
 }
 
+.state-quotation::before,
 .state-quotation::after {
-  content: '“';
   position: absolute;
-  top: -1.35rem;
-  right: 0.8rem;
-  color: var(--blue-wash);
+  z-index: 0;
+  color: rgba(0, 33, 71, 0.14);
   font-family: Georgia, serif;
-  font-size: 8rem;
+  font-size: clamp(5.5rem, 10vw, 8.5rem);
   line-height: 1;
   pointer-events: none;
+}
+
+.state-quotation::before {
+  content: '“';
+  top: -1.45rem;
+  left: 0.7rem;
+}
+
+.state-quotation::after {
+  content: '”';
+  right: 0.75rem;
+  bottom: -2.7rem;
 }
 
 .calendar-display {
@@ -332,7 +344,7 @@ h1 {
 .state-quotation footer {
   position: relative;
   z-index: 1;
-  margin-top: 0.65rem;
+  margin: 0 0 0.7rem;
   color: var(--ash);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.68rem;
@@ -599,6 +611,14 @@ td strong {
   color: var(--charcoal);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.78rem;
+}
+
+.nominal-reason {
+  display: block;
+  max-width: 180px;
+  color: var(--ash);
+  font-size: 0.7rem;
+  line-height: 1.35;
 }
 
 .celebration-translation {
