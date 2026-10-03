@@ -4,6 +4,7 @@
 
 ### Changed
 
+- The Annunciation now uses the rosary Christicon as an explicit display override while remaining categorised as a Lord observance in the calendar model.
 - Marian observances and Marian countdown targets now use the rosary Christicon before the generic cross fallback.
 - Added guaranteed icon fallback coverage to the composed display: unmapped observances/countdowns use the Christicons cross, while unmapped periods use church-1.
 - Added semantic Christicons to the composed calendar display, normalised the curated SVG assets for themeable rendering, and exposed icon identifiers in package display items.
