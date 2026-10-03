@@ -39,7 +39,7 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
   const label =
     observance.status === 'transferred'
       ? 'Transferred'
-      : observance.status === 'commemorated'
+      : observance.status === 'commemoration-eligible'
         ? 'Commemorated'
         : 'Impeded'
 
@@ -47,15 +47,15 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
     <div className={`rule-callout is-${observance.status}`}>
       <strong>{label}</strong>
       <span>
-        {observance.status === 'commemorated' ? 'Date' : 'Nominal date'}:{' '}
+        {observance.status === 'commemoration-eligible' ? 'Date' : 'Nominal date'}:{' '}
         {formatDate(observance.nominalDate)}
-        {observance.status !== 'commemorated' && observance.observedDate
+        {observance.status !== 'commemoration-eligible' && observance.observedDate
           ? ` · Observed: ${formatDate(observance.observedDate)}`
           : ''}
       </span>
       {observance.transferReason ? <span>{observance.transferReason}</span> : null}
-      {observance.commemorationReason ? (
-        <span>{observance.commemorationReason}</span>
+      {observance.commemorationEligibilityReason ? (
+        <span>{observance.commemorationEligibilityReason}</span>
       ) : null}
       {observance.impededBy ? <span>Impeded by: {observance.impededBy}.</span> : null}
     </div>
