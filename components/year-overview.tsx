@@ -35,22 +35,39 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <h2 id="year-overview-title">Year overview</h2>
           <p className="section-intro">
             Browse the curated observance set chronologically. Transfers use their observed date;
-            impeded entries remain visible on their nominal date.
+            impeded entries remain visible on their nominal date, while eligible memorials in privileged weekdays are marked as commemorated.
           </p>
         </div>
-        <label className="year-control">
+        <div className="year-control" aria-label="Year pagination">
           <span>Year</span>
-          <input
-            type="number"
-            min={MIN_SUPPORTED_YEAR}
-            max={MAX_SUPPORTED_YEAR}
-            value={year}
-            onChange={(event) => {
-              const value = Number(event.target.value)
-              if (value >= MIN_SUPPORTED_YEAR && value <= MAX_SUPPORTED_YEAR) setYear(value)
-            }}
-          />
-        </label>
+          <div className="year-pagination">
+            <button
+              type="button"
+              disabled={year === MIN_SUPPORTED_YEAR}
+              onClick={() => setYear((value) => Math.max(MIN_SUPPORTED_YEAR, value - 1))}
+              aria-label="Previous year"
+            >
+              ←
+            </button>
+            <strong>{year}</strong>
+            <button
+              type="button"
+              disabled={year === MAX_SUPPORTED_YEAR}
+              onClick={() => setYear((value) => Math.min(MAX_SUPPORTED_YEAR, value + 1))}
+              aria-label="Next year"
+            >
+              →
+            </button>
+          </div>
+          <button
+            className="year-current-button"
+            type="button"
+            disabled={year === initialYear}
+            onClick={() => setYear(initialYear)}
+          >
+            Current year
+          </button>
+        </div>
       </div>
 
       <div className="table-scroll" tabIndex={0}>
