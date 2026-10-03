@@ -13,6 +13,7 @@ const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'christmas-time': 'star',
   advent: 'candle',
   lent: 'calvary',
+  'holy-week': 'calvary',
   'easter-time': 'easter-egg',
   'st-michaels-lent': 'angel',
 }
