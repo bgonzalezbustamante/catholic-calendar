@@ -125,13 +125,16 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
         </div>
         <p>
           Rank describes a celebration&apos;s liturgical classification, not its spiritual
-          importance. In this curated model, <strong>Principal day</strong> marks the highest
-          seasonal days; <strong>Solemnity</strong> and <strong>Feast</strong> are higher
-          celebrations; <strong>Memorial</strong> is normally obligatory; and
-          <strong> Optional Memorial</strong> may be chosen when the calendar permits.
-          <strong> Commemoration</strong> is retained for special cases such as All Souls.
-          Actual precedence also depends on the season and the date, so rank alone does not
-          determine what is observed.
+          importance. In this curated model,{' '}
+          <span className="rank-pill is-principal-day">Principal day</span> marks the highest
+          seasonal days; <span className="rank-pill is-solemnity">Solemnity</span> and{' '}
+          <span className="rank-pill is-feast">Feast</span> are higher celebrations;{' '}
+          <span className="rank-pill is-memorial">Memorial</span> is normally obligatory; and{' '}
+          <span className="rank-pill is-optional-memorial">Optional Memorial</span> may be
+          chosen when the calendar permits.{' '}
+          <span className="rank-pill is-commemoration">Commemoration</span> is retained for
+          special cases such as All Souls. Actual precedence also depends on the season and
+          the date, so rank alone does not determine what is observed.
         </p>
       </aside>
     </section>
