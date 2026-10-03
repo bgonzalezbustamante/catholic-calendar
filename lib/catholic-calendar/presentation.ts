@@ -21,6 +21,7 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   annunciation: 'rosary',
   'st-bernadette-soubirous': 'rosary',
   'st-benedict-nursia': 'cross',
+  archangels: 'angel',
   'first-sunday-advent': 'candle',
   christmas: 'star',
   'sacred-heart': 'sacred-heart',
