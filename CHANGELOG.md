@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Added the npm lockfile, switched CI to `npm ci`, pinned npm 11.21.0 as the package manager, and generate Next.js route types before TypeScript checks.
+- Stopped tracking generated `next-env.d.ts`; Next.js recreates it during type generation and builds.
+
 ### Security
 
 - Explicitly deny the currently unnecessary `unrs-resolver` install script and fail installs when future dependency lifecycle scripts have not been reviewed.
