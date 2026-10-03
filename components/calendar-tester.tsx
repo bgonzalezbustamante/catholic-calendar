@@ -153,7 +153,21 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
             type="button"
             onClick={() => setCommittedDate(initialDate)}
           >
-            Return to today
+            <svg
+              aria-hidden="true"
+              className="today-button-icon"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 7v5h5M5.3 11A7 7 0 1 1 7 17.7"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.8"
+              />
+            </svg>
+            <span>Return to today</span>
           </button>
         </div>
       </div>
