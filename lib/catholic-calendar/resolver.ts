@@ -8,7 +8,6 @@ import {
 import { firstSundayOfAdvent, gregorianEasterSunday } from './computus'
 import {
   buildPeriodContext,
-  buildPeriods,
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
 } from './calendar'
