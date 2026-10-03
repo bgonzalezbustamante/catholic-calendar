@@ -172,15 +172,13 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         </div>
       </div>
 
-      <div className="selected-date-bar">
-        <span>Selected date</span>
-        <strong>{formatDate(date)}</strong>
-      </div>
-
       <div className="display-config" aria-label="Composed display configuration">
         <div className="display-config-heading">
           <strong>Display configuration</strong>
           <span>Composed display only · cards remain complete</span>
+          <span className="display-config-date">
+            Selected date <strong>{formatDate(date)}</strong>
+          </span>
         </div>
 
         <label className="display-config-field" htmlFor="display-max-items">
