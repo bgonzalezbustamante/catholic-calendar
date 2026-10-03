@@ -34,3 +34,16 @@ export function firstSundayOfAdvent(year: number): string {
 export function baptismOfTheLord(year: number): string {
   return nextSundayAfter(dateFromParts(year, 1, 6))
 }
+
+
+export function holyFamily(year: number): string {
+  let cursor = dateFromParts(year, 12, 26)
+  const end = dateFromParts(year, 12, 31)
+
+  while (cursor <= end) {
+    if (dayOfWeek(cursor) === 0) return cursor
+    cursor = addDays(cursor, 1)
+  }
+
+  return dateFromParts(year, 12, 30)
+}
