@@ -20,6 +20,7 @@ export type PeriodKind = 'liturgical' | 'devotional'
 export interface CalendarObservance {
   id: string
   name: string
+  nameEs: string
   category: ObservanceCategory
   rank: LiturgicalRank
   precedence: number
@@ -55,7 +56,7 @@ export interface CalendarDisplayItem {
 }
 
 export interface CalendarDisplayOptions {
-  maxItems?: 1 | 2
+  maxItems?: 2 | 3
   preferredPeriodIds?: readonly string[]
 }
 

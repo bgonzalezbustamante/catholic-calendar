@@ -4,6 +4,49 @@ import { assertSupportedYear, seasonDates } from './calendar'
 import { applyCalendarRules } from './rules'
 import type { CalendarObservance, LiturgicalRank, ObservanceCategory } from './types'
 
+const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
+  'mary-mother-of-god': 'Santa María, Madre de Dios',
+  'epiphany': 'Epifanía del Señor',
+  'baptism-of-the-lord': 'Bautismo del Señor',
+  'presentation': 'Presentación del Señor',
+  'our-lady-of-lourdes': 'Nuestra Señora de Lourdes',
+  'ash-wednesday': 'Miércoles de Ceniza',
+  'st-joseph': 'San José, esposo de la Bienaventurada Virgen María',
+  'annunciation': 'Anunciación del Señor',
+  'palm-sunday': 'Domingo de Ramos de la Pasión del Señor',
+  'holy-thursday': 'Jueves Santo',
+  'good-friday': 'Viernes Santo de la Pasión del Señor',
+  'holy-saturday': 'Sábado Santo',
+  'easter-sunday': 'Domingo de Pascua de la Resurrección del Señor',
+  'divine-mercy-sunday': 'Domingo de la Divina Misericordia',
+  'our-lady-of-fatima': 'Nuestra Señora de Fátima',
+  'ascension': 'Ascensión del Señor',
+  'pentecost': 'Domingo de Pentecostés',
+  'mary-mother-of-church': 'Bienaventurada Virgen María, Madre de la Iglesia',
+  'visitation': 'Visitación de la Bienaventurada Virgen María',
+  'trinity-sunday': 'Santísima Trinidad',
+  'corpus-christi': 'Santísimo Cuerpo y Sangre de Cristo',
+  'sacred-heart': 'Sagrado Corazón de Jesús',
+  'immaculate-heart': 'Inmaculado Corazón de la Bienaventurada Virgen María',
+  'nativity-john-baptist': 'Natividad de San Juan Bautista',
+  'peter-and-paul': 'Santos Pedro y Pablo, apóstoles',
+  'our-lady-of-mount-carmel': 'Nuestra Señora del Carmen',
+  'assumption': 'Asunción de la Bienaventurada Virgen María',
+  'queenship-of-mary': 'Bienaventurada Virgen María Reina',
+  'nativity-of-mary': 'Natividad de la Santísima Virgen María',
+  'exaltation-holy-cross': 'Exaltación de la Santa Cruz',
+  'our-lady-of-sorrows': 'Nuestra Señora de los Dolores',
+  'archangels': 'Santos Miguel, Gabriel y Rafael, arcángeles',
+  'our-lady-of-the-rosary': 'Nuestra Señora del Rosario',
+  'all-saints': 'Todos los Santos',
+  'all-souls': 'Conmemoración de todos los fieles difuntos',
+  'christ-the-king': 'Nuestro Señor Jesucristo, Rey del Universo',
+  'first-sunday-advent': 'Primer Domingo de Adviento',
+  'immaculate-conception': 'Inmaculada Concepción',
+  'our-lady-of-guadalupe': 'Nuestra Señora de Guadalupe',
+  'christmas': 'Navidad',
+}
+
 function observance(input: {
   id: string
   name: string
@@ -13,8 +56,14 @@ function observance(input: {
   nominalDate: string
   effectiveFrom?: number
 }): CalendarObservance {
+  const nameEs = SPANISH_OBSERVANCE_NAMES[input.id]
+  if (!nameEs) {
+    throw new Error(`Missing Spanish observance name for ${input.id}.`)
+  }
+
   return {
     ...input,
+    nameEs,
     observedDate: input.nominalDate,
     status: 'observed',
     transferred: false,

@@ -11,13 +11,14 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Computes Gregorian Easter and derives Ash Wednesday, Palm Sunday, Holy Week, the Paschal Triduum, Easter Time, Ascension, Pentecost, Trinity Sunday, Corpus Christi, the Sacred Heart and the Immaculate Heart.
 - Computes the First Sunday of Advent from the 27 November–3 December window and derives Christ the King and Advent.
 - Resolves three independent layers for a date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when no discrete observance is active.
-- Exposes a composed display API that returns at most two reader-facing items and accepts preferred period IDs, allowing consumers to keep personally observed periods visible without hard-coding those preferences into the calendar engine.
+- Exposes a composed display API that defaults to two reader-facing items and supports a two- or three-item limit plus preferred period IDs, allowing consumers to keep personally observed periods visible without hard-coding those preferences into the calendar engine.
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
 - Retains selected observances that are impeded by a higher-ranking day as nominal diagnostic entries instead of falsely reporting them as observed.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.
 - Models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
 - Uses the universal Roman dates for Epiphany, Ascension and Corpus Christi rather than national transfers.
 - Includes an interactive date tester and a complete year overview for visual QA.
+- Carries Spanish celebration labels in observance metadata and displays them beneath the English names in the Year Overview.
 - Keeps the calendar engine free of React, Next.js, network calls and database state so it can later be extracted into a package.
 
 ## Calendar scope

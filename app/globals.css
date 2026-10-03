@@ -568,6 +568,15 @@ td strong {
   font-size: 0.78rem;
 }
 
+.celebration-translation {
+  display: block;
+  margin-top: 0.08rem;
+  color: #8a8987;
+  font-family: var(--font-noto-serif), Georgia, serif;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
 td small {
   display: block;
   margin-top: 0.14rem;

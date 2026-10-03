@@ -70,6 +70,9 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                 <td>{formatShortDate(date)}</td>
                 <td>
                   <strong>{observance.name}</strong>
+                  <span className="celebration-translation" lang="es">
+                    {observance.nameEs}
+                  </span>
                   {observance.impededBy ? <small>Impeded by {observance.impededBy}</small> : null}
                 </td>
                 <td>{titleCase(observance.rank)}</td>

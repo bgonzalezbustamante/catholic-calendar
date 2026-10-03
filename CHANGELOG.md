@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Kept all three diagnostic cards independent from the composed-display limit, changed the tester limit choices to two or three items, and added Advent to preferred periods.
+- Added Spanish celebration names to the calendar observance metadata and display them as lighter secondary labels in Year Overview.
 - Added visible tester controls for the core composed-display configuration, including the one/two-item cap and preferred-period toggles for Lent and St Michael's Lent.
 - Realigned the in-app Release Notes card with the Weekly Penguin Timeline pattern: eyebrow outside the card, version/codename heading and status pill inside, full-width summary, and two-column detail sections.
 - Added a two-item core display policy with configurable preferred periods; the application prioritises Lent and St Michael's Lent so personally observed penitential periods remain visible when active.

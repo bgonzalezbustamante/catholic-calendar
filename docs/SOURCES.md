@@ -93,6 +93,17 @@ The curated set includes universal Marian observances relevant to the intended s
 
 Holy See notification for Mary, Mother of the Church: https://www.vatican.va/content/dam/wss/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20180324_notificazione-mater-ecclesiae_en.html
 
+## Spanish observance names
+
+Spanish labels in the Year Overview follow standard Spanish-language Roman Catholic usage, cross-checked against Holy See and Vatican News Spanish materials. Examples include `Santísimo Cuerpo y Sangre de Cristo`, `Conmemoración de todos los fieles difuntos`, `Nuestro Señor Jesucristo, Rey del Universo`, `Inmaculada Concepción` and `Natividad del Señor`.
+
+References:
+- Holy See, Code of Canon Law (Spanish), can. 1246: https://www.vatican.va/archive/cod-iuris-canonici/esp/documents/cic_libro4_cann1246-1248_sp.html
+- Vatican News, liturgical feasts index: https://www.vaticannews.va/es/fiestas-liturgicas.html
+- Holy See / Vatican News Spanish liturgical celebration pages for All Saints, the faithful departed, Christ the King, Immaculate Conception and Christmas.
+
+The public `name` field remains English for backwards compatibility; `nameEs` carries the Spanish display name.
+
 ## St Michael’s Lent
 
 St Michael’s Lent is a Franciscan devotional practice, not a liturgical season. The PoC represents the civil-date span from the Assumption (15 August) through the feast of Saints Michael, Gabriel and Raphael (29 September) inclusive and deliberately does not assign a numbered “day of Lent”.
