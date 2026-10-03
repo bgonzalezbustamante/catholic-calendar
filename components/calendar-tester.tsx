@@ -52,17 +52,19 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
-  const [maxDisplayItems, setMaxDisplayItems] = useState<1 | 2>(2)
+  const [maxDisplayItems, setMaxDisplayItems] = useState<2 | 3>(2)
   const [preferLent, setPreferLent] = useState(true)
   const [preferStMichaelsLent, setPreferStMichaelsLent] = useState(true)
+  const [preferAdvent, setPreferAdvent] = useState(true)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
   const preferredPeriodIds = useMemo(
     () => [
       ...(preferLent ? ['lent'] : []),
       ...(preferStMichaelsLent ? ['st-michaels-lent'] : []),
+      ...(preferAdvent ? ['advent'] : []),
     ],
-    [preferLent, preferStMichaelsLent]
+    [preferAdvent, preferLent, preferStMichaelsLent]
   )
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status !== 'observed'
@@ -131,7 +133,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
       <div className="display-config" aria-label="Composed display configuration">
         <div className="display-config-heading">
           <strong>Display configuration</strong>
-          <span>Package preview</span>
+          <span>Composed display only · cards remain complete</span>
         </div>
 
         <label className="display-config-field" htmlFor="display-max-items">
@@ -140,11 +142,11 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
             id="display-max-items"
             value={maxDisplayItems}
             onChange={(event) =>
-              setMaxDisplayItems(Number(event.target.value) as 1 | 2)
+              setMaxDisplayItems(Number(event.target.value) as 2 | 3)
             }
           >
-            <option value={1}>1 item</option>
             <option value={2}>2 items</option>
+            <option value={3}>3 items</option>
           </select>
         </label>
 
@@ -165,6 +167,14 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
               onChange={(event) => setPreferStMichaelsLent(event.target.checked)}
             />
             St Michael&apos;s Lent
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={preferAdvent}
+              onChange={(event) => setPreferAdvent(event.target.checked)}
+            />
+            Advent
           </label>
         </fieldset>
       </div>
