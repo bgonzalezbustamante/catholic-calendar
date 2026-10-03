@@ -30,7 +30,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Observance model',
         items: [
-          'Introduced simultaneous primary-observance, active-period and countdown layers, with all six Roman liturgical seasons including both spans of Ordinary Time.'
+          'Introduced simultaneous primary-observance, active-period and countdown layers, with all six Roman liturgical seasons including both spans of Ordinary Time.',
           'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel, the Presentation of Mary, Loreto and Guadalupe; added Saints Bernadette Soubirous, Benedict of Nursia and Francis of Assisi; and filled major feast gaps with the Transfiguration and Holy Family.',
           'Modelled St Michael’s Lent as a devotional period from the Assumption through the feast of the Archangels, subordinate to liturgical precedence.',
         ],
@@ -38,7 +38,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Precedence and transfers',
         items: [
-          'Tracks observed, commemorated, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy; impeded diagnostics are surfaced in Year Overview.'
+          'Tracks observed, commemorated, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy; impeded diagnostics are surfaced in Year Overview.',
           'Covers the selected transfer cases for Saint Joseph, the Annunciation and the Immaculate Conception.',
           'Resolves same-date selected solemnities, including the Sacred Heart and Nativity of Saint John the Baptist collision.',
         ],
