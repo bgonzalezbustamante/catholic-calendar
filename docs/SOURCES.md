@@ -89,6 +89,19 @@ Reference: https://www.liturgyoffice.org.uk/Calendar/2022/Ordo-2022.pdf
 
 The alpha generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
 
+## Selected saints
+
+The curated saints layer includes a small number of saints relevant to the intended calendar rather than reproducing the complete sanctoral cycle.
+
+- Saint Bernadette Soubirous — 16 April. Vatican sources consistently commemorate Bernadette on this date, but she is not listed in the Universal Calendar. The PoC therefore includes her as a curated optional memorial rather than assigning a universal memorial rank.
+- Saint Benedict of Nursia — 11 July. The Universal Calendar assigns memorial rank. Regional calendars in Europe may elevate Saint Benedict to a feast as a patron of Europe; this package retains the universal baseline rank.
+
+References:
+- Vatican News, Saint Bernadette Soubirous, 16 April: https://www.vaticannews.va/en/saints/04/16/st--mary-bernardette-soubirous--virgin.html
+- Benedict XVI, homily of 16 April 2012 referring to the memorial of Saint Bernadette: https://www.vatican.va/content/benedict-xvi/en/homilies/2012/documents/hf_ben-xvi_hom_20120416_85-bxvi.html
+- Universal Calendar, July — Saint Benedict, 11 July, memorial: https://www.liturgyoffice.org.uk/Calendar/Universal/JulUC.shtml
+- Vatican News, Saint Benedict: https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html
+
 ## Major feast audit
 
 A review against the Universal Calendar identified two structurally important omissions that fit the curated scope without expanding to the complete sanctoral calendar:

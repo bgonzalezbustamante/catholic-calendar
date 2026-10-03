@@ -31,7 +31,7 @@ export const releases: ReleaseNote[] = [
         title: 'Observance model',
         items: [
           'Introduced simultaneous primary-observance, active-period and countdown layers.',
-          'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel, the Presentation of Mary, Loreto and Guadalupe; added Saint Francis of Assisi; and filled major feast gaps with the Transfiguration and Holy Family.',
+          'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel, the Presentation of Mary, Loreto and Guadalupe; added Saints Bernadette Soubirous, Benedict of Nursia and Francis of Assisi; and filled major feast gaps with the Transfiguration and Holy Family.',
           'Modelled St Michael’s Lent as a devotional period from the Assumption through the feast of the Archangels, subordinate to liturgical precedence.',
         ],
       },
