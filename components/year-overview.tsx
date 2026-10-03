@@ -91,7 +91,11 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                     {observance.nameEs}
                   </span>
                 </td>
-                <td>{titleCase(observance.rank)}</td>
+                <td>
+                  <span className={`rank-pill is-${observance.rank}`}>
+                    {titleCase(observance.rank)}
+                  </span>
+                </td>
                 <td>
                   <span className={`status-pill is-${observance.status}`}>
                     {titleCase(observance.status)}
