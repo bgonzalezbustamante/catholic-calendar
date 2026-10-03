@@ -54,6 +54,8 @@ export type CalendarDisplayIcon =
   | 'calvary'
   | 'candle'
   | 'chalice'
+  | 'church-1'
+  | 'cross'
   | 'easter-egg'
   | 'fire'
   | 'rosary'
@@ -65,7 +67,7 @@ export interface CalendarDisplayItem {
   kind: CalendarDisplayItemKind
   id: string
   label: string
-  icon: CalendarDisplayIcon | null
+  icon: CalendarDisplayIcon
 }
 
 export interface CalendarDisplayOptions {

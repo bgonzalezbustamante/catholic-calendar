@@ -235,6 +235,41 @@ describe('display summary', () => {
     }
   })
 
+  it('guarantees an icon for every composed display item', () => {
+    const unmappedObservance = getCalendarDisplaySummary(
+      getCatholicCalendarState('2026-09-08')
+    )
+    expect(unmappedObservance.items[0]).toMatchObject({
+      id: 'nativity-of-mary',
+      icon: 'cross',
+    })
+
+    const christmasTime = getCalendarDisplaySummary(
+      getCatholicCalendarState('2026-01-03')
+    )
+    expect(christmasTime.items).toMatchObject([
+      { id: 'christmas-time', icon: 'church-1' },
+      { id: 'countdown:epiphany', icon: 'cross' },
+    ])
+
+    const overviewDates = [
+      '2026-01-03',
+      '2026-03-01',
+      '2026-04-05',
+      '2026-09-08',
+      '2026-12-03',
+    ]
+
+    for (const date of overviewDates) {
+      expect(
+        getCalendarDisplaySummary(
+          getCatholicCalendarState(date),
+          { maxItems: 3 }
+        ).items.every((item) => Boolean(item.icon))
+      ).toBe(true)
+    }
+  })
+
   it('provides Spanish names for every year-overview observance', () => {
     const overview = getYearOverview(2026)
     expect(overview.length).toBeGreaterThan(0)

@@ -24,12 +24,12 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'our-lady-of-the-rosary': 'rosary',
 }
 
-function iconForPeriod(periodId: string): CalendarDisplayIcon | null {
-  return PERIOD_ICONS[periodId] ?? null
+function iconForPeriod(periodId: string): CalendarDisplayIcon {
+  return PERIOD_ICONS[periodId] ?? 'church-1'
 }
 
-function iconForObservance(observanceId: string): CalendarDisplayIcon | null {
-  return OBSERVANCE_ICONS[observanceId] ?? null
+function iconForObservance(observanceId: string): CalendarDisplayIcon {
+  return OBSERVANCE_ICONS[observanceId] ?? 'cross'
 }
 
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
