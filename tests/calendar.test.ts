@@ -24,6 +24,49 @@ describe('computus', () => {
   })
 })
 
+describe('fixed observances', () => {
+  it('shows Our Lady of Lourdes on 11 February', () => {
+    const state = getCatholicCalendarState('2026-02-11')
+
+    expect(state.primaryObservance).toMatchObject({
+      id: 'our-lady-of-lourdes',
+      name: 'Our Lady of Lourdes',
+      rank: 'optional-memorial',
+      status: 'observed',
+    })
+    expect(
+      getYearOverview(2026).find(
+        ({ observance }) => observance.id === 'our-lady-of-lourdes'
+      )
+    ).toMatchObject({
+      date: '2026-02-11',
+      observance: {
+        status: 'observed',
+      },
+    })
+  })
+
+  it('includes Saint Francis of Assisi on 4 October', () => {
+    expect(getCatholicCalendarState('2027-10-04').primaryObservance).toMatchObject({
+      id: 'st-francis-assisi',
+      name: 'Saint Francis of Assisi',
+      nameEs: 'San Francisco de Asís',
+      rank: 'memorial',
+      status: 'observed',
+    })
+
+    expect(
+      getCatholicCalendarState('2026-10-04').nominalObservances.find(
+        (observance) => observance.id === 'st-francis-assisi'
+      )
+    ).toMatchObject({
+      status: 'impeded',
+      observedDate: null,
+      impededBy: 'Sunday',
+    })
+  })
+})
+
 describe('periods and countdown', () => {
   it('retains a Marian feast alongside St Michael’s Lent', () => {
     const state = getCatholicCalendarState('2026-09-08')
@@ -210,6 +253,23 @@ describe('display summary', () => {
         maxItems: 3,
       }).items.map((item) => item.label)
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
+  })
+
+  it('uses candle for the First Sunday of Advent and star for Christmas Time', () => {
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-11-29')).items[0]
+    ).toMatchObject({
+      id: 'first-sunday-advent',
+      icon: 'candle',
+    })
+
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-12-26')).items.find(
+        (item) => item.id === 'christmas-time'
+      )
+    ).toMatchObject({
+      icon: 'star',
+    })
   })
 
   it('maps the complete Christicon set onto calendar display semantics', () => {
