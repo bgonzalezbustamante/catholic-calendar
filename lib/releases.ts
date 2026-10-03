@@ -46,7 +46,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with two/three-item composed-display controls, natural engine-order truncation, themeable Christicons with Marian rosary semantics and guaranteed fallbacks, rule details and complete diagnostic cards.',
+          'Added an interactive date tester with two/three-item composed-display controls, natural engine-order truncation, themeable Christicons with Marian rosary semantics, an Annunciation rosary override and guaranteed fallbacks, rule details and complete diagnostic cards.',
           'Added a bilingual year overview showing English and Spanish celebration names alongside observed, transferred and impeded entries.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
