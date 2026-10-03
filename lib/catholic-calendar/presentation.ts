@@ -1,4 +1,5 @@
 import type {
+  CalendarDisplayIcon,
   CalendarDisplayItem,
   CalendarDisplayOptions,
   CalendarDisplaySummary,
@@ -6,6 +7,30 @@ import type {
 } from './types'
 
 export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
+
+const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
+  advent: 'candle',
+  lent: 'calvary',
+  'easter-time': 'easter-egg',
+  'st-michaels-lent': 'angel',
+}
+
+const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
+  christmas: 'star',
+  'sacred-heart': 'sacred-heart',
+  pentecost: 'fire',
+  'corpus-christi': 'chalice',
+  'trinity-sunday': 'trinity',
+  'our-lady-of-the-rosary': 'rosary',
+}
+
+function iconForPeriod(periodId: string): CalendarDisplayIcon | null {
+  return PERIOD_ICONS[periodId] ?? null
+}
+
+function iconForObservance(observanceId: string): CalendarDisplayIcon | null {
+  return OBSERVANCE_ICONS[observanceId] ?? null
+}
 
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
   if (!state.countdown) return null
@@ -16,6 +41,7 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
     kind: 'countdown',
     id: `countdown:${state.countdown.observance.id}`,
     label: `${state.countdown.daysUntil} ${unit} until ${state.countdown.observance.name}`,
+    icon: iconForObservance(state.countdown.observance.id),
   }
 }
 
@@ -31,6 +57,7 @@ export function getCalendarDisplaySummary(
       kind: 'observance',
       id: state.primaryObservance.id,
       label: state.primaryObservance.name,
+      icon: iconForObservance(state.primaryObservance.id),
     })
   }
 
@@ -41,6 +68,7 @@ export function getCalendarDisplaySummary(
       kind: 'period',
       id: period.id,
       label: period.name,
+      icon: iconForPeriod(period.id),
     })
   }
 
