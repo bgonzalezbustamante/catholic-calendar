@@ -10,6 +10,7 @@ import type {
 export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
 
 const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
+  'christmas-time': 'star',
   advent: 'candle',
   lent: 'calvary',
   'easter-time': 'easter-egg',
@@ -18,6 +19,7 @@ const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
 
 const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   annunciation: 'rosary',
+  'first-sunday-advent': 'candle',
   christmas: 'star',
   'sacred-heart': 'sacred-heart',
   pentecost: 'fire',

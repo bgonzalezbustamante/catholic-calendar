@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Added Saint Francis of Assisi on 4 October as a memorial in the General Roman Calendar baseline.
+- Added explicit regression coverage for Our Lady of Lourdes on 11 February and corrected display icon mappings for the First Sunday of Advent (candle) and Christmas Time (star).
 - The Annunciation now uses the rosary Christicon as an explicit display override while remaining categorised as a Lord observance in the calendar model.
 - Marian observances and Marian countdown targets now use the rosary Christicon before the generic cross fallback.
 - Added guaranteed icon fallback coverage to the composed display: unmapped observances/countdowns use the Christicons cross, while unmapped periods use church-1.

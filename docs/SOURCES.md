@@ -81,15 +81,25 @@ Reference: https://www.liturgyoffice.org.uk/Calendar/2022/Ordo-2022.pdf
 
 The alpha generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
 
+## Saint Francis of Assisi
+
+Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.
+
+Holy See references:
+- Pope Leo XIV, *Dilexi te* (4 October 2025), issued on the Memorial of Saint Francis of Assisi: https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html
+- Holy See calendar of papal celebrations (4 October 2023), identifying the Memorial of Saint Francis of Assisi: https://press.vatican.va/content/salastampa/en/bollettino/pubblico/2023/08/29/230829a.html
+
 ## Marian additions
 
 The curated set includes universal Marian observances relevant to the intended site display, including:
 
-- Our Lady of Lourdes — 11 February, optional memorial.
+- Our Lady of Lourdes — 11 February, optional memorial. The Holy See continues to identify 11 February as the liturgical memorial of Our Lady of Lourdes; the PoC includes an explicit regression test ensuring it is observed on an ordinary weekday such as 11 February 2026.
 - Our Lady of Fatima — 13 May, optional memorial; represented from 2002 in this PoC.
 - Our Lady of Mount Carmel — 16 July, optional memorial.
 - Our Lady of Guadalupe — 12 December, optional memorial in the General Roman Calendar; represented from 2002 in this PoC.
 - Blessed Virgin Mary, Mother of the Church — Monday after Pentecost; represented from 2018.
+
+Holy See reference for Our Lady of Lourdes (11 February 2026): https://press.vatican.va/content/salastampa/en/bollettino/pubblico/2026/02/11/260211e.html
 
 Holy See notification for Mary, Mother of the Church: https://www.vatican.va/content/dam/wss/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20180324_notificazione-mater-ecclesiae_en.html
 
