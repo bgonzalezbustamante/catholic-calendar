@@ -2,6 +2,10 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="shell footer-inner">
+        <span className="footer-credit">
+          Display icons by{' '}
+          <a href="https://christicons.com/">Christicons</a>
+        </span>
         <a
           className="footer-license"
           href="https://bgonzalezbustamante.com"
