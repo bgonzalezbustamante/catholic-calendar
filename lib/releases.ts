@@ -15,40 +15,29 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v0.1.0-alpha.1',
     codename: 'Calm Bridge',
-    status: 'In Development',
+    status: 'Released',
     summary:
-      'Calm Bridge establishes the first reusable Catholic Calendar proof of concept: deterministic Roman-calendar calculations, a separate Franciscan devotional layer, explicit transfer and impediment states, and interactive validation surfaces.',
+      'Calm Bridge is the first reusable Catholic Calendar alpha: a deterministic calendar engine with a compact composed display, interactive validation tools and a curated Roman-calendar scope.',
     sections: [
       {
-        title: 'Calendar engine',
+        title: 'Core release',
         items: [
-          'Added Gregorian Easter computus and derived the Holy Week and Easter cycle from Easter Sunday.',
-          'Derived the First Sunday of Advent, Christ the King and the Advent period rather than maintaining year tables.',
-          'Kept the engine independent of React, Next.js and external data services for later package extraction.',
+          'Computes the selected movable calendar, precedence and transfer rules for supported dates from 2000 through 2100.',
+          'Separates liturgical periods from the St Michael’s Lent devotional layer and keeps Ordinary Time outside this curated model.',
         ],
       },
       {
-        title: 'Observance model',
+        title: 'Reusable display',
         items: [
-          'Introduced simultaneous primary-observance, active-period and countdown layers.',
-          'Added the selected Marian observances, including Lourdes, Fatima, Mount Carmel, the Presentation of Mary, Loreto and Guadalupe; added Saints Bernadette Soubirous, Benedict of Nursia and Francis of Assisi; and filled major feast gaps with the Transfiguration and Holy Family.',
-          'Modelled St Michael’s Lent as a devotional period from the Assumption through the feast of the Archangels, subordinate to liturgical precedence.',
+          'Exposes a compact two- or three-item display API with semantic, themeable Christicons.',
+          'Includes bilingual observance metadata plus clear observed, transferred, commemoration-eligible and impeded states.',
         ],
       },
       {
-        title: 'Precedence and transfers',
+        title: 'Validation',
         items: [
-          'Tracks observed, commemoration-eligible, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy; the demonstration UI retains the “Commemorated” label and impeded diagnostics are surfaced in Year Overview.',
-          'Covers the selected transfer cases for Saint Joseph, the Annunciation and the Immaculate Conception.',
-          'Resolves same-date selected solemnities, including the Sacred Heart and Nativity of Saint John the Baptist collision.',
-        ],
-      },
-      {
-        title: 'Validation surfaces',
-        items: [
-          'Added an interactive date tester with guarded manual date entry, integrated selected-date/configuration controls, two/three-item composed-display controls, natural engine-order truncation, themeable Christicons including explicit Bernadette, Benedict, Archangels, Baptism, John the Baptist, Peter/Paul, Holy Week/calvary and All Souls mappings, and simplified diagnostic cards.',
-          'Added a bilingual year overview with year pagination, visible semantic celebration icons, a modelled-periods table with icons and boundaries, consistent celebration/period/rank subsection headings, a coral Current year shortcut, English/Spanish celebration names, colour-coded liturgical-rank/status labels, a Nominal / reason column and a non-overlapping rank legend.',
-          'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
+          'Provides an interactive date tester and Year Overview for inspecting celebrations, periods and calendar-rule outcomes.',
+          'Ships with regression tests and CI checks for linting, types, tests and production builds.',
         ],
       },
     ],
