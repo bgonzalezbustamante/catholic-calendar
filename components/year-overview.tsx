@@ -51,8 +51,8 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <p className="eyebrow">Visual QA</p>
           <h2 id="year-overview-title">Year overview</h2>
           <p className="section-intro">
-            Browse the curated observance set chronologically. Transfers use their observed date;
-            impeded entries remain visible on their nominal date, while eligible memorials in privileged weekdays are marked as commemorated.
+            Review the curated celebrations, modelled periods and liturgical-rank semantics for
+            the selected year.
           </p>
         </div>
         <div className="year-control" aria-label="Year pagination">
@@ -228,22 +228,40 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <h3 id="rank-guide-title">How to read liturgical rank</h3>
           </div>
           <p>
-            Rank labels describe the classification used in the table below.
+            Rank labels used in the celebrations table above.
           </p>
         </div>
         <p className="rank-guide-copy">
           Rank describes a celebration&apos;s liturgical classification, not its spiritual
-          importance. In this curated model,{' '}
-          <span className="rank-pill is-principal-day">Principal day</span> marks the highest
-          seasonal days; <span className="rank-pill is-solemnity">Solemnity</span> and{' '}
-          <span className="rank-pill is-feast">Feast</span> are higher celebrations;{' '}
-          <span className="rank-pill is-memorial">Memorial</span> is normally obligatory; and{' '}
-          <span className="rank-pill is-optional-memorial">Optional Memorial</span> may be
-          chosen when the calendar permits.{' '}
-          <span className="rank-pill is-commemoration">Commemoration</span> is retained for
-          special cases such as All Souls. Actual precedence also depends on the season and
-          the date, so rank alone does not determine what is observed.
+          importance. Actual precedence also depends on the season and date, so rank alone
+          does not determine what is observed.
         </p>
+        <div className="rank-guide-items">
+          <div className="rank-guide-item">
+            <span className="rank-pill is-principal-day">Principal day</span>
+            <span>Highest seasonal days in this curated model.</span>
+          </div>
+          <div className="rank-guide-item">
+            <span className="rank-pill is-solemnity">Solemnity</span>
+            <span>Major universal celebration.</span>
+          </div>
+          <div className="rank-guide-item">
+            <span className="rank-pill is-feast">Feast</span>
+            <span>Higher-ranked celebration below solemnities.</span>
+          </div>
+          <div className="rank-guide-item">
+            <span className="rank-pill is-memorial">Memorial</span>
+            <span>Normally obligatory when the calendar permits.</span>
+          </div>
+          <div className="rank-guide-item">
+            <span className="rank-pill is-optional-memorial">Optional Memorial</span>
+            <span>May be chosen when the calendar permits.</span>
+          </div>
+          <div className="rank-guide-item">
+            <span className="rank-pill is-commemoration">Commemoration</span>
+            <span>Retained for special cases such as All Souls.</span>
+          </div>
+        </div>
       </aside>
     </section>
   )
