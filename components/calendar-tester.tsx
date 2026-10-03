@@ -36,9 +36,16 @@ function shiftDate(value: string, days: number) {
 function TransferDetails({ observance }: { observance: CalendarObservance }) {
   if (observance.status === 'observed') return null
 
+  const label =
+    observance.status === 'transferred'
+      ? 'Transferred'
+      : observance.status === 'commemorated'
+        ? 'Commemorated'
+        : 'Impeded'
+
   return (
     <div className={`rule-callout is-${observance.status}`}>
-      <strong>{observance.status === 'transferred' ? 'Transferred' : 'Impeded'}</strong>
+      <strong>{label}</strong>
       <span>
         Nominal date: {formatDate(observance.nominalDate)}
         {observance.observedDate
@@ -46,6 +53,9 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
           : ''}
       </span>
       {observance.transferReason ? <span>{observance.transferReason}</span> : null}
+      {observance.commemorationReason ? (
+        <span>{observance.commemorationReason}</span>
+      ) : null}
       {observance.impededBy ? <span>Impeded by: {observance.impededBy}.</span> : null}
     </div>
   )
@@ -53,11 +63,35 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
+  const [dateInput, setDateInput] = useState(initialDate)
   const [maxDisplayItems, setMaxDisplayItems] = useState<2 | 3>(2)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
+  const commitDate = (value: string) => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+    if (!match) return
+
+    const year = Number(match[1])
+    if (year < MIN_SUPPORTED_YEAR || year > MAX_SUPPORTED_YEAR) return
+
+    const parsed = new Date(`${value}T00:00:00Z`)
+    if (
+      Number.isNaN(parsed.getTime()) ||
+      parsed.toISOString().slice(0, 10) !== value
+    ) {
+      return
+    }
+
+    setDate(value)
+  }
+
+  const setCommittedDate = (value: string) => {
+    setDateInput(value)
+    setDate(value)
+  }
+
   const visibleNominalExceptions = state.nominalObservances.filter(
-    (event) => event.status !== 'observed'
+    (event) => event.status === 'transferred' || event.status === 'impeded'
   )
   const displaySummary = useMemo(
     () =>
@@ -84,7 +118,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
             <button
               type="button"
               disabled={date === `${MIN_SUPPORTED_YEAR}-01-01`}
-              onClick={() => setDate(shiftDate(date, -1))}
+              onClick={() => setCommittedDate(shiftDate(date, -1))}
             >
               ←
               <span className="sr-only">Previous day</span>
@@ -94,21 +128,30 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
               type="date"
               min={`${MIN_SUPPORTED_YEAR}-01-01`}
               max={`${MAX_SUPPORTED_YEAR}-12-31`}
-              value={date}
+              value={dateInput}
               onChange={(event) => {
-                if (event.target.value) setDate(event.target.value)
+                const value = event.target.value
+                setDateInput(value)
+                commitDate(value)
+              }}
+              onBlur={() => {
+                if (dateInput !== date) setDateInput(date)
               }}
             />
             <button
               type="button"
               disabled={date === `${MAX_SUPPORTED_YEAR}-12-31`}
-              onClick={() => setDate(shiftDate(date, 1))}
+              onClick={() => setCommittedDate(shiftDate(date, 1))}
             >
               →
               <span className="sr-only">Next day</span>
             </button>
           </div>
-          <button className="today-button" type="button" onClick={() => setDate(initialDate)}>
+          <button
+            className="today-button"
+            type="button"
+            onClick={() => setCommittedDate(initialDate)}
+          >
             Return to today
           </button>
         </div>
@@ -155,6 +198,9 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
             <div className="chip-row">
               <span className="state-chip">{titleCase(state.primaryObservance.rank)}</span>
               <span className="state-chip muted">Precedence {state.primaryObservance.precedence}</span>
+              {state.primaryObservance.status === 'commemorated' ? (
+                <span className="state-chip commemorated">Commemorated</span>
+              ) : null}
             </div>
           ) : (
             <p className="card-copy">The period and countdown layers remain active independently.</p>
