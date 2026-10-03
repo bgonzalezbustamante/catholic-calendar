@@ -4,6 +4,9 @@
 
 ### Changed
 
+- Added the Presentation of the Blessed Virgin Mary on 21 November and Our Lady of Loreto on 10 December (effective from 2019), both using the Marian rosary icon semantics.
+- Documented the Flaticon-sourced rosary favicon in third-party notices.
+- Moved impediment reasons into the Year Overview Nominal date column, widened the hero copy, strengthened the composed-display quotation marks, and moved its label to the top of the card.
 - Added a `commemorated` status for memorials permitted on privileged weekdays, so dates such as Our Lady of Lourdes on 11 February 2027 remain in the main calendar state instead of being incorrectly marked impeded.
 - Hardened manual date entry against incomplete/out-of-range typed years, removed the decorative bubble from the three diagnostic cards, and replaced Year Overview's numeric year field with right-aligned previous/next year pagination.
 - Added Saint Francis of Assisi on 4 October as a memorial in the General Roman Calendar baseline.
