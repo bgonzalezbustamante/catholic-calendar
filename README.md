@@ -14,7 +14,7 @@ The visual identity intentionally follows `bgonzalezbustamante/weekly-penguin-ti
 - Exposes a composed display API that defaults to two reader-facing items and supports a two- or three-item limit. The display follows the engine’s natural state order—primary observance, liturgical periods, devotional periods, then countdown when space remains—without a separate presentation-precedence layer.
 - Adds semantic Christicons metadata to display items while keeping the calendar engine UI-agnostic. First Sunday of Advent uses the candle icon, Christmas Time uses the star icon, Baptism of the Lord and the Nativity of Saint John the Baptist use the dove icon, Ash Wednesday, Good Friday and Holy Week use calvary, Holy Thursday uses bread, Saints Peter and Paul use the Saint Peter icon, and All Souls uses the tombstone icon. Specific mappings use the selected Christicons; otherwise Marian observances and Marian countdown targets use `rosary`, other unmapped observances/countdowns use `cross`, and unmapped periods use `church-1`, so every composed-display item always has an icon. The reusable renderer uses CSS masks, so hosts can theme icons through `--catholic-calendar-icon-color` without duplicating SVG assets. The demonstration app falls back to the neutral ash colour; a host such as the Academic Website can set `--catholic-calendar-icon-color: #fe615a` for coral icons.
 - Tracks `nominalDate` and `observedDate` separately for transferable celebrations.
-- Distinguishes genuinely impeded observances from memorials that may be commemorated on privileged weekdays. Eligible memorials remain on their date with status `commemorated`; genuinely displaced lower-ranking observances remain nominal diagnostic entries.
+- Distinguishes genuinely impeded observances from memorials that may be commemorated on privileged weekdays. Eligible memorials remain on their date with status `commemoration-eligible`; the demonstration UI deliberately retains the reader-facing label “Commemorated”, while genuinely displaced lower-ranking observances remain nominal diagnostic entries.
 - Includes Marian celebrations in the curated scope, including Lourdes, Fatima, Mount Carmel and Guadalupe.
 - Models St Michael’s Lent as a separate Franciscan devotional period from 15 August through 29 September; it never outranks the liturgical calendar.
 - Uses the universal Roman dates for Epiphany, Ascension and Corpus Christi rather than national transfers.
@@ -110,7 +110,7 @@ getCatholicCalendarState('2026-10-03').countdown
 The engine distinguishes four states:
 
 - `observed` — celebrated on its nominal date.
-- `commemorated` — a memorial remains attached to its nominal date in a privileged weekday while the seasonal weekday retains liturgical precedence.
+- `commemoration-eligible` — a memorial remains attached to its nominal date because it may be commemorated on a privileged weekday while the seasonal weekday retains liturgical precedence. The demonstration UI presents this as “Commemorated” for continuity.
 - `transferred` — nominal and observed dates differ; the transfer reason is retained.
 - `impeded` — the selected nominal observance is retained for inspection but has no observed date because a higher-ranking day takes precedence.
 
@@ -131,7 +131,7 @@ This deliberately permits meaningful boundary overlaps on Holy Thursday and East
 
 ## Historical scope
 
-The supported range is 2000–2100. The purpose is current and forward-looking site use, not a complete historical reconstruction of every revision to the Roman Calendar. Known additions that materially affect this curated set are gated where useful: Divine Mercy Sunday from 2000, Fatima and Guadalupe from 2002, Mary, Mother of the Church from 2018, and Our Lady of Loreto from 2019.
+The supported range is 2000–2100. Period resolution carries the Christmas Time span beginning on 25 December 1999 into the first supported January, without otherwise exposing 1999 as a supported calendar year. The purpose is current and forward-looking site use, not a complete historical reconstruction of every revision to the Roman Calendar. Known additions that materially affect this curated set are gated where useful: Divine Mercy Sunday from 2000, Fatima and Guadalupe from 2002, Mary, Mother of the Church from 2018, and Our Lady of Loreto from 2019.
 
 ## Local setup
 
