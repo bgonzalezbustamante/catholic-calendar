@@ -23,6 +23,7 @@ No unreleased changes.
 - Added a publishable `@bgonzalezbustamante/catholic-calendar` package boundary under `packages/catholic-calendar/`, compiled from the existing UI-agnostic engine with CommonJS output, TypeScript declarations and zero runtime dependencies.
 - Added package smoke testing and `npm pack --dry-run` validation to the standard CI workflow.
 - Added a package-level `prepack` lifecycle so direct `npm pack` and `npm publish` commands rebuild the compiled engine before npm determines the tarball contents.
+- Set the publishable package’s default npm dist-tag to `alpha` and documented explicit `@alpha` installation for prerelease consumers.
 
 ### Changed
 
