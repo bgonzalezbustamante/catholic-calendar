@@ -78,7 +78,7 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
               <th>Celebration</th>
               <th>Rank</th>
               <th>Status</th>
-              <th>Nominal date</th>
+              <th>Nominal / reason</th>
             </tr>
           </thead>
           <tbody>
@@ -113,6 +113,23 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           </tbody>
         </table>
       </div>
+
+      <aside className="rank-guide" aria-labelledby="rank-guide-title">
+        <div>
+          <p className="eyebrow">Rank</p>
+          <h3 id="rank-guide-title">How to read liturgical rank</h3>
+        </div>
+        <p>
+          Rank describes a celebration&apos;s liturgical classification, not its spiritual
+          importance. In this curated model, <strong>Principal day</strong> marks the highest
+          seasonal days; <strong>Solemnity</strong> and <strong>Feast</strong> are higher
+          celebrations; <strong>Memorial</strong> is normally obligatory; and
+          <strong> Optional Memorial</strong> may be chosen when the calendar permits.
+          <strong> Commemoration</strong> is retained for special cases such as All Souls.
+          Actual precedence also depends on the season and the date, so rank alone does not
+          determine what is observed.
+        </p>
+      </aside>
     </section>
   )
 }
