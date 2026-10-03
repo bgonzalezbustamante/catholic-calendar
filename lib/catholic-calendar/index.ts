@@ -6,6 +6,8 @@ export {
   DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
+  getObservanceDisplayIcon,
+  getPeriodDisplayIcon,
 } from './presentation'
 export { getCatholicCalendarState, getYearOverview } from './resolver'
 export type {
