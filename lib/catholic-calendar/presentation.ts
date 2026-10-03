@@ -3,6 +3,7 @@ import type {
   CalendarDisplayItem,
   CalendarDisplayOptions,
   CalendarDisplaySummary,
+  CalendarObservance,
   CatholicCalendarState,
 } from './types'
 
@@ -28,8 +29,13 @@ function iconForPeriod(periodId: string): CalendarDisplayIcon {
   return PERIOD_ICONS[periodId] ?? 'church-1'
 }
 
-function iconForObservance(observanceId: string): CalendarDisplayIcon {
-  return OBSERVANCE_ICONS[observanceId] ?? 'cross'
+function iconForObservance(
+  observance: Pick<CalendarObservance, 'id' | 'category'>
+): CalendarDisplayIcon {
+  return (
+    OBSERVANCE_ICONS[observance.id] ??
+    (observance.category === 'marian' ? 'rosary' : 'cross')
+  )
 }
 
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
@@ -41,7 +47,7 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
     kind: 'countdown',
     id: `countdown:${state.countdown.observance.id}`,
     label: `${state.countdown.daysUntil} ${unit} until ${state.countdown.observance.name}`,
-    icon: iconForObservance(state.countdown.observance.id),
+    icon: iconForObservance(state.countdown.observance),
   }
 }
 
@@ -57,7 +63,7 @@ export function getCalendarDisplaySummary(
       kind: 'observance',
       id: state.primaryObservance.id,
       label: state.primaryObservance.name,
-      icon: iconForObservance(state.primaryObservance.id),
+      icon: iconForObservance(state.primaryObservance),
     })
   }
 
