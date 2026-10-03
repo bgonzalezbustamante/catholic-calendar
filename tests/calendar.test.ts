@@ -417,6 +417,22 @@ describe('display summary', () => {
     }
   })
 
+  it('uses the requested icons for Bernadette and Benedict', () => {
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-04-16')).items[0]
+    ).toMatchObject({
+      id: 'st-bernadette-soubirous',
+      icon: 'rosary',
+    })
+
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2026-07-11')).items[0]
+    ).toMatchObject({
+      id: 'st-benedict-nursia',
+      icon: 'cross',
+    })
+  })
+
   it('uses the rosary icon for the Annunciation as a specific override', () => {
     expect(
       getCalendarDisplaySummary(getCatholicCalendarState('2026-03-25')).items[0]
