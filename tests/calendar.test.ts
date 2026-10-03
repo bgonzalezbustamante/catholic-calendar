@@ -5,6 +5,7 @@ import {
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
   getCatholicCalendarState,
+  getObservanceDisplayIcon,
   getYearOverview,
   gregorianEasterSunday,
   holyFamily,
@@ -288,6 +289,25 @@ describe('impeded selected observances', () => {
 })
 
 describe('year overview', () => {
+  it('keeps impeded Benedict in Year Overview while omitting it from composed display', () => {
+    const state = getCatholicCalendarState('2027-07-11')
+    const benedict = getYearOverview(2027).find(
+      ({ observance }) => observance.id === 'st-benedict-nursia'
+    )
+
+    expect(state.primaryObservance).toBeNull()
+    expect(
+      getCalendarDisplaySummary(state).items.some(
+        (item) => item.id === 'st-benedict-nursia'
+      )
+    ).toBe(false)
+    expect(benedict?.observance).toMatchObject({
+      status: 'impeded',
+      impededBy: 'Sunday',
+    })
+    expect(getObservanceDisplayIcon(benedict!.observance)).toBe('cross')
+  })
+
   it('sorts transferred celebrations by observed date', () => {
     const june2022 = getYearOverview(2022).filter((entry) =>
       entry.date.startsWith('2022-06')
@@ -401,6 +421,8 @@ describe('display summary', () => {
       ['2026-04-20', 'easter-time', 'easter-egg'],
       ['2026-09-08', 'st-michaels-lent', 'angel'],
       ['2026-09-29', 'archangels', 'angel'],
+      ['2026-06-24', 'nativity-john-baptist', 'dove'],
+      ['2026-06-29', 'peter-and-paul', 'fishes'],
       ['2026-12-25', 'christmas', 'star'],
       ['2026-06-12', 'sacred-heart', 'sacred-heart'],
       ['2026-05-24', 'pentecost', 'fire'],
