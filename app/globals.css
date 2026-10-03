@@ -286,16 +286,41 @@ h1 {
   pointer-events: none;
 }
 
-.state-quotation p {
+.calendar-display {
   position: relative;
   z-index: 1;
   max-width: 980px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.28rem 0.42rem;
   margin: 0;
   color: var(--blue);
   font-family: var(--font-noto-serif), Georgia, serif;
   font-size: clamp(1.18rem, 2.6vw, 1.65rem);
   font-weight: 600;
   line-height: 1.45;
+}
+
+.calendar-display-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.calendar-display-icon {
+  width: 1.18em;
+  height: 1.18em;
+  flex: 0 0 1.18em;
+  background: var(--catholic-calendar-icon-color, var(--ash));
+  -webkit-mask: var(--calendar-display-icon) center / contain no-repeat;
+  mask: var(--calendar-display-icon) center / contain no-repeat;
+}
+
+.calendar-display-separator {
+  color: var(--stone);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-weight: 400;
 }
 
 .state-quotation footer {
