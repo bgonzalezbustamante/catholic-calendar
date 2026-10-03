@@ -803,15 +803,29 @@ tbody tr:last-child td {
 }
 
 .rank-guide-copy {
-  margin: 0;
+  margin: 0 0 0.8rem;
   color: var(--ash);
   font-size: 0.8rem;
-  line-height: 2.15;
 }
 
-.rank-guide .rank-pill {
-  margin: 0.14rem 0.12rem;
-  vertical-align: middle;
+.rank-guide-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 1rem;
+}
+
+.rank-guide-item {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.38rem 0.5rem;
+  color: var(--ash);
+  font-size: 0.76rem;
+}
+
+.rank-guide-item .rank-pill {
+  flex: 0 0 auto;
   white-space: nowrap;
 }
 
@@ -1027,7 +1041,8 @@ tbody tr:last-child td {
     flex-basis: 18px;
   }
 
-  .year-subsection-heading {
+  .year-subsection-heading,
+  .rank-guide-items {
     grid-template-columns: 1fr;
   }
 
