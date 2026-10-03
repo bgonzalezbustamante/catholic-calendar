@@ -177,14 +177,51 @@ describe('fixed observances', () => {
 })
 
 describe('periods and countdown', () => {
-  it('retains a Marian feast alongside St Michael’s Lent', () => {
+  it('retains Ordinary Time and St Michael’s Lent alongside a Marian feast', () => {
     const state = getCatholicCalendarState('2026-09-08')
 
     expect(state.primaryObservance?.id).toBe('nativity-of-mary')
+    expect(state.liturgicalPeriods.map((period) => period.id)).toContain(
+      'ordinary-time'
+    )
     expect(state.devotionalPeriods.map((period) => period.id)).toContain(
       'st-michaels-lent'
     )
     expect(state.countdown).toBeNull()
+  })
+
+  it('covers both annual spans of Ordinary Time', () => {
+    expect(
+      getCatholicCalendarState('2026-01-12').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).toContain('ordinary-time')
+    expect(
+      getCatholicCalendarState('2026-02-17').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).toContain('ordinary-time')
+    expect(
+      getCatholicCalendarState('2026-05-25').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).toContain('ordinary-time')
+    expect(
+      getCatholicCalendarState('2026-11-28').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).toContain('ordinary-time')
+
+    expect(
+      getCatholicCalendarState('2026-02-18').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).not.toContain('ordinary-time')
+    expect(
+      getCatholicCalendarState('2026-11-29').liturgicalPeriods.map(
+        (period) => period.id
+      )
+    ).not.toContain('ordinary-time')
   })
 
   it('counts calendar days to the next selected observance when today has none', () => {
@@ -305,7 +342,7 @@ describe('display summary', () => {
   it('combines a primary observance with active periods', () => {
     const state = getCatholicCalendarState('2026-09-08')
     expect(formatCalendarStateSummary(state)).toBe(
-      "Nativity of the Blessed Virgin Mary · St Michael's Lent"
+      'Nativity of the Blessed Virgin Mary · Ordinary Time'
     )
   })
 
@@ -364,7 +401,12 @@ describe('display summary', () => {
 
     const michaelState = getCatholicCalendarState('2026-08-15')
     expect(formatCalendarStateSummary(michaelState)).toBe(
-      "Assumption of the Blessed Virgin Mary · St Michael's Lent"
+      'Assumption of the Blessed Virgin Mary · Ordinary Time'
+    )
+    expect(
+      formatCalendarStateSummary(michaelState, { maxItems: 3 })
+    ).toBe(
+      "Assumption of the Blessed Virgin Mary · Ordinary Time · St Michael's Lent"
     )
   })
 
