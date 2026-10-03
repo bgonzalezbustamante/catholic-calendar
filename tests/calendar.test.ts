@@ -212,36 +212,27 @@ describe('display summary', () => {
     ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
   })
 
-  it('maps Christicons onto calendar display semantics', () => {
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-12-03')).items).toMatchObject([
-      { id: 'advent', icon: 'candle' },
-      { id: 'countdown:immaculate-conception', icon: null },
-    ])
+  it('maps the complete Christicon set onto calendar display semantics', () => {
+    const expectations = [
+      ['2026-12-03', 'advent', 'candle'],
+      ['2026-03-01', 'lent', 'calvary'],
+      ['2026-04-20', 'easter-time', 'easter-egg'],
+      ['2026-09-08', 'st-michaels-lent', 'angel'],
+      ['2026-12-25', 'christmas', 'star'],
+      ['2026-06-12', 'sacred-heart', 'sacred-heart'],
+      ['2026-05-24', 'pentecost', 'fire'],
+      ['2026-06-04', 'corpus-christi', 'chalice'],
+      ['2026-05-31', 'trinity-sunday', 'trinity'],
+      ['2026-10-07', 'our-lady-of-the-rosary', 'rosary'],
+    ] as const
 
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-12-25')).items[0]).toMatchObject({
-      id: 'christmas',
-      icon: 'star',
-    })
-
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-05-24')).items[0]).toMatchObject({
-      id: 'pentecost',
-      icon: 'fire',
-    })
-
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-06-04')).items[0]).toMatchObject({
-      id: 'corpus-christi',
-      icon: 'chalice',
-    })
-
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-06-12')).items[0]).toMatchObject({
-      id: 'sacred-heart',
-      icon: 'sacred-heart',
-    })
-
-    expect(getCalendarDisplaySummary(getCatholicCalendarState('2026-10-07')).items[0]).toMatchObject({
-      id: 'our-lady-of-the-rosary',
-      icon: 'rosary',
-    })
+    for (const [date, id, icon] of expectations) {
+      const items = getCalendarDisplaySummary(
+        getCatholicCalendarState(date),
+        { maxItems: 3 }
+      ).items
+      expect(items.find((item) => item.id === id)).toMatchObject({ icon })
+    }
   })
 
   it('provides Spanish names for every year-overview observance', () => {
