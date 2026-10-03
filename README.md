@@ -37,10 +37,12 @@ The reusable boundary is `lib/catholic-calendar/`:
 
 1. `date-utils.ts` — strict civil-date arithmetic using UTC calendar dates.
 2. `computus.ts` — Gregorian Easter, First Sunday of Advent and Baptism of the Lord calculations.
-3. `observances.ts` — curated observance definitions, periods, precedence, transfers, solemnity collision handling and impediments.
-4. `resolver.ts` — date-state and year-overview APIs.
-5. `types.ts` — package-facing data contracts.
-6. `index.ts` — public exports.
+3. `calendar.ts` — supported range, movable-cycle derivation and liturgical/devotional periods.
+4. `observances.ts` — curated observance definitions.
+5. `rules.ts` — precedence, transfers, solemnity collision handling and impediments.
+6. `resolver.ts` — date-state and year-overview APIs.
+7. `types.ts` — package-facing data contracts.
+8. `index.ts` — public exports.
 
 The proof-of-concept shell is deliberately separate:
 
