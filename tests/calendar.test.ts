@@ -7,6 +7,7 @@ import {
   getCatholicCalendarState,
   getYearOverview,
   gregorianEasterSunday,
+  holyFamily,
 } from '@/lib/catholic-calendar'
 
 describe('computus', () => {
@@ -15,6 +16,12 @@ describe('computus', () => {
     expect(gregorianEasterSunday(2025)).toBe('2025-04-20')
     expect(gregorianEasterSunday(2026)).toBe('2026-04-05')
     expect(gregorianEasterSunday(2027)).toBe('2027-03-28')
+  })
+
+  it('calculates the Holy Family within the Christmas Octave', () => {
+    expect(holyFamily(2026)).toBe('2026-12-27')
+    expect(holyFamily(2027)).toBe('2027-12-26')
+    expect(holyFamily(2022)).toBe('2022-12-30')
   })
 
   it('derives Advent from the Sunday in the 27 November–3 December window', () => {
@@ -63,6 +70,27 @@ describe('fixed observances', () => {
       observance: {
         status: 'observed',
       },
+    })
+  })
+
+  it('includes the Transfiguration and Holy Family', () => {
+    expect(getCatholicCalendarState('2026-08-06').primaryObservance).toMatchObject({
+      id: 'transfiguration',
+      name: 'Transfiguration of the Lord',
+      nameEs: 'Transfiguración del Señor',
+      rank: 'feast',
+    })
+
+    expect(getCatholicCalendarState('2026-12-27').primaryObservance).toMatchObject({
+      id: 'holy-family',
+      name: 'Holy Family of Jesus, Mary and Joseph',
+      nameEs: 'Sagrada Familia de Jesús, María y José',
+      rank: 'feast',
+    })
+
+    expect(getCatholicCalendarState('2022-12-30').primaryObservance).toMatchObject({
+      id: 'holy-family',
+      rank: 'feast',
     })
   })
 
