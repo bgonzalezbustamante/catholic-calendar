@@ -8,6 +8,16 @@ import type {
 
 export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
 
+export const CALENDAR_DISPLAY_PRIORITY_PERIOD_IDS = [
+  'lent',
+  'st-michaels-lent',
+  'advent',
+] as const
+
+const priorityPeriodOrder = new Map<string, number>(
+  CALENDAR_DISPLAY_PRIORITY_PERIOD_IDS.map((periodId, index) => [periodId, index])
+)
+
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
   if (!state.countdown) return null
 
@@ -20,31 +30,25 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
   }
 }
 
-function orderedPeriods(
-  state: CatholicCalendarState,
-  preferredPeriodIds: readonly string[]
-): CalendarPeriod[] {
+function orderedPeriods(state: CatholicCalendarState): CalendarPeriod[] {
   const periods = [...state.liturgicalPeriods, ...state.devotionalPeriods]
-  const preferred = new Map(
-    preferredPeriodIds.map((periodId, index) => [periodId, index])
-  )
 
   return periods
     .map((period, sourceIndex) => ({
       period,
       sourceIndex,
-      preferenceIndex: preferred.get(period.id),
+      priorityIndex: priorityPeriodOrder.get(period.id),
     }))
     .sort((a, b) => {
-      const aPreferred = a.preferenceIndex !== undefined
-      const bPreferred = b.preferenceIndex !== undefined
+      const aPriority = a.priorityIndex !== undefined
+      const bPriority = b.priorityIndex !== undefined
 
-      if (aPreferred && bPreferred) {
-        return a.preferenceIndex! - b.preferenceIndex!
+      if (aPriority && bPriority) {
+        return a.priorityIndex! - b.priorityIndex!
       }
 
-      if (aPreferred) return -1
-      if (bPreferred) return 1
+      if (aPriority) return -1
+      if (bPriority) return 1
       return a.sourceIndex - b.sourceIndex
     })
     .map(({ period }) => period)
@@ -55,7 +59,6 @@ export function getCalendarDisplaySummary(
   options: CalendarDisplayOptions = {}
 ): CalendarDisplaySummary {
   const maxItems = options.maxItems ?? DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS
-  const preferredPeriodIds = options.preferredPeriodIds ?? []
   const items: CalendarDisplayItem[] = []
 
   if (state.primaryObservance) {
@@ -66,7 +69,7 @@ export function getCalendarDisplaySummary(
     })
   }
 
-  for (const period of orderedPeriods(state, preferredPeriodIds)) {
+  for (const period of orderedPeriods(state)) {
     if (items.length >= maxItems) break
 
     items.push({
