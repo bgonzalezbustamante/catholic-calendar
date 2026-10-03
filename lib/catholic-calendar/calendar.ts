@@ -51,8 +51,7 @@ export function seasonDates(year: number) {
   }
 }
 
-export function buildPeriods(year: number): CalendarPeriod[] {
-  assertSupportedYear(year)
+function buildPeriodsForYear(year: number): CalendarPeriod[] {
   const dates = seasonDates(year)
 
   return [
@@ -106,4 +105,25 @@ export function buildPeriods(year: number): CalendarPeriod[] {
       endDate: dateFromParts(year, 12, 24),
     },
   ]
+}
+
+export function buildPeriods(year: number): CalendarPeriod[] {
+  assertSupportedYear(year)
+  return buildPeriodsForYear(year)
+}
+
+// Resolver-only context permits the immediately preceding year so a period
+// that begins before the supported range can still extend into it.
+export function buildPeriodContext(year: number): CalendarPeriod[] {
+  if (
+    !Number.isInteger(year) ||
+    year < MIN_SUPPORTED_YEAR - 1 ||
+    year > MAX_SUPPORTED_YEAR
+  ) {
+    throw new RangeError(
+      `Catholic Calendar period context supports years ${MIN_SUPPORTED_YEAR - 1}–${MAX_SUPPORTED_YEAR}.`
+    )
+  }
+
+  return buildPeriodsForYear(year)
 }
