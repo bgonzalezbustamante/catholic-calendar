@@ -137,7 +137,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
     }),
     observance({
       id: 'divine-mercy-sunday',
-      name: 'Second Sunday of Easter (Divine Mercy Sunday)',
+      name: 'Divine Mercy Sunday',
       category: 'lord',
       rank: 'principal-day',
       precedence: 2,
@@ -194,7 +194,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
     }),
     observance({
       id: 'corpus-christi',
-      name: 'Most Holy Body and Blood of Christ (Corpus Christi)',
+      name: 'Corpus Christi',
       category: 'lord',
       rank: 'solemnity',
       precedence: 3,
@@ -295,7 +295,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
     }),
     fixed(year, 11, 2, {
       id: 'all-souls',
-      name: 'Commemoration of All the Faithful Departed (All Souls)',
+      name: 'All Souls',
       category: 'faithful-departed',
       rank: 'commemoration',
       precedence: 3,
@@ -318,7 +318,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
     }),
     fixed(year, 12, 8, {
       id: 'immaculate-conception',
-      name: 'Immaculate Conception of the Blessed Virgin Mary',
+      name: 'Immaculate Conception',
       category: 'marian',
       rank: 'solemnity',
       precedence: 3,
@@ -333,7 +333,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
     }),
     fixed(year, 12, 25, {
       id: 'christmas',
-      name: 'Nativity of the Lord (Christmas)',
+      name: 'Christmas',
       category: 'lord',
       rank: 'principal-day',
       precedence: 2,
