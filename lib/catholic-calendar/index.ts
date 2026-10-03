@@ -9,6 +9,7 @@ export {
 } from './presentation'
 export { getCatholicCalendarState, getYearOverview } from './resolver'
 export type {
+  CalendarDisplayIcon,
   CalendarDisplayItem,
   CalendarDisplayItemKind,
   CalendarDisplayOptions,
