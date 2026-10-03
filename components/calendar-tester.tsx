@@ -186,8 +186,8 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
       </div>
 
       <blockquote className="state-quotation">
-        <CalendarDisplay items={displaySummary.items} />
         <footer>Composed calendar display</footer>
+        <CalendarDisplay items={displaySummary.items} />
       </blockquote>
 
       <div className="layer-grid">
