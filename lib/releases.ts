@@ -38,7 +38,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Precedence and transfers',
         items: [
-          'Tracks nominal and observed dates separately and retains impeded nominal observances for inspection.',
+          'Tracks observed, commemorated, transferred and impeded states separately, keeping eligible memorials visible on privileged weekdays without overriding the seasonal liturgy.',
           'Covers the selected transfer cases for Saint Joseph, the Annunciation and the Immaculate Conception.',
           'Resolves same-date selected solemnities, including the Sacred Heart and Nativity of Saint John the Baptist collision.',
         ],
@@ -46,7 +46,7 @@ export const releases: ReleaseNote[] = [
       {
         title: 'Validation surfaces',
         items: [
-          'Added an interactive date tester with two/three-item composed-display controls, natural engine-order truncation, themeable Christicons with Marian rosary semantics, Advent/Christmas icon corrections, an Annunciation rosary override and guaranteed fallbacks, rule details and complete diagnostic cards.',
+          'Added an interactive date tester with guarded manual date entry, two/three-item composed-display controls, natural engine-order truncation, themeable Christicons and simplified diagnostic cards.',
           'Added a bilingual year overview showing English and Spanish celebration names alongside observed, transferred and impeded entries.',
           'Added regression coverage for computus, Advent, overlaps, countdowns, transfers and impediments.',
         ],
