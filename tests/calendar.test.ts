@@ -25,6 +25,26 @@ describe('computus', () => {
 })
 
 describe('fixed observances', () => {
+  it('commemorates Lourdes on a Lenten weekday instead of impeding it', () => {
+    const state = getCatholicCalendarState('2027-02-11')
+
+    expect(state.primaryObservance).toMatchObject({
+      id: 'our-lady-of-lourdes',
+      status: 'commemorated',
+      observedDate: '2027-02-11',
+    })
+    expect(state.liturgicalPeriods.map((period) => period.id)).toContain('lent')
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Our Lady of Lourdes · Lent'
+    )
+    expect(
+      getYearOverview(2027).find(
+        ({ observance }) => observance.id === 'our-lady-of-lourdes'
+      )?.observance.status
+    ).toBe('commemorated')
+  })
+
+
   it('shows Our Lady of Lourdes on 11 February', () => {
     const state = getCatholicCalendarState('2026-02-11')
 
@@ -150,6 +170,19 @@ describe('transfers', () => {
 })
 
 describe('impeded selected observances', () => {
+  it('still impedes memorials on Sundays and Ash Wednesday', () => {
+    expect(
+      getCatholicCalendarState('2026-10-04').nominalObservances.find(
+        (event) => event.id === 'st-francis-assisi'
+      )
+    ).toMatchObject({
+      status: 'impeded',
+      observedDate: null,
+      impededBy: 'Sunday',
+    })
+  })
+
+
   it('retains an optional Marian memorial as nominal when an Advent Sunday outranks it', () => {
     const state = getCatholicCalendarState('2027-12-12')
     const guadalupe = state.nominalObservances.find(
