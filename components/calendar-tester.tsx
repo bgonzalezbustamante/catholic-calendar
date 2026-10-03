@@ -210,7 +210,6 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           {state.primaryObservance ? (
             <div className="chip-row">
               <span className="state-chip">{titleCase(state.primaryObservance.rank)}</span>
-              <span className="state-chip muted">Precedence {state.primaryObservance.precedence}</span>
               {state.primaryObservance.status === 'commemorated' ? (
                 <span className="state-chip commemorated">Commemorated</span>
               ) : null}
