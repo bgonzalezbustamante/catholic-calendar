@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Marian observances and Marian countdown targets now use the rosary Christicon before the generic cross fallback.
 - Added guaranteed icon fallback coverage to the composed display: unmapped observances/countdowns use the Christicons cross, while unmapped periods use church-1.
 - Added semantic Christicons to the composed calendar display, normalised the curated SVG assets for themeable rendering, and exposed icon identifiers in package display items.
 - Removed compact-display period prioritisation. The composed display now follows the engine's natural state order and only applies the selected two- or three-item truncation.
