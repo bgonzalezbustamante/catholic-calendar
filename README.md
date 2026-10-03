@@ -67,10 +67,10 @@ The publishable npm package is defined in `packages/catholic-calendar/`. Its gen
 The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Once published, consumers can install it with:
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar
+npm install @bgonzalezbustamante/catholic-calendar@alpha
 ```
 
-The first alpha publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+The first alpha is distributed through the `alpha` npm channel. On a package’s first publication npm may also create `latest`; consumers should use `@alpha` or the exact prerelease version until a stable release is published. The first alpha publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
 
 Validate the package locally with:
 
