@@ -63,6 +63,7 @@ export interface NextObservance {
 
 export type CalendarDisplayItemKind =
   | 'observance'
+  | 'nominal-observance'
   | 'customary'
   | 'period'
   | 'countdown'
