@@ -3,6 +3,7 @@ import type {
   CalendarDisplayItem,
   CalendarDisplayOptions,
   CalendarDisplaySummary,
+  CalendarCustomaryObservance,
   CalendarObservance,
   CatholicCalendarState,
 } from './types'
@@ -52,6 +53,13 @@ export function getObservanceDisplayIcon(
   )
 }
 
+export function getCustomaryObservanceDisplayIcon(
+  observance: Pick<CalendarCustomaryObservance, 'id'>
+): CalendarDisplayIcon {
+  if (observance.id === 'shrove-tuesday') return 'church-1'
+  return 'church-1'
+}
+
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
   if (!state.countdown) return null
 
@@ -81,6 +89,17 @@ export function getCalendarDisplaySummary(
     })
   }
 
+  for (const customary of state.customaryObservances) {
+    if (items.length >= maxItems) break
+
+    items.push({
+      kind: 'customary',
+      id: customary.id,
+      label: customary.name,
+      icon: getCustomaryObservanceDisplayIcon(customary),
+    })
+  }
+
   for (const period of [...state.liturgicalPeriods, ...state.devotionalPeriods]) {
     if (items.length >= maxItems) break
 
@@ -102,7 +121,7 @@ export function getCalendarDisplaySummary(
     text:
       items.length > 0
         ? items.map((item) => item.label).join(' · ')
-        : 'No selected observance or active period',
+        : 'No selected observance, customary observance or active period',
   }
 }
 
