@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import {
   buildPeriods,
+  buildYearCustomaryObservances,
   firstSundayOfAdvent,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
   getCatholicCalendarState,
+  getCustomaryObservanceDisplayIcon,
   getObservanceDisplayIcon,
   getPeriodDisplayIcon,
   getYearOverview,
@@ -165,13 +167,19 @@ describe('fixed observances', () => {
     ).toMatchObject({ id: 'our-lady-of-loreto', icon: 'rosary' })
   })
 
-  it('includes Saint Francis of Assisi on 4 October', () => {
+  it('includes Saint Francis of Assisi on 4 October with the universal memorial rank', () => {
     expect(getCatholicCalendarState('2027-10-04').primaryObservance).toMatchObject({
       id: 'st-francis-assisi',
       name: 'Saint Francis of Assisi',
       nameEs: 'San Francisco de Asís',
       rank: 'memorial',
       status: 'observed',
+    })
+    expect(
+      getCalendarDisplaySummary(getCatholicCalendarState('2027-10-04')).items[0]
+    ).toMatchObject({
+      id: 'st-francis-assisi',
+      icon: 'cross',
     })
 
     expect(
@@ -183,6 +191,57 @@ describe('fixed observances', () => {
       observedDate: null,
       impededBy: 'Sunday',
     })
+  })
+})
+
+describe('customary observances', () => {
+  it('derives Shrove Tuesday as the day before Ash Wednesday', () => {
+    expect(buildYearCustomaryObservances(2026)).toEqual([
+      {
+        id: 'shrove-tuesday',
+        name: 'Shrove Tuesday',
+        nameEs: 'Martes de Carnaval',
+        aliases: ['Mardi Gras', 'Fat Tuesday'],
+        kind: 'customary',
+        date: '2026-02-17',
+      },
+    ])
+    expect(buildYearCustomaryObservances(2027)[0]?.date).toBe('2027-02-09')
+  })
+
+  it('exposes Shrove Tuesday separately from liturgical rank and keeps the countdown active', () => {
+    const state = getCatholicCalendarState('2026-02-17')
+
+    expect(state.primaryObservance).toBeNull()
+    expect(state.customaryObservances).toEqual([
+      expect.objectContaining({
+        id: 'shrove-tuesday',
+        name: 'Shrove Tuesday',
+        aliases: ['Mardi Gras', 'Fat Tuesday'],
+      }),
+    ])
+    expect(state.countdown).toMatchObject({
+      daysUntil: 1,
+      observance: {
+        id: 'ash-wednesday',
+      },
+    })
+    expect(getCalendarDisplaySummary(state).items).toEqual([
+      expect.objectContaining({
+        kind: 'customary',
+        id: 'shrove-tuesday',
+        label: 'Shrove Tuesday',
+        icon: 'church-1',
+      }),
+      expect.objectContaining({
+        kind: 'countdown',
+        id: 'countdown:ash-wednesday',
+        label: '1 day until Ash Wednesday',
+      }),
+    ])
+    expect(getCustomaryObservanceDisplayIcon(state.customaryObservances[0])).toBe(
+      'church-1'
+    )
   })
 })
 
