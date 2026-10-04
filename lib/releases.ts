@@ -17,28 +17,27 @@ export const releases: ReleaseNote[] = [
     codename: 'Verdant Orchard',
     status: 'In development',
     summary:
-      'Verdant Orchard extends the curated calendar with a non-ranked customary-observance layer and refines the demonstration interface while preserving Roman-calendar precedence semantics.',
+      'Verdant Orchard refines the fixed two-item calendar display, preserves impeded same-day celebrations when space is available and streamlines the demonstration interface.',
     sections: [
       {
-        title: 'Calendar model',
+        title: 'Calendar display',
         items: [
-          'Adds Shrove Tuesday as a derived customary observance, with Mardi Gras and Fat Tuesday aliases, without assigning liturgical rank or precedence.',
-          'Carries Saint Francis of Assisi on 4 October forward with its General Roman Calendar memorial rank and an explicit display mapping.',
+          'Uses available composed-display space for impeded nominal celebrations without changing their canonical status or liturgical precedence.',
+          'Keeps the display fixed at two items, ordered by primary observance, active periods, impeded nominal celebration and then countdown.',
         ],
       },
       {
         title: 'Interface',
         items: [
-          'Shows the weekday in Display configuration and exposes customary observances as a distinct tester layer.',
-          'Uses spare composed-display capacity for impeded nominal celebrations, while keeping active periods ahead of them and preserving canonical precedence.',
-          'Places periods above celebrations in Year Overview, adds a customary-observance table and streamlines the liturgical-rank guide.',
+          'Moves the weekday-formatted selected date below the composed display and removes the display-configuration card.',
+          'Places periods above celebrations, right-aligns the Ordinary Time note with an icon, and paginates Release Notes one release at a time.',
         ],
       },
       {
-        title: 'Package',
+        title: 'Release preparation',
         items: [
-          'Bumps the engine and package to v0.1.0-beta.1 and prepares the npm beta distribution channel.',
-          'Adds package-facing customary-observance types, builders, state output and display composition with regression coverage.',
+          'Carries Saint Francis of Assisi on 4 October with its General Roman Calendar memorial rank and an explicit display mapping.',
+          'Bumps the application and package to v0.1.0-beta.1 and prepares the npm beta distribution channel.',
         ],
       },
     ],
