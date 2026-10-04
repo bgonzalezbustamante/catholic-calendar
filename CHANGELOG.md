@@ -2,9 +2,22 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
-## [Unreleased]
+## [Unreleased] — v0.1.0-beta.1 “Verdant Orchard”
 
-No unreleased changes.
+### Added
+
+- Added a package-facing non-ranked customary-observance layer and `buildYearCustomaryObservances`, with Shrove Tuesday derived as the day before Ash Wednesday.
+- Added Shrove Tuesday aliases for Mardi Gras and Fat Tuesday, a Spanish display label, composed-display support and a dedicated Year Overview table.
+- Added regression and package-smoke coverage for customary dates, display composition and Saint Francis of Assisi.
+
+### Changed
+
+- Bumped the application and publishable package to `0.1.0-beta.1` and prepared npm publication through the `beta` dist-tag.
+- Expanded the date tester from three to four explicit output layers so customary observances remain separate from ranked liturgical observances and periods.
+- Added the weekday to the selected date shown in Display configuration.
+- Moved “Periods in this model” above “Celebrations in this model” in Year Overview.
+- Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
+- Made the Saint Francis of Assisi display mapping explicit while retaining the General Roman Calendar memorial rank on 4 October.
 
 ## [0.1.0-alpha.1] — Calm Bridge — 2026-10-03
 
