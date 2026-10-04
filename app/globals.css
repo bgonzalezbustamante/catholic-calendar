@@ -221,60 +221,17 @@ h1 {
   flex: 0 0 0.78rem;
 }
 
-.display-config {
-  display: grid;
-  grid-template-columns: minmax(180px, 1fr) auto;
-  gap: 0.75rem 1rem;
-  align-items: end;
-  margin: 0 0 0.75rem;
-  border: 1px solid var(--stone);
-  border-radius: 0.65rem;
-  background: var(--paper);
-  padding: 0.8rem 0.9rem;
-}
-
-.display-config-heading {
-  display: grid;
-  gap: 0.08rem;
-  align-self: center;
-  font-family: var(--font-roboto), Arial, sans-serif;
-}
-
-.display-config-heading strong {
-  color: var(--blue);
-  font-size: 0.78rem;
-}
-
-.display-config-heading span {
-  color: var(--ash);
-  font-size: 0.65rem;
-}
-
-.display-config-heading .display-config-date {
-  margin-top: 0.28rem;
-  color: var(--ash);
-}
-
-.display-config-date strong {
-  color: var(--blue);
-  font-size: 1em;
-}
-
-.display-config-field {
-  display: grid;
+.composed-display-date {
+  display: flex;
+  justify-content: flex-end;
   gap: 0.28rem;
-  color: var(--blue);
+  margin: -0.55rem 0 1rem;
+  color: var(--ash);
   font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.66rem;
-  font-weight: 700;
+  font-size: 0.68rem;
 }
 
-.display-config-field select {
-  min-height: 36px;
-  border: 1px solid var(--stone);
-  border-radius: 0.45rem;
-  background: var(--paper);
-  padding: 0.35rem 1.8rem 0.35rem 0.55rem;
+.composed-display-date strong {
   color: var(--blue);
 }
 
@@ -373,7 +330,7 @@ h1 {
 
 .layer-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
 
@@ -785,10 +742,22 @@ tbody tr:last-child td {
 }
 
 .year-subsection-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.32rem;
   margin: 0.55rem 0 0;
   color: var(--ash);
   font-size: 0.7rem;
   font-style: italic;
+  text-align: right;
+}
+
+.year-subsection-note-icon {
+  width: 0.78rem;
+  height: 0.78rem;
+  flex: 0 0 0.78rem;
+  background: var(--ash);
 }
 
 .rank-guide {
@@ -921,6 +890,63 @@ tbody tr:last-child td {
   margin-top: 0.28rem;
 }
 
+.release-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+.release-page-numbers {
+  display: flex;
+  gap: 0.28rem;
+}
+
+.release-page-nav,
+.release-page-number {
+  border: 1px solid var(--stone);
+  border-radius: 0.4rem;
+  background: var(--paper);
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 0.66rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.release-page-nav {
+  padding: 0.28rem 0.48rem;
+}
+
+.release-page-number {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.release-page-number.is-selected {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.release-page-nav:hover:not(:disabled),
+.release-page-number:hover:not(.is-selected),
+.release-page-nav:focus-visible,
+.release-page-number:focus-visible {
+  border-color: var(--aqua);
+  outline: none;
+}
+
+.release-page-nav:disabled {
+  opacity: 0.36;
+  cursor: not-allowed;
+}
+
 .site-footer {
   border-top: 1px solid var(--stone);
   background: var(--paper);
@@ -1007,11 +1033,6 @@ tbody tr:last-child td {
   .overview-heading {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .display-config {
-    grid-template-columns: 1fr;
-    align-items: stretch;
   }
 
   .date-control,
