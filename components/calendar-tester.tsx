@@ -79,7 +79,6 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
   const [dateInput, setDateInput] = useState(initialDate)
-  const [maxDisplayItems, setMaxDisplayItems] = useState<2 | 3>(2)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
   const commitDate = (value: string) => {
@@ -109,11 +108,8 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
     (event) => event.status === 'transferred'
   )
   const displaySummary = useMemo(
-    () =>
-      getCalendarDisplaySummary(state, {
-        maxItems: maxDisplayItems,
-      }),
-    [maxDisplayItems, state]
+    () => getCalendarDisplaySummary(state),
+    [state]
   )
 
   return (
@@ -123,7 +119,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <p className="eyebrow">Interactive test</p>
           <h2 id="tester-title">Calendar state tester</h2>
           <p className="section-intro">
-            Select any supported civil date to inspect the four output layers,
+            Select any supported civil date to inspect the three output layers,
             transfer decisions and the underlying movable-date calculations.
           </p>
         </div>
@@ -186,35 +182,13 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         </div>
       </div>
 
-      <div className="display-config" aria-label="Composed display configuration">
-        <div className="display-config-heading">
-          <strong>Display configuration</strong>
-          <span>Composed display only · cards remain complete</span>
-          <span className="display-config-date">
-            Selected date <strong>{formatDisplayDate(date)}</strong>
-          </span>
-        </div>
-
-        <label className="display-config-field" htmlFor="display-max-items">
-          <span>Maximum items</span>
-          <select
-            id="display-max-items"
-            value={maxDisplayItems}
-            onChange={(event) =>
-              setMaxDisplayItems(Number(event.target.value) as 2 | 3)
-            }
-          >
-            <option value={2}>2 items</option>
-            <option value={3}>3 items</option>
-          </select>
-        </label>
-
-      </div>
-
       <blockquote className="state-quotation">
         <footer>Composed calendar display</footer>
         <CalendarDisplay items={displaySummary.items} />
       </blockquote>
+      <p className="composed-display-date">
+        Selected date <strong>{formatDisplayDate(date)}</strong>
+      </p>
 
       <div className="layer-grid">
         <article className="layer-card">
@@ -231,35 +205,12 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
               </span>
             </div>
           ) : (
-            <p className="card-copy">The other calendar layers remain active independently.</p>
+            <p className="card-copy">The period and countdown layers remain active independently.</p>
           )}
         </article>
 
         <article className="layer-card">
           <span className="layer-number">02</span>
-          <p className="eyebrow">Customary observance</p>
-          {state.customaryObservances.length > 0 ? (
-            <>
-              <h3>{state.customaryObservances.map((observance) => observance.name).join(' · ')}</h3>
-              <p className="card-copy">
-                {state.customaryObservances
-                  .map((observance) => `Also known as ${observance.aliases.join(' / ')}.`)
-                  .join(' ')}
-              </p>
-              <div className="chip-row">
-                <span className="state-chip muted">Customary</span>
-              </div>
-            </>
-          ) : (
-            <>
-              <h3>No selected customary observance</h3>
-              <p className="card-copy">Customary dates remain separate from liturgical rank and precedence.</p>
-            </>
-          )}
-        </article>
-
-        <article className="layer-card">
-          <span className="layer-number">03</span>
           <p className="eyebrow">Active periods</p>
           <h3>
             {[...state.liturgicalPeriods, ...state.devotionalPeriods].length > 0
@@ -283,7 +234,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         </article>
 
         <article className="layer-card">
-          <span className="layer-number">04</span>
+          <span className="layer-number">03</span>
           <p className="eyebrow">Countdown</p>
           {state.countdown ? (
             <>
@@ -337,10 +288,6 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <div>
             <span>Nominal selections today</span>
             <strong>{state.nominalObservances.length}</strong>
-          </div>
-          <div>
-            <span>Customary observances today</span>
-            <strong>{state.customaryObservances.length}</strong>
           </div>
         </div>
 
