@@ -12,11 +12,10 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 
 - Computes Gregorian Easter and the selected Paschal-cycle dates, including Ash Wednesday, Holy Week, Easter Time, Ascension, Pentecost, Trinity Sunday, Corpus Christi and the Sacred Heart.
 - Computes the First Sunday of Advent and derives Christ the King, Advent and Christmas Time.
-- Resolves four independent outputs for a civil date: primary selected observance, customary observances, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
+- Resolves three independent output layers for a civil date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
 - Tracks nominal and observed dates separately and distinguishes observed, transferred, commemoration-eligible and impeded observances.
-- Derives Shrove Tuesday from Ash Wednesday and exposes it separately from liturgical rank and precedence, with Mardi Gras and Fat Tuesday as aliases.
-- Exposes a composed display API with a two- or three-item limit, deterministic engine order and semantic Christicons metadata.
-- Uses spare composed-display capacity for an impeded nominal celebration when no primary observance occupies the date, without changing its canonical status or precedence.
+- Exposes a fixed two-item composed display API with deterministic engine order and semantic Christicons metadata.
+- Uses spare composed-display capacity for impeded nominal celebrations after primary observances and active periods, without changing canonical status or precedence.
 - Includes English and Spanish observance names.
 - Provides an interactive date tester and Year Overview for inspecting calendar outcomes and period boundaries.
 
@@ -24,7 +23,7 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 
 The current model is deliberately curated rather than a complete Ordo generator.
 
-It includes the principal Christmas, Lent, Holy Week and Easter boundaries; selected Marian observances; selected saints and feasts; Shrove Tuesday as a customary pre-Lenten observance; transfer handling for Saint Joseph, the Annunciation and the Immaculate Conception; and selected same-date solemnity collisions.
+It includes the principal Christmas, Lent, Holy Week and Easter boundaries; selected Marian observances; selected saints and feasts; transfer handling for Saint Joseph, the Annunciation and the Immaculate Conception; and selected same-date solemnity collisions.
 
 The modelled periods are:
 
@@ -48,12 +47,11 @@ The reusable engine boundary is `lib/catholic-calendar/`:
 2. `computus.ts` — Gregorian Easter, First Sunday of Advent, Baptism of the Lord and Holy Family calculations.
 3. `calendar.ts` — supported range, movable-cycle derivation and liturgical/devotional periods.
 4. `observances.ts` — curated ranked observance definitions.
-5. `customary.ts` — derived non-ranked customary observances.
-6. `rules.ts` — precedence, transfers, solemnity collisions and impediments.
-7. `resolver.ts` — date-state and Year Overview APIs.
-8. `types.ts` — package-facing data contracts.
-9. `presentation.ts` — composed-display and icon semantics.
-10. `index.ts` — public exports.
+5. `rules.ts` — precedence, transfers, solemnity collisions and impediments.
+6. `resolver.ts` — date-state and Year Overview APIs.
+7. `types.ts` — package-facing data contracts.
+8. `presentation.ts` — composed-display and icon semantics.
+9. `index.ts` — public exports.
 
 The demonstration shell is separate:
 
@@ -106,7 +104,6 @@ Representative state:
     observedDate: '2026-09-08',
     status: 'observed'
   },
-  customaryObservances: [],
   liturgicalPeriods: [],
   devotionalPeriods: [
     { id: 'st-michaels-lent', name: "St Michael's Lent", ... }
@@ -114,13 +111,6 @@ Representative state:
   countdown: null,
   ...
 }
-```
-
-A customary date can coexist with the ranked calendar and countdown without taking liturgical precedence:
-
-```ts
-getCatholicCalendarState('2026-02-17').customaryObservances
-// [{ id: 'shrove-tuesday', name: 'Shrove Tuesday', aliases: ['Mardi Gras', 'Fat Tuesday'], ... }]
 ```
 
 A date without a selected discrete celebration can expose the countdown independently:
