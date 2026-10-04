@@ -18,6 +18,7 @@ All notable changes to this project are documented here. The format follows Keep
 - Moved “Periods in this model” above “Celebrations in this model” in Year Overview.
 - Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
 - Made the Saint Francis of Assisi display mapping explicit while retaining the General Roman Calendar memorial rank on 4 October.
+- Changed composed-display fallback behaviour so impeded nominal celebrations can fill unused slots without becoming the primary observance; active periods still take precedence in display ordering.
 
 ## [0.1.0-alpha.1] — Calm Bridge — 2026-10-03
 
