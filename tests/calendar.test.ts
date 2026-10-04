@@ -2,12 +2,10 @@ import { describe, expect, it } from 'vitest'
 
 import {
   buildPeriods,
-  buildYearCustomaryObservances,
   firstSundayOfAdvent,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
   getCatholicCalendarState,
-  getCustomaryObservanceDisplayIcon,
   getObservanceDisplayIcon,
   getPeriodDisplayIcon,
   getYearOverview,
@@ -208,57 +206,6 @@ describe('fixed observances', () => {
         label: '3 days until Our Lady of the Rosary',
       }),
     ])
-  })
-})
-
-describe('customary observances', () => {
-  it('derives Shrove Tuesday as the day before Ash Wednesday', () => {
-    expect(buildYearCustomaryObservances(2026)).toEqual([
-      {
-        id: 'shrove-tuesday',
-        name: 'Shrove Tuesday',
-        nameEs: 'Martes de Carnaval',
-        aliases: ['Mardi Gras', 'Fat Tuesday'],
-        kind: 'customary',
-        date: '2026-02-17',
-      },
-    ])
-    expect(buildYearCustomaryObservances(2027)[0]?.date).toBe('2027-02-09')
-  })
-
-  it('exposes Shrove Tuesday separately from liturgical rank and keeps the countdown active', () => {
-    const state = getCatholicCalendarState('2026-02-17')
-
-    expect(state.primaryObservance).toBeNull()
-    expect(state.customaryObservances).toEqual([
-      expect.objectContaining({
-        id: 'shrove-tuesday',
-        name: 'Shrove Tuesday',
-        aliases: ['Mardi Gras', 'Fat Tuesday'],
-      }),
-    ])
-    expect(state.countdown).toMatchObject({
-      daysUntil: 1,
-      observance: {
-        id: 'ash-wednesday',
-      },
-    })
-    expect(getCalendarDisplaySummary(state).items).toEqual([
-      expect.objectContaining({
-        kind: 'customary',
-        id: 'shrove-tuesday',
-        label: 'Shrove Tuesday',
-        icon: 'church-1',
-      }),
-      expect.objectContaining({
-        kind: 'countdown',
-        id: 'countdown:ash-wednesday',
-        label: '1 day until Ash Wednesday',
-      }),
-    ])
-    expect(getCustomaryObservanceDisplayIcon(state.customaryObservances[0])).toBe(
-      'church-1'
-    )
   })
 })
 
@@ -475,6 +422,27 @@ describe('display summary', () => {
     ])
   })
 
+  it('uses a free second slot for an impeded celebration alongside a primary observance', () => {
+    const state = getCatholicCalendarState('2026-05-31')
+
+    expect(state.primaryObservance?.id).toBe('trinity-sunday')
+    expect(
+      state.nominalObservances.find(
+        (observance) => observance.id === 'visitation'
+      )
+    ).toMatchObject({
+      status: 'impeded',
+      observedDate: null,
+    })
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Most Holy Trinity · Visitation of the Blessed Virgin Mary'
+    )
+    expect(getCalendarDisplaySummary(state).items[1]).toMatchObject({
+      kind: 'nominal-observance',
+      id: 'visitation',
+    })
+  })
+
 
   it('caps the composed display at two items', () => {
     const state = getCatholicCalendarState('2026-04-02')
@@ -484,24 +452,6 @@ describe('display summary', () => {
     expect(display.items.map((item) => item.label)).toEqual([
       'Holy Thursday',
       'Lent',
-    ])
-  })
-
-  it('supports a three-item composed display without changing diagnostic state', () => {
-    const state = getCatholicCalendarState('2026-04-02')
-    const display = getCalendarDisplaySummary(state, {
-      maxItems: 3,
-    })
-
-    expect(display.items.map((item) => item.label)).toEqual([
-      'Holy Thursday',
-      'Lent',
-      'Holy Week',
-    ])
-    expect(state.liturgicalPeriods.map((period) => period.name)).toEqual([
-      'Lent',
-      'Holy Week',
-      'Sacred Paschal Triduum',
     ])
   })
 
@@ -515,25 +465,10 @@ describe('display summary', () => {
     expect(formatCalendarStateSummary(easter)).toBe(
       'Easter Sunday of the Resurrection of the Lord · Sacred Paschal Triduum'
     )
-    expect(
-      formatCalendarStateSummary(easter, { maxItems: 3 })
-    ).toBe(
-      'Easter Sunday of the Resurrection of the Lord · Sacred Paschal Triduum · Easter Time'
-    )
-
     const michaelState = getCatholicCalendarState('2026-08-15')
     expect(formatCalendarStateSummary(michaelState)).toBe(
       "Assumption of the Blessed Virgin Mary · St Michael's Lent"
     )
-  })
-
-  it('exposes only the compact display length as a package option', () => {
-    const state = getCatholicCalendarState('2026-04-02')
-    expect(
-      getCalendarDisplaySummary(state, {
-        maxItems: 3,
-      }).items.map((item) => item.label)
-    ).toEqual(['Holy Thursday', 'Lent', 'Holy Week'])
   })
 
   it('uses calvary for Holy Week', () => {
@@ -581,8 +516,7 @@ describe('display summary', () => {
 
     for (const [date, id, icon] of expectations) {
       const items = getCalendarDisplaySummary(
-        getCatholicCalendarState(date),
-        { maxItems: 3 }
+        getCatholicCalendarState(date)
       ).items
       expect(items.find((item) => item.id === id)).toMatchObject({ icon })
     }
@@ -675,8 +609,7 @@ describe('display summary', () => {
     for (const date of overviewDates) {
       expect(
         getCalendarDisplaySummary(
-          getCatholicCalendarState(date),
-          { maxItems: 3 }
+          getCatholicCalendarState(date)
         ).items.every((item) => Boolean(item.icon))
       ).toBe(true)
     }
