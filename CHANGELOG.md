@@ -6,19 +6,19 @@ All notable changes to this project are documented here. The format follows Keep
 
 ### Added
 
-- Added a package-facing non-ranked customary-observance layer and `buildYearCustomaryObservances`, with Shrove Tuesday derived as the day before Ash Wednesday.
-- Added Shrove Tuesday aliases for Mardi Gras and Fat Tuesday, a Spanish display label, composed-display support and a dedicated Year Overview table.
-- Added regression and package-smoke coverage for customary dates, display composition and Saint Francis of Assisi.
+- Added regression and package-smoke coverage for impeded nominal celebrations filling available composed-display slots, including Saint Francis of Assisi on 4 October 2026 and the Visitation on 31 May 2026.
+- Added one-release-at-a-time pagination to the reader-facing Release Notes, following the Weekly Penguin Timeline interaction pattern.
 
 ### Changed
 
 - Bumped the application and publishable package to `0.1.0-beta.1` and prepared npm publication through the `beta` dist-tag.
-- Expanded the date tester from three to four explicit output layers so customary observances remain separate from ranked liturgical observances and periods.
-- Added the weekday to the selected date shown in Display configuration.
+- Fixed the composed display at two items and removed the package/UI option for selecting a maximum display length.
+- Changed composed-display fallback behaviour so impeded nominal celebrations can fill unused slots after primary observances and active periods, without becoming observed or primary; countdowns use only remaining capacity.
+- Removed the Display configuration card and moved the weekday-formatted selected date directly below the composed calendar display, aligned to the right.
 - Moved “Periods in this model” above “Celebrations in this model” in Year Overview.
+- Right-aligned the Ordinary Time note and added a small semantic icon.
 - Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
 - Made the Saint Francis of Assisi display mapping explicit while retaining the General Roman Calendar memorial rank on 4 October.
-- Changed composed-display fallback behaviour so impeded nominal celebrations can fill unused slots without becoming the primary observance; active periods still take precedence in display ordering.
 
 ## [0.1.0-alpha.1] — Calm Bridge — 2026-10-03
 
