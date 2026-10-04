@@ -2,6 +2,8 @@
 
 **Current release: v0.1.0-alpha.1 “Calm Bridge” — released 3 October 2026**
 
+**Next release: v0.1.0-beta.1 “Verdant Orchard” — in development**
+
 A reusable Roman Catholic calendar proof of concept built in TypeScript. It derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the resulting state through a compact display API, an interactive tester and a Year Overview.
 
 The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The Next.js application in this repository is a demonstration and validation surface rather than a dependency of the engine.
@@ -10,8 +12,9 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 
 - Computes Gregorian Easter and the selected Paschal-cycle dates, including Ash Wednesday, Holy Week, Easter Time, Ascension, Pentecost, Trinity Sunday, Corpus Christi and the Sacred Heart.
 - Computes the First Sunday of Advent and derives Christ the King, Advent and Christmas Time.
-- Resolves three independent layers for a civil date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
+- Resolves four independent outputs for a civil date: primary selected observance, customary observances, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
 - Tracks nominal and observed dates separately and distinguishes observed, transferred, commemoration-eligible and impeded observances.
+- Derives Shrove Tuesday from Ash Wednesday and exposes it separately from liturgical rank and precedence, with Mardi Gras and Fat Tuesday as aliases.
 - Exposes a composed display API with a two- or three-item limit, deterministic engine order and semantic Christicons metadata.
 - Includes English and Spanish observance names.
 - Provides an interactive date tester and Year Overview for inspecting calendar outcomes and period boundaries.
@@ -20,7 +23,7 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 
 The current model is deliberately curated rather than a complete Ordo generator.
 
-It includes the principal Christmas, Lent, Holy Week and Easter boundaries; selected Marian observances; selected saints and feasts; transfer handling for Saint Joseph, the Annunciation and the Immaculate Conception; and selected same-date solemnity collisions.
+It includes the principal Christmas, Lent, Holy Week and Easter boundaries; selected Marian observances; selected saints and feasts; Shrove Tuesday as a customary pre-Lenten observance; transfer handling for Saint Joseph, the Annunciation and the Immaculate Conception; and selected same-date solemnity collisions.
 
 The modelled periods are:
 
@@ -43,12 +46,13 @@ The reusable engine boundary is `lib/catholic-calendar/`:
 1. `date-utils.ts` — strict civil-date arithmetic using UTC dates.
 2. `computus.ts` — Gregorian Easter, First Sunday of Advent, Baptism of the Lord and Holy Family calculations.
 3. `calendar.ts` — supported range, movable-cycle derivation and liturgical/devotional periods.
-4. `observances.ts` — curated observance definitions.
-5. `rules.ts` — precedence, transfers, solemnity collisions and impediments.
-6. `resolver.ts` — date-state and Year Overview APIs.
-7. `types.ts` — package-facing data contracts.
-8. `presentation.ts` — composed-display and icon semantics.
-9. `index.ts` — public exports.
+4. `observances.ts` — curated ranked observance definitions.
+5. `customary.ts` — derived non-ranked customary observances.
+6. `rules.ts` — precedence, transfers, solemnity collisions and impediments.
+7. `resolver.ts` — date-state and Year Overview APIs.
+8. `types.ts` — package-facing data contracts.
+9. `presentation.ts` — composed-display and icon semantics.
+10. `index.ts` — public exports.
 
 The demonstration shell is separate:
 
@@ -67,10 +71,10 @@ The publishable npm package is defined in `packages/catholic-calendar/`. Its gen
 The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Once published, consumers can install it with:
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar@alpha
+npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
-The first alpha is distributed through the `alpha` npm channel. On a package’s first publication npm may also create `latest`; consumers should use `@alpha` or the exact prerelease version until a stable release is published. The first alpha publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+Verdant Orchard is prepared for the `beta` npm channel. Until beta.1 is published, the previously released alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
 
 Validate the package locally with:
 
@@ -101,6 +105,7 @@ Representative state:
     observedDate: '2026-09-08',
     status: 'observed'
   },
+  customaryObservances: [],
   liturgicalPeriods: [],
   devotionalPeriods: [
     { id: 'st-michaels-lent', name: "St Michael's Lent", ... }
@@ -108,6 +113,13 @@ Representative state:
   countdown: null,
   ...
 }
+```
+
+A customary date can coexist with the ranked calendar and countdown without taking liturgical precedence:
+
+```ts
+getCatholicCalendarState('2026-02-17').customaryObservances
+// [{ id: 'shrove-tuesday', name: 'Shrove Tuesday', aliases: ['Mardi Gras', 'Fat Tuesday'], ... }]
 ```
 
 A date without a selected discrete celebration can expose the countdown independently:
