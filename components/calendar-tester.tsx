@@ -23,7 +23,7 @@ function formatDate(value: string) {
 function formatDisplayDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
     weekday: 'long',
-    day: 'numeric',
+    day: '2-digit',
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
