@@ -12,7 +12,6 @@ import {
   MIN_SUPPORTED_YEAR,
 } from './calendar'
 import { buildYearObservances } from './observances'
-import { buildYearCustomaryObservances } from './customary'
 import type {
   CalendarObservance,
   CatholicCalendarState,
@@ -45,9 +44,6 @@ export function getCatholicCalendarState(value: string): CatholicCalendarState {
   const periodYears =
     year === MIN_SUPPORTED_YEAR ? [MIN_SUPPORTED_YEAR - 1, ...years] : years
   const observances = years.flatMap(buildYearObservances)
-  const customaryObservances = buildYearCustomaryObservances(year).filter(
-    (observance) => observance.date === date
-  )
   const periods = periodYears.flatMap(buildPeriodContext)
 
   const observedObservances = sortObserved(
@@ -83,7 +79,6 @@ export function getCatholicCalendarState(value: string): CatholicCalendarState {
     primaryObservance,
     observedObservances,
     nominalObservances,
-    customaryObservances,
     liturgicalPeriods: activePeriods.filter((period) => period.kind === 'liturgical'),
     devotionalPeriods: activePeriods.filter((period) => period.kind === 'devotional'),
     nextObservance,
