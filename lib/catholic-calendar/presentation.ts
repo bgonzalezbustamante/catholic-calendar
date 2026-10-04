@@ -112,6 +112,21 @@ export function getCalendarDisplaySummary(
     })
   }
 
+  if (!state.primaryObservance) {
+    for (const observance of state.nominalObservances.filter(
+      (event) => event.status === 'impeded'
+    )) {
+      if (items.length >= maxItems) break
+
+      items.push({
+        kind: 'nominal-observance',
+        id: observance.id,
+        label: observance.name,
+        icon: getObservanceDisplayIcon(observance),
+      })
+    }
+  }
+
   if (!state.primaryObservance && items.length < maxItems) {
     const countdown = countdownItem(state)
     if (countdown) items.push(countdown)
