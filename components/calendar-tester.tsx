@@ -231,7 +231,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
               </span>
             </div>
           ) : (
-            <p className="card-copy">The period and countdown layers remain active independently.</p>
+            <p className="card-copy">The other calendar layers remain active independently.</p>
           )}
         </article>
 
