@@ -182,8 +182,10 @@ describe('fixed observances', () => {
       icon: 'cross',
     })
 
+    const impededFrancis = getCatholicCalendarState('2026-10-04')
+
     expect(
-      getCatholicCalendarState('2026-10-04').nominalObservances.find(
+      impededFrancis.nominalObservances.find(
         (observance) => observance.id === 'st-francis-assisi'
       )
     ).toMatchObject({
@@ -191,6 +193,21 @@ describe('fixed observances', () => {
       observedDate: null,
       impededBy: 'Sunday',
     })
+    expect(formatCalendarStateSummary(impededFrancis)).toBe(
+      'Saint Francis of Assisi · 3 days until Our Lady of the Rosary'
+    )
+    expect(getCalendarDisplaySummary(impededFrancis).items).toEqual([
+      expect.objectContaining({
+        kind: 'nominal-observance',
+        id: 'st-francis-assisi',
+        label: 'Saint Francis of Assisi',
+      }),
+      expect.objectContaining({
+        kind: 'countdown',
+        id: 'countdown:our-lady-of-the-rosary',
+        label: '3 days until Our Lady of the Rosary',
+      }),
+    ])
   })
 })
 
@@ -390,7 +407,7 @@ describe('impeded selected observances', () => {
 })
 
 describe('year overview', () => {
-  it('keeps impeded Benedict in Year Overview while omitting it from composed display', () => {
+  it('keeps impeded Benedict in Year Overview and uses available composed-display space', () => {
     const state = getCatholicCalendarState('2027-07-11')
     const benedict = getYearOverview(2027).find(
       ({ observance }) => observance.id === 'st-benedict-nursia'
@@ -398,10 +415,13 @@ describe('year overview', () => {
 
     expect(state.primaryObservance).toBeNull()
     expect(
-      getCalendarDisplaySummary(state).items.some(
+      getCalendarDisplaySummary(state).items.find(
         (item) => item.id === 'st-benedict-nursia'
       )
-    ).toBe(false)
+    ).toMatchObject({
+      kind: 'nominal-observance',
+      label: 'Saint Benedict of Nursia',
+    })
     expect(benedict?.observance).toMatchObject({
       status: 'impeded',
       impededBy: 'Sunday',
@@ -435,6 +455,24 @@ describe('display summary', () => {
     expect(formatCalendarStateSummary(state)).toBe(
       'Advent · 5 days until Immaculate Conception'
     )
+  })
+
+  it('keeps active periods ahead of impeded nominal celebrations', () => {
+    const state = getCatholicCalendarState('2027-12-12')
+
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Advent · Our Lady of Guadalupe'
+    )
+    expect(getCalendarDisplaySummary(state).items).toEqual([
+      expect.objectContaining({
+        kind: 'period',
+        id: 'advent',
+      }),
+      expect.objectContaining({
+        kind: 'nominal-observance',
+        id: 'our-lady-of-guadalupe',
+      }),
+    ])
   })
 
 
