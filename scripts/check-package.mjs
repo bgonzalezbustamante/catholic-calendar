@@ -18,6 +18,13 @@ assert.equal(
   'Shrove Tuesday · 1 day until Ash Wednesday'
 )
 
+const saintFrancisSunday = calendar.getCatholicCalendarState('2026-10-04')
+assert.equal(saintFrancisSunday.primaryObservance, null)
+assert.equal(
+  calendar.getCalendarDisplaySummary(saintFrancisSunday).text,
+  'Saint Francis of Assisi · 3 days until Our Lady of the Rosary'
+)
+
 const boundary = calendar.getCatholicCalendarState('2000-01-01')
 assert.ok(
   boundary.liturgicalPeriods.some(
