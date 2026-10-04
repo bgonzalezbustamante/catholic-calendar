@@ -23,19 +23,18 @@ console.log(display.text)
 // Nativity of the Blessed Virgin Mary · St Michael's Lent
 ```
 
-The package exposes the same engine used by the demonstration application, including computus helpers, selected liturgical observances, customary observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
+The package exposes the same engine used by the demonstration application, including computus helpers, selected liturgical observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
 
 ## Scope
 
 - Supported civil years: **2000–2100**.
 - Uses universal Roman dates for Epiphany, Ascension and Corpus Christi.
 - Models a curated observance set rather than a complete General Roman Calendar or local proper calendar.
-- Exposes Shrove Tuesday as a derived customary observance, with Mardi Gras and Fat Tuesday as aliases, without assigning liturgical rank or precedence.
 - Models Christmas Time, Lent, Holy Week, the Sacred Paschal Triduum, Easter Time and Advent.
 - Models St Michael’s Lent separately as a devotional period.
 - Ordinary Time is intentionally not modelled.
 - `commemoration-eligible` means a memorial may be commemorated while the privileged seasonal weekday retains liturgical precedence.
-- Impeded nominal celebrations may appear in unused composed-display slots; this is presentation-only and does not make them primary or observed.
+- The composed display is fixed at two items. Impeded nominal celebrations may use an available slot after primary observances and active periods; this is presentation-only and does not make them primary or observed.
 
 See the repository README and `docs/SOURCES.md` for the full scope, sources and rule limitations.
 
