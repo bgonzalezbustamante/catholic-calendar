@@ -20,6 +20,16 @@ function formatDate(value: string) {
   }).format(new Date(`${value}T00:00:00Z`))
 }
 
+function formatDisplayDate(value: string) {
+  return new Intl.DateTimeFormat('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${value}T00:00:00Z`))
+}
+
 function titleCase(value: string) {
   return value
     .split('-')
@@ -113,7 +123,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <p className="eyebrow">Interactive test</p>
           <h2 id="tester-title">Calendar state tester</h2>
           <p className="section-intro">
-            Select any supported civil date to inspect the three output layers,
+            Select any supported civil date to inspect the four output layers,
             transfer decisions and the underlying movable-date calculations.
           </p>
         </div>
@@ -181,7 +191,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <strong>Display configuration</strong>
           <span>Composed display only · cards remain complete</span>
           <span className="display-config-date">
-            Selected date <strong>{formatDate(date)}</strong>
+            Selected date <strong>{formatDisplayDate(date)}</strong>
           </span>
         </div>
 
@@ -227,6 +237,29 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
 
         <article className="layer-card">
           <span className="layer-number">02</span>
+          <p className="eyebrow">Customary observance</p>
+          {state.customaryObservances.length > 0 ? (
+            <>
+              <h3>{state.customaryObservances.map((observance) => observance.name).join(' · ')}</h3>
+              <p className="card-copy">
+                {state.customaryObservances
+                  .map((observance) => `Also known as ${observance.aliases.join(' / ')}.`)
+                  .join(' ')}
+              </p>
+              <div className="chip-row">
+                <span className="state-chip muted">Customary</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <h3>No selected customary observance</h3>
+              <p className="card-copy">Customary dates remain separate from liturgical rank and precedence.</p>
+            </>
+          )}
+        </article>
+
+        <article className="layer-card">
+          <span className="layer-number">03</span>
           <p className="eyebrow">Active periods</p>
           <h3>
             {[...state.liturgicalPeriods, ...state.devotionalPeriods].length > 0
@@ -250,7 +283,7 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         </article>
 
         <article className="layer-card">
-          <span className="layer-number">03</span>
+          <span className="layer-number">04</span>
           <p className="eyebrow">Countdown</p>
           {state.countdown ? (
             <>
@@ -304,6 +337,10 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <div>
             <span>Nominal selections today</span>
             <strong>{state.nominalObservances.length}</strong>
+          </div>
+          <div>
+            <span>Customary observances today</span>
+            <strong>{state.customaryObservances.length}</strong>
           </div>
         </div>
 
