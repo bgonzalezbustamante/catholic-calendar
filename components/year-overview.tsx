@@ -280,8 +280,8 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
       <aside className="rank-guide year-subsection" aria-labelledby="rank-guide-title">
         <div className="year-subsection-heading">
           <div>
-          <p className="eyebrow">Rank</p>
-          <h3 id="rank-guide-title">How to read liturgical rank</h3>
+            <p className="eyebrow">Rank</p>
+            <h3 id="rank-guide-title">How to read liturgical rank</h3>
           </div>
         </div>
         <p className="rank-guide-copy">
