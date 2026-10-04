@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
-## [Unreleased] — v0.1.0-beta.1 “Verdant Orchard”
+## [Unreleased] — v0.1.0-beta.1 “Crystal Falcon”
 
 ### Added
 
