@@ -1,14 +1,12 @@
 import type {
   CalendarDisplayIcon,
   CalendarDisplayItem,
-  CalendarDisplayOptions,
   CalendarDisplaySummary,
-  CalendarCustomaryObservance,
   CalendarObservance,
   CatholicCalendarState,
 } from './types'
 
-export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
+export const CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
 
 const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'christmas-time': 'star',
@@ -54,13 +52,6 @@ export function getObservanceDisplayIcon(
   )
 }
 
-export function getCustomaryObservanceDisplayIcon(
-  observance: Pick<CalendarCustomaryObservance, 'id'>
-): CalendarDisplayIcon {
-  if (observance.id === 'shrove-tuesday') return 'church-1'
-  return 'church-1'
-}
-
 function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null {
   if (!state.countdown) return null
 
@@ -75,10 +66,8 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
 }
 
 export function getCalendarDisplaySummary(
-  state: CatholicCalendarState,
-  options: CalendarDisplayOptions = {}
+  state: CatholicCalendarState
 ): CalendarDisplaySummary {
-  const maxItems = options.maxItems ?? DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS
   const items: CalendarDisplayItem[] = []
 
   if (state.primaryObservance) {
@@ -90,19 +79,8 @@ export function getCalendarDisplaySummary(
     })
   }
 
-  for (const customary of state.customaryObservances) {
-    if (items.length >= maxItems) break
-
-    items.push({
-      kind: 'customary',
-      id: customary.id,
-      label: customary.name,
-      icon: getCustomaryObservanceDisplayIcon(customary),
-    })
-  }
-
   for (const period of [...state.liturgicalPeriods, ...state.devotionalPeriods]) {
-    if (items.length >= maxItems) break
+    if (items.length >= CALENDAR_DISPLAY_MAX_ITEMS) break
 
     items.push({
       kind: 'period',
@@ -112,22 +90,20 @@ export function getCalendarDisplaySummary(
     })
   }
 
-  if (!state.primaryObservance) {
-    for (const observance of state.nominalObservances.filter(
-      (event) => event.status === 'impeded'
-    )) {
-      if (items.length >= maxItems) break
+  for (const observance of state.nominalObservances.filter(
+    (event) => event.status === 'impeded'
+  )) {
+    if (items.length >= CALENDAR_DISPLAY_MAX_ITEMS) break
 
-      items.push({
-        kind: 'nominal-observance',
-        id: observance.id,
-        label: observance.name,
-        icon: getObservanceDisplayIcon(observance),
-      })
-    }
+    items.push({
+      kind: 'nominal-observance',
+      id: observance.id,
+      label: observance.name,
+      icon: getObservanceDisplayIcon(observance),
+    })
   }
 
-  if (!state.primaryObservance && items.length < maxItems) {
+  if (!state.primaryObservance && items.length < CALENDAR_DISPLAY_MAX_ITEMS) {
     const countdown = countdownItem(state)
     if (countdown) items.push(countdown)
   }
@@ -137,13 +113,12 @@ export function getCalendarDisplaySummary(
     text:
       items.length > 0
         ? items.map((item) => item.label).join(' · ')
-        : 'No selected observance, customary observance or active period',
+        : 'No selected observance or active period',
   }
 }
 
 export function formatCalendarStateSummary(
-  state: CatholicCalendarState,
-  options: CalendarDisplayOptions = {}
+  state: CatholicCalendarState
 ): string {
-  return getCalendarDisplaySummary(state, options).text
+  return getCalendarDisplaySummary(state).text
 }
