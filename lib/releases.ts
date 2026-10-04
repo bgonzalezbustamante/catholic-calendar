@@ -13,6 +13,36 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v0.1.0-beta.1',
+    codename: 'Verdant Orchard',
+    status: 'In development',
+    summary:
+      'Verdant Orchard extends the curated calendar with a non-ranked customary-observance layer and refines the demonstration interface while preserving Roman-calendar precedence semantics.',
+    sections: [
+      {
+        title: 'Calendar model',
+        items: [
+          'Adds Shrove Tuesday as a derived customary observance, with Mardi Gras and Fat Tuesday aliases, without assigning liturgical rank or precedence.',
+          'Carries Saint Francis of Assisi on 4 October forward with its General Roman Calendar memorial rank and an explicit display mapping.',
+        ],
+      },
+      {
+        title: 'Interface',
+        items: [
+          'Shows the weekday in Display configuration and exposes customary observances as a distinct tester layer.',
+          'Places periods above celebrations in Year Overview, adds a customary-observance table and streamlines the liturgical-rank guide.',
+        ],
+      },
+      {
+        title: 'Package',
+        items: [
+          'Bumps the engine and package to v0.1.0-beta.1 and prepares the npm beta distribution channel.',
+          'Adds package-facing customary-observance types, builders, state output and display composition with regression coverage.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v0.1.0-alpha.1',
     codename: 'Calm Bridge',
     status: 'Released',
