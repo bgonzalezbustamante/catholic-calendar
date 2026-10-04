@@ -40,13 +40,6 @@ Gregorian Easter is calculated algorithmically. The selected movable dates are t
 
 The PoC uses the universal Thursday dates for Ascension and Corpus Christi rather than national Sunday transfers.
 
-### Shrove Tuesday
-
-Shrove Tuesday is derived as the Tuesday immediately before Ash Wednesday, or Easter Sunday −47 days. It is exposed as a `customary` observance with the aliases Mardi Gras and Fat Tuesday rather than as a ranked celebration in the General Roman Calendar. It therefore has no liturgical rank, precedence, transfer or impediment semantics in this model.
-
-Reference:
-- Diocese of Norwich, “Father, What Is Shrove Tuesday and Why Do We Celebrate It?”: https://www.norwichdiocese.org/Stay-Informed/All-Diocesan-Articles/articleType/ArticleView/articleID/25813
-
 ### Advent
 
 The First Sunday of Advent is derived as the Sunday occurring from 27 November through 3 December. Christ the King is the immediately preceding Sunday. Advent runs from the First Sunday of Advent through 24 December at civil-date granularity.
