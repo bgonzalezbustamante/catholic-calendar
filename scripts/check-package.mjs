@@ -11,6 +11,13 @@ assert.equal(
   "Nativity of the Blessed Virgin Mary · St Michael's Lent"
 )
 
+const shroveTuesday = calendar.getCatholicCalendarState('2026-02-17')
+assert.equal(shroveTuesday.customaryObservances[0]?.id, 'shrove-tuesday')
+assert.equal(
+  calendar.getCalendarDisplaySummary(shroveTuesday).text,
+  'Shrove Tuesday · 1 day until Ash Wednesday'
+)
+
 const boundary = calendar.getCatholicCalendarState('2000-01-01')
 assert.ok(
   boundary.liturgicalPeriods.some(
