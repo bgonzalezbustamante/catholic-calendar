@@ -14,10 +14,10 @@ export type ReleaseNote = {
 export const releases: ReleaseNote[] = [
   {
     version: 'v0.1.0-beta.1',
-    codename: 'Verdant Orchard',
+    codename: 'Crystal Falcon',
     status: 'In development',
     summary:
-      'Verdant Orchard refines the fixed two-item calendar display, preserves impeded same-day celebrations when space is available and streamlines the demonstration interface.',
+      'Crystal Falcon refines the fixed two-item calendar display, preserves impeded same-day celebrations when space is available and streamlines the demonstration interface.',
     sections: [
       {
         title: 'Calendar display',
