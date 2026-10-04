@@ -30,6 +30,7 @@ export const releases: ReleaseNote[] = [
         title: 'Interface',
         items: [
           'Shows the weekday in Display configuration and exposes customary observances as a distinct tester layer.',
+          'Uses spare composed-display capacity for impeded nominal celebrations, while keeping active periods ahead of them and preserving canonical precedence.',
           'Places periods above celebrations in Year Overview, adds a customary-observance table and streamlines the liturgical-rank guide.',
         ],
       },
