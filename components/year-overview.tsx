@@ -4,8 +4,6 @@ import { useMemo, useState } from 'react'
 
 import {
   buildPeriods,
-  buildYearCustomaryObservances,
-  getCustomaryObservanceDisplayIcon,
   getObservanceDisplayIcon,
   getPeriodDisplayIcon,
   getYearOverview,
@@ -45,10 +43,6 @@ function statusLabel(status: string) {
 export default function YearOverview({ initialYear }: { initialYear: number }) {
   const [year, setYear] = useState(initialYear)
   const entries = useMemo(() => getYearOverview(year), [year])
-  const customaryObservances = useMemo(
-    () => buildYearCustomaryObservances(year),
-    [year]
-  )
   const periods = useMemo(
     () => [...buildPeriods(year)].sort((a, b) => a.startDate.localeCompare(b.startDate)),
     [year]
@@ -61,8 +55,8 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <p className="eyebrow">Visual QA</p>
           <h2 id="year-overview-title">Year overview</h2>
           <p className="section-intro">
-            Review the modelled periods, curated celebrations, customary observances and
-            liturgical-rank semantics for the selected year.
+            Review the modelled periods, curated celebrations and liturgical-rank
+            semantics for the selected year.
           </p>
         </div>
         <div className="year-control" aria-label="Year pagination">
@@ -159,7 +153,13 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           </table>
         </div>
         <p className="year-subsection-note">
-          Ordinary Time is intentionally not modelled in this curated implementation.
+          <CalendarIcon
+            className="year-subsection-note-icon"
+            icon="church-1"
+          />
+          <span>
+            Ordinary Time is intentionally not modelled in this curated implementation.
+          </span>
         </p>
       </section>
 
@@ -227,52 +227,6 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
               </tr>
             ))}
           </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="year-subsection" aria-labelledby="customary-overview-title">
-        <div className="year-subsection-heading">
-          <div>
-            <p className="eyebrow">Customary observances</p>
-            <h3 id="customary-overview-title">Customary observances in this model</h3>
-          </div>
-          <p>
-            Derived Catholic customs exposed separately from ranked liturgical
-            celebrations and their precedence rules.
-          </p>
-        </div>
-
-        <div className="table-scroll" tabIndex={0}>
-          <table className="period-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Icon</th>
-                <th>Customary observance</th>
-                <th>Also known as</th>
-              </tr>
-            </thead>
-            <tbody>
-              {customaryObservances.map((observance) => (
-                <tr key={observance.id}>
-                  <td>{formatPeriodDate(observance.date)}</td>
-                  <td className="year-icon-cell">
-                    <CalendarIcon
-                      className="year-overview-icon"
-                      icon={getCustomaryObservanceDisplayIcon(observance)}
-                    />
-                  </td>
-                  <td>
-                    <strong>{observance.name}</strong>
-                    <span className="celebration-translation" lang="es">
-                      {observance.nameEs}
-                    </span>
-                  </td>
-                  <td>{observance.aliases.join(' / ')}</td>
-                </tr>
-              ))}
-            </tbody>
           </table>
         </div>
       </section>
