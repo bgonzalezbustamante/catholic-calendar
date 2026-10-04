@@ -16,6 +16,7 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 - Tracks nominal and observed dates separately and distinguishes observed, transferred, commemoration-eligible and impeded observances.
 - Derives Shrove Tuesday from Ash Wednesday and exposes it separately from liturgical rank and precedence, with Mardi Gras and Fat Tuesday as aliases.
 - Exposes a composed display API with a two- or three-item limit, deterministic engine order and semantic Christicons metadata.
+- Uses spare composed-display capacity for an impeded nominal celebration when no primary observance occupies the date, without changing its canonical status or precedence.
 - Includes English and Spanish observance names.
 - Provides an interactive date tester and Year Overview for inspecting calendar outcomes and period boundaries.
 
