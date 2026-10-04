@@ -5,7 +5,7 @@ A small, UI-agnostic TypeScript engine for the curated Roman Catholic calendar m
 ## Install
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar@alpha
+npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
 ## Usage
@@ -23,13 +23,14 @@ console.log(display.text)
 // Nativity of the Blessed Virgin Mary · St Michael's Lent
 ```
 
-The package exposes the same engine used by the demonstration application, including computus helpers, selected observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
+The package exposes the same engine used by the demonstration application, including computus helpers, selected liturgical observances, customary observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
 
 ## Scope
 
 - Supported civil years: **2000–2100**.
 - Uses universal Roman dates for Epiphany, Ascension and Corpus Christi.
 - Models a curated observance set rather than a complete General Roman Calendar or local proper calendar.
+- Exposes Shrove Tuesday as a derived customary observance, with Mardi Gras and Fat Tuesday as aliases, without assigning liturgical rank or precedence.
 - Models Christmas Time, Lent, Holy Week, the Sacred Paschal Triduum, Easter Time and Advent.
 - Models St Michael’s Lent separately as a devotional period.
 - Ordinary Time is intentionally not modelled.
