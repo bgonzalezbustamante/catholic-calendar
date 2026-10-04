@@ -35,6 +35,7 @@ The package exposes the same engine used by the demonstration application, inclu
 - Models St Michael’s Lent separately as a devotional period.
 - Ordinary Time is intentionally not modelled.
 - `commemoration-eligible` means a memorial may be commemorated while the privileged seasonal weekday retains liturgical precedence.
+- Impeded nominal celebrations may appear in unused composed-display slots; this is presentation-only and does not make them primary or observed.
 
 See the repository README and `docs/SOURCES.md` for the full scope, sources and rule limitations.
 
