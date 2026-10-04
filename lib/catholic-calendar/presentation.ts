@@ -27,6 +27,7 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'good-friday': 'calvary',
   'st-bernadette-soubirous': 'rosary',
   'st-benedict-nursia': 'cross',
+  'st-francis-assisi': 'cross',
   archangels: 'angel',
   'nativity-john-baptist': 'dove',
   'peter-and-paul': 'st-peter',
