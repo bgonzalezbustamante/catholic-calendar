@@ -46,13 +46,26 @@ export interface CalendarPeriod {
   endDate: string
 }
 
+export interface CalendarCustomaryObservance {
+  id: string
+  name: string
+  nameEs: string
+  aliases: string[]
+  kind: 'customary'
+  date: string
+}
+
 export interface NextObservance {
   observance: CalendarObservance
   date: string
   daysUntil: number
 }
 
-export type CalendarDisplayItemKind = 'observance' | 'period' | 'countdown'
+export type CalendarDisplayItemKind =
+  | 'observance'
+  | 'customary'
+  | 'period'
+  | 'countdown'
 
 export type CalendarDisplayIcon =
   | 'angel'
@@ -93,6 +106,7 @@ export interface CatholicCalendarState {
   primaryObservance: CalendarObservance | null
   observedObservances: CalendarObservance[]
   nominalObservances: CalendarObservance[]
+  customaryObservances: CalendarCustomaryObservance[]
   liturgicalPeriods: CalendarPeriod[]
   devotionalPeriods: CalendarPeriod[]
   nextObservance: NextObservance | null
