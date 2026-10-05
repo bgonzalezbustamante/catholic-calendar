@@ -14,7 +14,7 @@ All notable changes to this project are documented here. The format follows Keep
 - Bumped the application and publishable package to `0.1.0-beta.1` and prepared npm publication through the `beta` dist-tag.
 - Fixed the composed display at two items and removed the package/UI option for selecting a maximum display length.
 - Changed composed-display fallback behaviour so impeded nominal celebrations can fill unused slots after primary observances and active periods, without becoming observed or primary; countdowns use only remaining capacity.
-- Removed the Display configuration card and moved the weekday-formatted selected date directly below the composed calendar display, aligned to the right.
+- Removed the Display configuration card and the redundant selected-date line below the composed display; the right-aligned calendar control now shows the selected date directly as a weekday-formatted value such as “Monday, 5 October 2026”, without a separate “Date” label.
 - Moved “Periods in this model” above “Celebrations in this model” in Year Overview.
 - Right-aligned the Ordinary Time note and added a small semantic icon.
 - Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
