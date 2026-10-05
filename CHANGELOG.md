@@ -19,6 +19,7 @@ All notable changes to this project are documented here. The format follows Keep
 - Right-aligned the Ordinary Time note and added a small semantic icon.
 - Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
 - Made the Saint Francis of Assisi display mapping explicit while retaining the General Roman Calendar memorial rank on 4 October.
+- Clarified the hero scope label to distinguish the curated Roman calendar, its selected Marian observances and the separate St Michael’s Lent devotional period.
 
 ## [0.1.0-alpha.1] — Calm Bridge — 2026-10-03
 
