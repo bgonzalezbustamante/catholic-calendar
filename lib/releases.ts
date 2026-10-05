@@ -30,7 +30,7 @@ export const releases: ReleaseNote[] = [
         title: 'Interface',
         items: [
           'Keeps the calendar control at the upper right, removes redundant date labels and shows the selected value directly in weekday format.',
-          'Places periods above celebrations, right-aligns the Ordinary Time note with an icon, and paginates Release Notes one release at a time.',
+          'Places periods above celebrations, right-aligns the Ordinary Time note with an icon, clarifies the calendar model scope and paginates Release Notes one release at a time.',
         ],
       },
       {
