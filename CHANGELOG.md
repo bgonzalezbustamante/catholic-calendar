@@ -54,6 +54,7 @@ All notable changes to this project are documented here. The format follows Keep
 
 ### Fixed
 
+- Excluded generated package output under `packages/catholic-calendar/dist/` from ESLint so local release checks match clean CI checkouts.
 - Fixed the lower supported-range boundary so Christmas Time beginning on 25 December 1999 remains active in early January 2000 without exposing 1999 as a supported public calendar year.
 - Corrected privileged-weekday memorial handling so eligible memorials remain available for commemoration rather than being treated as impeded.
 - Fixed Year Overview masked-icon visibility outside flex layouts.
