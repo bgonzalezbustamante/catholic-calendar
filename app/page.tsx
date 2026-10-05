@@ -22,9 +22,9 @@ export default function HomePage() {
             observance set. It resolves movable dates, liturgical and devotional periods,
             transfers, impediments and countdowns without an external API.
           </p>
-          <div className="rule-note" aria-label="Calendar rule set">
-            <span>Rule set</span>
-            <strong>General Roman Calendar + Franciscan devotional layer</strong>
+          <div className="rule-note" aria-label="Calendar model scope">
+            <span>Model scope</span>
+            <strong>Curated Roman calendar, with selected Marian observances and St Michael’s Lent</strong>
           </div>
         </div>
       </section>
