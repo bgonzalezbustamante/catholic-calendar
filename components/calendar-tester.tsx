@@ -23,7 +23,7 @@ function formatDate(value: string) {
 function formatDisplayDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
     weekday: 'long',
-    day: '2-digit',
+    day: 'numeric',
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
@@ -78,30 +78,10 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
 
 export default function CalendarTester({ initialDate }: { initialDate: string }) {
   const [date, setDate] = useState(initialDate)
-  const [dateInput, setDateInput] = useState(initialDate)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
-  const commitDate = (value: string) => {
-    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
-    if (!match) return
-
-    const year = Number(match[1])
-    if (year < MIN_SUPPORTED_YEAR || year > MAX_SUPPORTED_YEAR) return
-
-    const parsed = new Date(`${value}T00:00:00Z`)
-    if (
-      Number.isNaN(parsed.getTime()) ||
-      parsed.toISOString().slice(0, 10) !== value
-    ) {
-      return
-    }
-
-    setDate(value)
-  }
-
   const setCommittedDate = (value: string) => {
-    setDateInput(value)
-    setDate(value)
+    if (value) setDate(value)
   }
 
   const visibleNominalExceptions = state.nominalObservances.filter(
@@ -124,7 +104,6 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           </p>
         </div>
         <div className="date-control">
-          <label htmlFor="calendar-date">Date</label>
           <div className="date-control-row">
             <button
               type="button"
@@ -134,21 +113,32 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
               ←
               <span className="sr-only">Previous day</span>
             </button>
-            <input
-              id="calendar-date"
-              type="date"
-              min={`${MIN_SUPPORTED_YEAR}-01-01`}
-              max={`${MAX_SUPPORTED_YEAR}-12-31`}
-              value={dateInput}
-              onChange={(event) => {
-                const value = event.target.value
-                setDateInput(value)
-                commitDate(value)
-              }}
-              onBlur={() => {
-                if (dateInput !== date) setDateInput(date)
-              }}
-            />
+            <label className="date-picker-field" htmlFor="calendar-date">
+              <span>{formatDisplayDate(date)}</span>
+              <svg
+                aria-hidden="true"
+                className="date-picker-icon"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6.5 3.5v3M17.5 3.5v3M4.5 9h15M5 5.5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.6"
+                />
+              </svg>
+              <input
+                aria-label="Select date"
+                id="calendar-date"
+                type="date"
+                min={`${MIN_SUPPORTED_YEAR}-01-01`}
+                max={`${MAX_SUPPORTED_YEAR}-12-31`}
+                value={date}
+                onChange={(event) => setCommittedDate(event.target.value)}
+              />
+            </label>
             <button
               type="button"
               disabled={date === `${MAX_SUPPORTED_YEAR}-12-31`}
@@ -186,9 +176,6 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
         <footer>Composed calendar display</footer>
         <CalendarDisplay items={displaySummary.items} />
       </blockquote>
-      <p className="composed-display-date">
-        Selected date <strong>{formatDisplayDate(date)}</strong>
-      </p>
 
       <div className="layer-grid">
         <article className="layer-card">
