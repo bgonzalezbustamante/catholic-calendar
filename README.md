@@ -1,8 +1,6 @@
 # Catholic Calendar
 
-**Current release: v0.1.0-alpha.1 “Calm Bridge” — released 3 October 2026**
-
-**Next release: v0.1.0-beta.1 “Crystal Falcon” — in development**
+**Current release: v0.1.0-beta.1 “Crystal Falcon” — released 5 October 2026**
 
 A reusable Roman Catholic calendar proof of concept built in TypeScript. It derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the resulting state through a compact display API, an interactive tester and a Year Overview.
 
@@ -73,7 +71,7 @@ The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero ru
 npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
-Crystal Falcon is prepared for the `beta` npm channel. Until beta.1 is published, the previously released alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+Crystal Falcon is distributed through the `beta` npm channel. The previous alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
 
 Validate the package locally with:
 
