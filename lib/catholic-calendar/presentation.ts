@@ -1,13 +1,12 @@
 import type {
   CalendarDisplayIcon,
   CalendarDisplayItem,
-  CalendarDisplayOptions,
   CalendarDisplaySummary,
   CalendarObservance,
   CatholicCalendarState,
 } from './types'
 
-export const DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
+export const CALENDAR_DISPLAY_MAX_ITEMS = 2 as const
 
 const PERIOD_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'christmas-time': 'star',
@@ -26,6 +25,7 @@ const OBSERVANCE_ICONS: Partial<Record<string, CalendarDisplayIcon>> = {
   'good-friday': 'calvary',
   'st-bernadette-soubirous': 'rosary',
   'st-benedict-nursia': 'cross',
+  'st-francis-assisi': 'cross',
   archangels: 'angel',
   'nativity-john-baptist': 'dove',
   'peter-and-paul': 'st-peter',
@@ -66,10 +66,8 @@ function countdownItem(state: CatholicCalendarState): CalendarDisplayItem | null
 }
 
 export function getCalendarDisplaySummary(
-  state: CatholicCalendarState,
-  options: CalendarDisplayOptions = {}
+  state: CatholicCalendarState
 ): CalendarDisplaySummary {
-  const maxItems = options.maxItems ?? DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS
   const items: CalendarDisplayItem[] = []
 
   if (state.primaryObservance) {
@@ -82,7 +80,7 @@ export function getCalendarDisplaySummary(
   }
 
   for (const period of [...state.liturgicalPeriods, ...state.devotionalPeriods]) {
-    if (items.length >= maxItems) break
+    if (items.length >= CALENDAR_DISPLAY_MAX_ITEMS) break
 
     items.push({
       kind: 'period',
@@ -92,7 +90,20 @@ export function getCalendarDisplaySummary(
     })
   }
 
-  if (!state.primaryObservance && items.length < maxItems) {
+  for (const observance of state.nominalObservances.filter(
+    (event) => event.status === 'impeded'
+  )) {
+    if (items.length >= CALENDAR_DISPLAY_MAX_ITEMS) break
+
+    items.push({
+      kind: 'nominal-observance',
+      id: observance.id,
+      label: observance.name,
+      icon: getObservanceDisplayIcon(observance),
+    })
+  }
+
+  if (!state.primaryObservance && items.length < CALENDAR_DISPLAY_MAX_ITEMS) {
     const countdown = countdownItem(state)
     if (countdown) items.push(countdown)
   }
@@ -107,8 +118,7 @@ export function getCalendarDisplaySummary(
 }
 
 export function formatCalendarStateSummary(
-  state: CatholicCalendarState,
-  options: CalendarDisplayOptions = {}
+  state: CatholicCalendarState
 ): string {
-  return getCalendarDisplaySummary(state, options).text
+  return getCalendarDisplaySummary(state).text
 }

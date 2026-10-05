@@ -46,13 +46,18 @@ export interface CalendarPeriod {
   endDate: string
 }
 
+
 export interface NextObservance {
   observance: CalendarObservance
   date: string
   daysUntil: number
 }
 
-export type CalendarDisplayItemKind = 'observance' | 'period' | 'countdown'
+export type CalendarDisplayItemKind =
+  | 'observance'
+  | 'nominal-observance'
+  | 'period'
+  | 'countdown'
 
 export type CalendarDisplayIcon =
   | 'angel'
@@ -79,9 +84,6 @@ export interface CalendarDisplayItem {
   icon: CalendarDisplayIcon
 }
 
-export interface CalendarDisplayOptions {
-  maxItems?: 2 | 3
-}
 
 export interface CalendarDisplaySummary {
   items: CalendarDisplayItem[]

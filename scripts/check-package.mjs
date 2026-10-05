@@ -11,6 +11,20 @@ assert.equal(
   "Nativity of the Blessed Virgin Mary · St Michael's Lent"
 )
 
+const saintFrancisSunday = calendar.getCatholicCalendarState('2026-10-04')
+assert.equal(saintFrancisSunday.primaryObservance, null)
+assert.equal(
+  calendar.getCalendarDisplaySummary(saintFrancisSunday).text,
+  'Saint Francis of Assisi · 3 days until Our Lady of the Rosary'
+)
+
+const trinitySunday = calendar.getCatholicCalendarState('2026-05-31')
+assert.equal(trinitySunday.primaryObservance?.id, 'trinity-sunday')
+assert.equal(
+  calendar.getCalendarDisplaySummary(trinitySunday).text,
+  'Most Holy Trinity · Visitation of the Blessed Virgin Mary'
+)
+
 const boundary = calendar.getCatholicCalendarState('2000-01-01')
 assert.ok(
   boundary.liturgicalPeriods.some(

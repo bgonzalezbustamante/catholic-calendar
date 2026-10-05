@@ -162,19 +162,13 @@ h1 {
   font-weight: 700;
 }
 
-.date-control > label {
-  justify-self: end;
-  text-align: right;
-}
-
 .date-control-row {
   display: grid;
-  grid-template-columns: 38px minmax(160px, 1fr) 38px;
+  grid-template-columns: 38px minmax(235px, 1fr) 38px;
   gap: 0.35rem;
 }
 
 .date-control button,
-.date-control input,
 .year-pagination button,
 .year-current-button {
   min-height: 40px;
@@ -189,8 +183,49 @@ h1 {
   font-weight: 700;
 }
 
-.date-control input {
+.date-picker-field {
+  position: relative;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  overflow: hidden;
+  border: 1px solid var(--stone);
+  border-radius: 0.48rem;
+  background: var(--paper);
   padding: 0.42rem 0.6rem;
+  color: var(--blue);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.date-picker-field:focus-within {
+  outline: 2px solid var(--aqua);
+  outline-offset: 2px;
+}
+
+.date-picker-field > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date-picker-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  color: var(--ash);
+}
+
+.date-picker-field input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .today-button {
@@ -219,63 +254,6 @@ h1 {
   width: 0.78rem;
   height: 0.78rem;
   flex: 0 0 0.78rem;
-}
-
-.display-config {
-  display: grid;
-  grid-template-columns: minmax(180px, 1fr) auto;
-  gap: 0.75rem 1rem;
-  align-items: end;
-  margin: 0 0 0.75rem;
-  border: 1px solid var(--stone);
-  border-radius: 0.65rem;
-  background: var(--paper);
-  padding: 0.8rem 0.9rem;
-}
-
-.display-config-heading {
-  display: grid;
-  gap: 0.08rem;
-  align-self: center;
-  font-family: var(--font-roboto), Arial, sans-serif;
-}
-
-.display-config-heading strong {
-  color: var(--blue);
-  font-size: 0.78rem;
-}
-
-.display-config-heading span {
-  color: var(--ash);
-  font-size: 0.65rem;
-}
-
-.display-config-heading .display-config-date {
-  margin-top: 0.28rem;
-  color: var(--ash);
-}
-
-.display-config-date strong {
-  color: var(--blue);
-  font-size: 1em;
-}
-
-.display-config-field {
-  display: grid;
-  gap: 0.28rem;
-  color: var(--blue);
-  font-family: var(--font-roboto), Arial, sans-serif;
-  font-size: 0.66rem;
-  font-weight: 700;
-}
-
-.display-config-field select {
-  min-height: 36px;
-  border: 1px solid var(--stone);
-  border-radius: 0.45rem;
-  background: var(--paper);
-  padding: 0.35rem 1.8rem 0.35rem 0.55rem;
-  color: var(--blue);
 }
 
 .state-quotation {
@@ -785,10 +763,22 @@ tbody tr:last-child td {
 }
 
 .year-subsection-note {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.32rem;
   margin: 0.55rem 0 0;
   color: var(--ash);
   font-size: 0.7rem;
   font-style: italic;
+  text-align: right;
+}
+
+.year-subsection-note-icon {
+  width: 0.78rem;
+  height: 0.78rem;
+  flex: 0 0 0.78rem;
+  background: var(--ash);
 }
 
 .rank-guide {
@@ -921,6 +911,63 @@ tbody tr:last-child td {
   margin-top: 0.28rem;
 }
 
+.release-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  font-family: var(--font-roboto), Arial, sans-serif;
+}
+
+.release-page-numbers {
+  display: flex;
+  gap: 0.28rem;
+}
+
+.release-page-nav,
+.release-page-number {
+  border: 1px solid var(--stone);
+  border-radius: 0.4rem;
+  background: var(--paper);
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 0.66rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.release-page-nav {
+  padding: 0.28rem 0.48rem;
+}
+
+.release-page-number {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.release-page-number.is-selected {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.release-page-nav:hover:not(:disabled),
+.release-page-number:hover:not(.is-selected),
+.release-page-nav:focus-visible,
+.release-page-number:focus-visible {
+  border-color: var(--aqua);
+  outline: none;
+}
+
+.release-page-nav:disabled {
+  opacity: 0.36;
+  cursor: not-allowed;
+}
+
 .site-footer {
   border-top: 1px solid var(--stone);
   background: var(--paper);
@@ -1009,18 +1056,9 @@ tbody tr:last-child td {
     flex-direction: column;
   }
 
-  .display-config {
-    grid-template-columns: 1fr;
-    align-items: stretch;
-  }
-
   .date-control,
   .year-control {
     width: 100%;
-  }
-
-  .date-control > label {
-    justify-self: end;
   }
 
   .year-control {

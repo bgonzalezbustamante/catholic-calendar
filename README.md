@@ -1,6 +1,6 @@
 # Catholic Calendar
 
-**Current release: v0.1.0-alpha.1 “Calm Bridge” — released 3 October 2026**
+**Current release: v0.1.0-beta.1 “Crystal Falcon” — released 5 October 2026**
 
 A reusable Roman Catholic calendar proof of concept built in TypeScript. It derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the resulting state through a compact display API, an interactive tester and a Year Overview.
 
@@ -10,9 +10,10 @@ The calendar engine is UI-agnostic and lives under `lib/catholic-calendar/`. The
 
 - Computes Gregorian Easter and the selected Paschal-cycle dates, including Ash Wednesday, Holy Week, Easter Time, Ascension, Pentecost, Trinity Sunday, Corpus Christi and the Sacred Heart.
 - Computes the First Sunday of Advent and derives Christ the King, Advent and Christmas Time.
-- Resolves three independent layers for a civil date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
+- Resolves three independent output layers for a civil date: primary selected observance, active liturgical/devotional periods, and a countdown to the next observed selected celebration when appropriate.
 - Tracks nominal and observed dates separately and distinguishes observed, transferred, commemoration-eligible and impeded observances.
-- Exposes a composed display API with a two- or three-item limit, deterministic engine order and semantic Christicons metadata.
+- Exposes a fixed two-item composed display API with deterministic engine order and semantic Christicons metadata.
+- Uses spare composed-display capacity for impeded nominal celebrations after primary observances and active periods, without changing canonical status or precedence.
 - Includes English and Spanish observance names.
 - Provides an interactive date tester and Year Overview for inspecting calendar outcomes and period boundaries.
 
@@ -43,7 +44,7 @@ The reusable engine boundary is `lib/catholic-calendar/`:
 1. `date-utils.ts` — strict civil-date arithmetic using UTC dates.
 2. `computus.ts` — Gregorian Easter, First Sunday of Advent, Baptism of the Lord and Holy Family calculations.
 3. `calendar.ts` — supported range, movable-cycle derivation and liturgical/devotional periods.
-4. `observances.ts` — curated observance definitions.
+4. `observances.ts` — curated ranked observance definitions.
 5. `rules.ts` — precedence, transfers, solemnity collisions and impediments.
 6. `resolver.ts` — date-state and Year Overview APIs.
 7. `types.ts` — package-facing data contracts.
@@ -67,10 +68,10 @@ The publishable npm package is defined in `packages/catholic-calendar/`. Its gen
 The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Once published, consumers can install it with:
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar@alpha
+npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
-The first alpha is distributed through the `alpha` npm channel. On a package’s first publication npm may also create `latest`; consumers should use `@alpha` or the exact prerelease version until a stable release is published. The first alpha publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+Crystal Falcon is distributed through the `beta` npm channel. The previous alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
 
 Validate the package locally with:
 

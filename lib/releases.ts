@@ -13,6 +13,36 @@ export type ReleaseNote = {
 
 export const releases: ReleaseNote[] = [
   {
+    version: 'v0.1.0-beta.1',
+    codename: 'Crystal Falcon',
+    status: 'Released',
+    summary:
+      'Crystal Falcon refines the fixed two-item calendar display, preserves impeded same-day celebrations when space is available and streamlines the demonstration interface.',
+    sections: [
+      {
+        title: 'Calendar display',
+        items: [
+          'Uses available composed-display space for impeded nominal celebrations without changing their canonical status or liturgical precedence.',
+          'Keeps the display fixed at two items, ordered by primary observance, active periods, impeded nominal celebration and then countdown.',
+        ],
+      },
+      {
+        title: 'Interface',
+        items: [
+          'Keeps the calendar control at the upper right, removes redundant date labels and shows the selected value directly in weekday format.',
+          'Places periods above celebrations, right-aligns the Ordinary Time note with an icon, clarifies the calendar model scope and paginates Release Notes one release at a time.',
+        ],
+      },
+      {
+        title: 'Release preparation',
+        items: [
+          'Carries Saint Francis of Assisi on 4 October with its General Roman Calendar memorial rank and an explicit display mapping.',
+          'Bumps the application and package to v0.1.0-beta.1 and prepares the npm beta distribution channel.',
+        ],
+      },
+    ],
+  },
+  {
     version: 'v0.1.0-alpha.1',
     codename: 'Calm Bridge',
     status: 'Released',

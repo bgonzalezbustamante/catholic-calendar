@@ -1,6 +1,6 @@
 {
   "name": "@bgonzalezbustamante/catholic-calendar",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-beta.1",
   "description": "Curated TypeScript engine for selected Roman Catholic calendar calculations, observances, periods and display summaries.",
   "license": "MIT",
   "author": "Bastián González-Bustamante",
@@ -42,7 +42,7 @@
   "sideEffects": false,
   "publishConfig": {
     "access": "public",
-    "tag": "alpha"
+    "tag": "beta"
   },
   "scripts": {
     "prepack": "npm --prefix ../.. run build:package"

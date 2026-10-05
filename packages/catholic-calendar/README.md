@@ -5,7 +5,7 @@ A small, UI-agnostic TypeScript engine for the curated Roman Catholic calendar m
 ## Install
 
 ```bash
-npm install @bgonzalezbustamante/catholic-calendar@alpha
+npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ console.log(display.text)
 // Nativity of the Blessed Virgin Mary · St Michael's Lent
 ```
 
-The package exposes the same engine used by the demonstration application, including computus helpers, selected observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
+The package exposes the same engine used by the demonstration application, including computus helpers, selected liturgical observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
 
 ## Scope
 
@@ -34,6 +34,7 @@ The package exposes the same engine used by the demonstration application, inclu
 - Models St Michael’s Lent separately as a devotional period.
 - Ordinary Time is intentionally not modelled.
 - `commemoration-eligible` means a memorial may be commemorated while the privileged seasonal weekday retains liturgical precedence.
+- The composed display is fixed at two items. Impeded nominal celebrations may use an available slot after primary observances and active periods; this is presentation-only and does not make them primary or observed.
 
 See the repository README and `docs/SOURCES.md` for the full scope, sources and rule limitations.
 

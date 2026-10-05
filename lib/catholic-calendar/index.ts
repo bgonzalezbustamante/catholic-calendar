@@ -3,7 +3,7 @@ export { todayInTimeZone } from './date-utils'
 export { buildPeriods, MAX_SUPPORTED_YEAR, MIN_SUPPORTED_YEAR } from './calendar'
 export { buildYearObservances } from './observances'
 export {
-  DEFAULT_CALENDAR_DISPLAY_MAX_ITEMS,
+  CALENDAR_DISPLAY_MAX_ITEMS,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
   getObservanceDisplayIcon,
@@ -14,7 +14,6 @@ export type {
   CalendarDisplayIcon,
   CalendarDisplayItem,
   CalendarDisplayItemKind,
-  CalendarDisplayOptions,
   CalendarDisplaySummary,
   CalendarObservance,
   CalendarPeriod,

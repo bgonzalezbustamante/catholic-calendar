@@ -55,8 +55,8 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           <p className="eyebrow">Visual QA</p>
           <h2 id="year-overview-title">Year overview</h2>
           <p className="section-intro">
-            Review the curated celebrations, modelled periods and liturgical-rank semantics for
-            the selected year.
+            Review the modelled periods, curated celebrations and liturgical-rank
+            semantics for the selected year.
           </p>
         </div>
         <div className="year-control" aria-label="Year pagination">
@@ -104,6 +104,64 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           </button>
         </div>
       </div>
+
+      <section className="year-subsection" aria-labelledby="period-overview-title">
+        <div className="year-subsection-heading">
+          <div>
+            <p className="eyebrow">Periods</p>
+            <h3 id="period-overview-title">Periods in this model</h3>
+          </div>
+          <p>
+            These are the liturgical and devotional periods currently exposed by the
+            calendar engine for the selected year.
+          </p>
+        </div>
+
+        <div className="table-scroll" tabIndex={0}>
+          <table className="period-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Period</th>
+                <th>Kind</th>
+                <th>Start</th>
+                <th>End</th>
+              </tr>
+            </thead>
+            <tbody>
+              {periods.map((period) => (
+                <tr key={period.id}>
+                  <td className="year-icon-cell">
+                    <CalendarIcon
+                      className="year-overview-icon"
+                      icon={getPeriodDisplayIcon(period.id)}
+                    />
+                  </td>
+                  <td>
+                    <strong>{period.name}</strong>
+                  </td>
+                  <td>
+                    <span className={`period-pill is-${period.kind}`}>
+                      {titleCase(period.kind)}
+                    </span>
+                  </td>
+                  <td>{formatPeriodDate(period.startDate)}</td>
+                  <td>{formatPeriodDate(period.endDate)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="year-subsection-note">
+          <CalendarIcon
+            className="year-subsection-note-icon"
+            icon="church-1"
+          />
+          <span>
+            Ordinary Time is intentionally not modelled in this curated implementation.
+          </span>
+        </p>
+      </section>
 
       <section className="year-subsection" aria-labelledby="celebrations-overview-title">
         <div className="year-subsection-heading">
@@ -173,67 +231,12 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
         </div>
       </section>
 
-      <section className="year-subsection" aria-labelledby="period-overview-title">
-        <div className="year-subsection-heading">
-          <div>
-            <p className="eyebrow">Periods</p>
-            <h3 id="period-overview-title">Periods in this model</h3>
-          </div>
-          <p>
-            These are the liturgical and devotional periods currently exposed by the
-            calendar engine for the selected year.
-          </p>
-        </div>
-
-        <div className="table-scroll" tabIndex={0}>
-          <table className="period-table">
-            <thead>
-              <tr>
-                <th>Icon</th>
-                <th>Period</th>
-                <th>Kind</th>
-                <th>Start</th>
-                <th>End</th>
-              </tr>
-            </thead>
-            <tbody>
-              {periods.map((period) => (
-                <tr key={period.id}>
-                  <td className="year-icon-cell">
-                    <CalendarIcon
-                      className="year-overview-icon"
-                      icon={getPeriodDisplayIcon(period.id)}
-                    />
-                  </td>
-                  <td>
-                    <strong>{period.name}</strong>
-                  </td>
-                  <td>
-                    <span className={`period-pill is-${period.kind}`}>
-                      {titleCase(period.kind)}
-                    </span>
-                  </td>
-                  <td>{formatPeriodDate(period.startDate)}</td>
-                  <td>{formatPeriodDate(period.endDate)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="year-subsection-note">
-          Ordinary Time is intentionally not modelled in this curated implementation.
-        </p>
-      </section>
-
       <aside className="rank-guide year-subsection" aria-labelledby="rank-guide-title">
         <div className="year-subsection-heading">
           <div>
-          <p className="eyebrow">Rank</p>
-          <h3 id="rank-guide-title">How to read liturgical rank</h3>
+            <p className="eyebrow">Rank</p>
+            <h3 id="rank-guide-title">How to read liturgical rank</h3>
           </div>
-          <p>
-            Rank labels used in the celebrations table above.
-          </p>
         </div>
         <p className="rank-guide-copy">
           Rank describes a celebration&apos;s liturgical classification, not its spiritual

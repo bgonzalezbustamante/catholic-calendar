@@ -87,7 +87,7 @@ In 2022 the Sacred Heart and the Nativity of Saint John the Baptist both fell on
 
 Reference: https://www.liturgyoffice.org.uk/Calendar/2022/Ordo-2022.pdf
 
-The alpha generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
+The engine generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
 
 ## Selected saints
 
@@ -120,7 +120,7 @@ Holy See reference:
 
 ## Saint Francis of Assisi
 
-Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.
+Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. Verdant Orchard keeps this canonical rank even when the day is described colloquially as the feast of Saint Francis. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.
 
 Holy See references:
 - Pope Leo XIV, *Dilexi te* (4 October 2025), issued on the Memorial of Saint Francis of Assisi: https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html
@@ -166,9 +166,9 @@ Franciscan references:
 - Secular Franciscan Order – USA: https://www.secularfranciscansusa.org/2022/08/st-michaels-lent-august-15th-to-september-29th/
 - Franciscan Tradition: https://www.franciscantradition.org/blog/the-five-lents-of-francis-vjkyuy/
 
-## Intentional limits of v0.1.0-alpha.1
+## Intentional limits of v0.1.0-beta.1
 
-The alpha does **not** yet implement:
+The beta does **not** yet implement:
 
 - national, diocesan, parish or religious-order proper calendars;
 - conference-level transfers of Epiphany, Ascension or Corpus Christi;

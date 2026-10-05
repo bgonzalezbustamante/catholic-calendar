@@ -2,9 +2,28 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
-## [Unreleased]
+## [0.1.0-beta.1] — Crystal Falcon — 2026-10-05
 
-No unreleased changes.
+### Added
+
+- Added regression and package-smoke coverage for impeded nominal celebrations filling available composed-display slots, including Saint Francis of Assisi on 4 October 2026 and the Visitation on 31 May 2026.
+- Added one-release-at-a-time pagination to the reader-facing Release Notes, following the Weekly Penguin Timeline interaction pattern.
+
+### Changed
+
+- Bumped the application and publishable package to `0.1.0-beta.1` and prepared npm publication through the `beta` dist-tag.
+- Fixed the composed display at two items and removed the package/UI option for selecting a maximum display length.
+- Changed composed-display fallback behaviour so impeded nominal celebrations can fill unused slots after primary observances and active periods, without becoming observed or primary; countdowns use only remaining capacity.
+- Removed the Display configuration card and the redundant selected-date line below the composed display; the right-aligned calendar control now shows the selected date directly as a weekday-formatted value such as “Monday, 5 October 2026”, without a separate “Date” label.
+- Moved “Periods in this model” above “Celebrations in this model” in Year Overview.
+- Right-aligned the Ordinary Time note and added a small semantic icon.
+- Removed the redundant “Rank labels used in the celebrations table above.” sentence while retaining the complete liturgical-rank guidance section.
+- Made the Saint Francis of Assisi display mapping explicit while retaining the General Roman Calendar memorial rank on 4 October.
+- Clarified the hero scope label to distinguish the curated Roman calendar, its selected Marian observances and the separate St Michael’s Lent devotional period.
+
+### Fixed
+
+- Excluded generated package output under `packages/catholic-calendar/dist/` from ESLint so local release checks match clean CI checkouts.
 
 ## [0.1.0-alpha.1] — Calm Bridge — 2026-10-03
 
