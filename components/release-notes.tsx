@@ -19,7 +19,9 @@ export default function ReleaseNotes() {
             {release.version} “{release.codename}”
           </h2>
           <span className="release-tag">{release.status}</span>
-          <span className="release-tag">{release.releasedOn}</span>
+          {release.releasedOn ? (
+            <span className="release-tag">{release.releasedOn}</span>
+          ) : null}
         </div>
 
         <p className="release-summary">{release.summary}</p>
