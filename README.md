@@ -161,7 +161,7 @@ The repository does not require environment variables, an API connection or a da
 ## Documentation
 
 - `CHANGELOG.md` is the canonical technical release history.
-- `lib/releases.ts` contains the short reader-facing Release Notes displayed by the demonstration app.
+- `lib/releases.ts` contains the short, dated reader-facing Release Notes displayed by the demonstration app.
 - `docs/SOURCES.md` documents liturgical sources, rule choices and intentional limitations.
 - `THIRD_PARTY_NOTICES.md` records third-party asset licensing and attribution.
 
