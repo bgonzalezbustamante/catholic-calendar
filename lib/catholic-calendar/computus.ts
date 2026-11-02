@@ -1,9 +1,13 @@
 import { addDays, dateFromParts, dayOfWeek, nextSundayAfter } from './date-utils'
 
-export function gregorianEasterSunday(year: number): string {
+function assertGregorianYear(year: number, calculation: string) {
   if (!Number.isInteger(year) || year < 1583 || year > 4099) {
-    throw new RangeError('Gregorian Easter calculation supports years 1583–4099.')
+    throw new RangeError(`${calculation} calculation supports years 1583–4099.`)
   }
+}
+
+export function gregorianEasterSunday(year: number): string {
+  assertGregorianYear(year, 'Gregorian Easter')
 
   const a = year % 19
   const b = Math.floor(year / 100)
@@ -24,6 +28,7 @@ export function gregorianEasterSunday(year: number): string {
 }
 
 export function firstSundayOfAdvent(year: number): string {
+  assertGregorianYear(year, 'First Sunday of Advent')
   let cursor = dateFromParts(year, 11, 27)
   while (dayOfWeek(cursor) !== 0) {
     cursor = addDays(cursor, 1)
@@ -32,11 +37,12 @@ export function firstSundayOfAdvent(year: number): string {
 }
 
 export function baptismOfTheLord(year: number): string {
+  assertGregorianYear(year, 'Baptism of the Lord')
   return nextSundayAfter(dateFromParts(year, 1, 6))
 }
 
-
 export function holyFamily(year: number): string {
+  assertGregorianYear(year, 'Holy Family')
   let cursor = dateFromParts(year, 12, 26)
   const end = dateFromParts(year, 12, 31)
 
