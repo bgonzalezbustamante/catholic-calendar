@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "next": "16.4.4",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -28,9 +28,10 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.4",
     "typescript": "^5",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   },
   "allowScripts": {
+    "fsevents": false,
     "unrs-resolver": false
   },
   "packageManager": "npm@11.21.0"
