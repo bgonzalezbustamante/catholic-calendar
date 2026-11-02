@@ -1,6 +1,8 @@
 # Catholic Calendar
 
-**Current release: v0.1.0-beta.1 “Crystal Falcon” — released 5 October 2026**
+**Current published release: v0.1.0-beta.1 “Crystal Falcon” — released 5 October 2026**
+
+**In development: v0.1.0-beta.2 “Ivory Delta” — not yet released**
 
 A reusable Roman Catholic calendar proof of concept built in TypeScript. It derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the resulting state through a compact display API, an interactive tester and a Year Overview.
 
