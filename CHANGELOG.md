@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows Keep
 
 ## [Unreleased]
 
+### Added
+
+- Added release dates beside the status of each reader-facing Release Notes entry, matching the Weekly Penguin Timeline presentation and covering both existing releases.
+
 ### Security
 
 - Updated `next` and `eslint-config-next` from 16.3.8 to 16.4.4, resolving GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr and GHSA-p3m5-59mp-jv5r in the demonstration application. The npm package has no runtime dependencies and is unaffected.
