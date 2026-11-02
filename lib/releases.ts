@@ -21,12 +21,27 @@ export const releases: ReleaseNote[] = [
     codename: 'Ivory Delta',
     status: 'In development',
     summary:
-      'Ivory Delta improves the release history with clear dates for earlier versions. More changes may follow before this beta is published.',
+      'Ivory Delta follows a full audit of the calendar engine, the demonstration app and the release process. It fixes a date-entry crash, makes the interface more accessible and dates the release history.',
     sections: [
       {
-        title: 'Release notes',
+        title: 'Calendar engine',
         items: [
-          'Shows release dates alongside the status of earlier versions, making the release history easier to follow.',
+          'Names the celebration that takes precedence when another is impeded, such as Ash Wednesday or Most Holy Trinity.',
+          'Keeps the countdown running through the last days of 2100 and adds a check for supported dates.',
+        ],
+      },
+      {
+        title: 'Interface',
+        items: [
+          'Prevents the page from failing when a partial or unsupported date is typed, and adds an error page.',
+          'Improves contrast, focus and screen-reader support, and shows release dates beside earlier versions.',
+        ],
+      },
+      {
+        title: 'Security and checks',
+        items: [
+          'Updates Next.js to resolve published security advisories.',
+          'Tests every Easter date from 2000 to 2100 and runs CI on Node 22 and 24.',
         ],
       },
     ],

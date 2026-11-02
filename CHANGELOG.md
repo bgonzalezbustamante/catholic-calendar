@@ -2,19 +2,50 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
-## [Unreleased] — Ivory Delta (planned v0.1.0-beta.2)
+## [Unreleased]
+
+Planned as v0.1.0-beta.2 “Ivory Delta”. The full audit behind this release is recorded in `docs/AUDIT-beta.2.md`.
 
 ### Added
 
-- Added release dates beside the status of each reader-facing Release Notes entry, matching the Weekly Penguin Timeline presentation and covering both existing releases.
+- Added release dates beside the status of each published Release Notes entry, stored as ISO dates and rendered as `<time>` elements; unreleased entries carry no date and have a distinct “In development” tag.
+- Added `isSupportedCalendarDate()` and exported `baptismOfTheLord()` from the package.
+- Added an error page to the demonstration app.
+- Added regression coverage for Easter across 2000–2100 against an independent algorithm, a full-range sweep (unique ids, one observed celebration per date, no impeded solemnity), period boundaries, further transfers and collisions, Mary, Mother of the Church, Immaculate Heart impediments, start years, date validation, time zones and the end of the supported range.
+- Added a release checklist (`docs/RELEASING.md`), Dependabot configuration and package smoke checks for ESM import, the display constant, `isSupportedCalendarDate()`, the 2100 countdown and the exact tarball contents.
 
 ### Changed
 
-- Prepared the application and npm package for the next beta version without publishing it or assigning a release date.
+- `impededBy` now names the selected celebration that takes the day, such as Ash Wednesday or Most Holy Trinity, instead of a generic label; generic labels remain when no selected celebration is involved.
+- Equal-rank celebrations on the same date are now resolved by precedence, the Lord–Mary–saints tie-break and then id, rather than by list order. No supported date changes outcome.
+- Changed the Spanish name of Christmas to “Natividad del Señor”, matching `docs/SOURCES.md`.
+- Computus helpers now reject years outside 1583–4099 consistently.
+- Release Notes pagination now reads “Newer” and “Older”, keeps visible page numbers in their accessible names and announces page changes.
+- Year Overview now lists periods carried over from the previous year, such as the January part of Christmas Time, and formats months from a fixed list.
+- The “Return to today” control names its time zone (Europe/Amsterdam).
+- The footer credits the Flaticon favicon, shows © instead of a Creative Commons glyph and computes its year in Europe/Amsterdam.
+- Added `metadataBase`, Open Graph and Twitter metadata, and set the document language to `en-GB`.
+- CI now pins actions by commit SHA, runs on Node 22 and 24 with npm caching, cancels superseded runs and audits production dependencies.
+- Updated `react` and `react-dom` to 19.3.1 and `vitest` to 4.1.12, and refreshed the lockfile.
+- Exposed `./package.json` in the package exports map.
+- Clarified `docs/SOURCES.md` on implemented transfers, commemoration of obligatory memorials, unverified collision cases and version-free limits.
+
+### Fixed
+
+- Fixed a crash in the date tester when a partial or out-of-range date was typed into the date field, a regression from beta.1.
+- Fixed the missing countdown from 27 to 31 December 2100.
+- Fixed `dateFromParts()` treating years 0–99 as 1900–1999.
+- Raised text contrast for eyebrows, the Return to today and Current year controls, layer numbers and Spanish names to WCAG AA, and made focus rings visible on all controls.
+- Kept keyboard focus on day, year and Release Notes controls at the ends of their ranges.
+- Removed horizontal scrolling at 320 px width.
+- Fixed heading order, unnamed groups, table regions and captions, and arrow glyphs read aloud by screen readers.
+- Removed a stale codename and version from `docs/SOURCES.md`, the outdated “Once published” wording from the README and an inaccurate countdown example.
 
 ### Security
 
 - Updated `next` and `eslint-config-next` from 16.3.8 to 16.4.4, resolving GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr and GHSA-p3m5-59mp-jv5r in the demonstration application. The npm package has no runtime dependencies and is unaffected.
+- Updated `zod` within the development lint tooling, resolving its high-severity advisory. Sixteen moderate advisories remain in `minimatch` within ESLint 9, which only ESLint 10 resolves; this major upgrade is deferred.
+- Declared the `fsevents` install script as reviewed and not required.
 
 ## [0.1.0-beta.1] — Crystal Falcon — 2026-10-05
 
@@ -90,3 +121,7 @@ All notable changes to this project are documented here. The format follows Keep
 - The supported civil-date range is 2000–2100. The engine is intended for current and forward-looking application use rather than complete historical reconstruction.
 - Period boundaries are date-level approximations; Holy Thursday and Easter Sunday intentionally expose overlapping contextual periods.
 - The selected observance set is curated rather than a complete General Roman Calendar or local proper calendar.
+
+[Unreleased]: https://github.com/bgonzalezbustamante/catholic-calendar/compare/v0.1.0-beta.1...HEAD
+[0.1.0-beta.1]: https://github.com/bgonzalezbustamante/catholic-calendar/compare/v0.1.0-alpha.1...v0.1.0-beta.1
+[0.1.0-alpha.1]: https://github.com/bgonzalezbustamante/catholic-calendar/releases/tag/v0.1.0-alpha.1
