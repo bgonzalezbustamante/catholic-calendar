@@ -24,6 +24,7 @@ Planned as v0.1.0-beta.2 “Ivory Delta”. The full audit behind this release i
 - Year Overview now lists periods carried over from the previous year, such as the January part of Christmas Time, and formats months from a fixed list.
 - The “Return to today” control names its time zone (Europe/Amsterdam).
 - The footer credits the Flaticon favicon, shows © instead of a Creative Commons glyph and computes its year in Europe/Amsterdam.
+- Recoloured the favicon and re-encoded it without editor metadata (104 KB → 14 KB).
 - Added `metadataBase`, Open Graph and Twitter metadata, and set the document language to `en-GB`.
 - CI now pins actions by commit SHA, runs on Node 22 and 24 with npm caching, cancels superseded runs and audits production dependencies.
 - Updated `react` and `react-dom` to 19.3.1 and `vitest` to 4.1.12, and refreshed the lockfile.

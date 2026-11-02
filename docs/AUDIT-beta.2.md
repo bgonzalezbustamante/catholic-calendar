@@ -82,7 +82,7 @@
 | A13 | Low | `app/layout.tsx` | No `metadataBase`, Open Graph or Twitter metadata; `lang="en"` for British copy. | Fixed (C6). |
 | A14 | Low | `app/globals.css` | No colour-scheme declaration. | Fixed (C5): `color-scheme: light`. |
 | A15 | Info | `components/year-overview.tsx` | The January part of Christmas Time carried over from the previous year was not listed. | Fixed (C5). |
-| A16 | Low | `app/icon.png` (uncommitted) | A local re-export is 104 KB against 23.5 KB committed and carries Fireworks metadata. | Deferred: not part of this release; optimise before committing if it is kept. |
+| A16 | Low | `app/icon.png` | The recoloured favicon, exported from Fireworks, is 104 KB against 23.5 KB before, mostly editor data and XMP metadata. | Fixed: recoloured by the maintainer, then re-encoded losslessly as an indexed PNG without editor metadata (104 KB → 14 KB, pixel-identical). |
 
 ## Release setup
 
