@@ -3,10 +3,13 @@ export type ReleaseNoteSection = {
   items: string[]
 }
 
+export type ReleaseStatus = 'Released' | 'In development'
+
 export type ReleaseNote = {
   version: string
   codename: string
-  status: string
+  status: ReleaseStatus
+  // ISO date (YYYY-MM-DD); set only once the release is published.
   releasedOn?: string
   summary: string
   sections: ReleaseNoteSection[]
@@ -32,7 +35,7 @@ export const releases: ReleaseNote[] = [
     version: 'v0.1.0-beta.1',
     codename: 'Crystal Falcon',
     status: 'Released',
-    releasedOn: '5 October 2026',
+    releasedOn: '2026-10-05',
     summary:
       'Crystal Falcon refines the fixed two-item calendar display, preserves impeded same-day celebrations when space is available and streamlines the demonstration interface.',
     sections: [
@@ -63,7 +66,7 @@ export const releases: ReleaseNote[] = [
     version: 'v0.1.0-alpha.1',
     codename: 'Calm Bridge',
     status: 'Released',
-    releasedOn: '3 October 2026',
+    releasedOn: '2026-10-03',
     summary:
       'Calm Bridge is the first reusable Catholic Calendar alpha: a deterministic calendar engine with a compact composed display, interactive validation tools and a curated Roman-calendar scope.',
     sections: [
@@ -92,4 +95,6 @@ export const releases: ReleaseNote[] = [
   },
 ]
 
-export const currentRelease = releases[0]
+export const latestPublishedRelease = releases.find(
+  (release) => release.status === 'Released'
+)
