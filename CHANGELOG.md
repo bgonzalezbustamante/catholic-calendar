@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
+## [Unreleased]
+
+### Security
+
+- Updated `next` and `eslint-config-next` from 16.3.8 to 16.4.4, resolving GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr and GHSA-p3m5-59mp-jv5r in the demonstration application. The npm package has no runtime dependencies and is unaffected.
+
 ## [0.1.0-beta.1] — Crystal Falcon — 2026-10-05
 
 ### Added
