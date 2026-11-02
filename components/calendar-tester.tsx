@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import {
   getCalendarDisplaySummary,
   getCatholicCalendarState,
+  isSupportedCalendarDate,
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
 } from '@/lib/catholic-calendar'
@@ -76,13 +77,27 @@ function TransferDetails({ observance }: { observance: CalendarObservance }) {
   )
 }
 
-export default function CalendarTester({ initialDate }: { initialDate: string }) {
+export default function CalendarTester({
+  initialDate,
+  timeZone,
+}: {
+  initialDate: string
+  timeZone: string
+}) {
   const [date, setDate] = useState(initialDate)
+  // The native date input reports partial years such as 0002-11-02 while the
+  // user types, so it keeps its own draft and only supported dates are committed.
+  const [draftDate, setDraftDate] = useState(initialDate)
   const state = useMemo(() => getCatholicCalendarState(date), [date])
 
   const setCommittedDate = (value: string) => {
-    if (value) setDate(value)
+    setDraftDate(value)
+    if (isSupportedCalendarDate(value)) setDate(value)
   }
+
+  const isFirstDate = date === `${MIN_SUPPORTED_YEAR}-01-01`
+  const isLastDate = date === `${MAX_SUPPORTED_YEAR}-12-31`
+  const isToday = date === initialDate
 
   const visibleNominalExceptions = state.nominalObservances.filter(
     (event) => event.status === 'transferred'
@@ -107,10 +122,12 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           <div className="date-control-row">
             <button
               type="button"
-              disabled={date === `${MIN_SUPPORTED_YEAR}-01-01`}
-              onClick={() => setCommittedDate(shiftDate(date, -1))}
+              aria-disabled={isFirstDate}
+              onClick={() => {
+                if (!isFirstDate) setCommittedDate(shiftDate(date, -1))
+              }}
             >
-              ←
+              <span aria-hidden="true">←</span>
               <span className="sr-only">Previous day</span>
             </button>
             <label className="date-picker-field" htmlFor="calendar-date">
@@ -135,23 +152,29 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
                 type="date"
                 min={`${MIN_SUPPORTED_YEAR}-01-01`}
                 max={`${MAX_SUPPORTED_YEAR}-12-31`}
-                value={date}
+                value={draftDate}
                 onChange={(event) => setCommittedDate(event.target.value)}
+                onBlur={() => setDraftDate(date)}
               />
             </label>
             <button
               type="button"
-              disabled={date === `${MAX_SUPPORTED_YEAR}-12-31`}
-              onClick={() => setCommittedDate(shiftDate(date, 1))}
+              aria-disabled={isLastDate}
+              onClick={() => {
+                if (!isLastDate) setCommittedDate(shiftDate(date, 1))
+              }}
             >
-              →
+              <span aria-hidden="true">→</span>
               <span className="sr-only">Next day</span>
             </button>
           </div>
           <button
             className="today-button"
             type="button"
-            onClick={() => setCommittedDate(initialDate)}
+            aria-disabled={isToday}
+            onClick={() => {
+              if (!isToday) setCommittedDate(initialDate)
+            }}
           >
             <svg
               aria-hidden="true"
@@ -167,15 +190,15 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
                 strokeWidth="1.8"
               />
             </svg>
-            <span>Return to today</span>
+            <span>Return to today ({timeZone})</span>
           </button>
         </div>
       </div>
 
-      <blockquote className="state-quotation">
-        <footer>Composed calendar display</footer>
+      <figure className="state-quotation">
+        <figcaption>Composed calendar display</figcaption>
         <CalendarDisplay items={displaySummary.items} />
-      </blockquote>
+      </figure>
 
       <div className="layer-grid">
         <article className="layer-card">
@@ -208,13 +231,23 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
           </h3>
           <div className="chip-row">
             {state.liturgicalPeriods.map((period) => (
-              <span className="period-pill is-liturgical" key={period.id}>
+              <span
+                className="period-pill is-liturgical"
+                key={period.id}
+                title={period.name}
+              >
                 Liturgical
+                <span className="sr-only">: {period.name}</span>
               </span>
             ))}
             {state.devotionalPeriods.map((period) => (
-              <span className="period-pill is-devotional" key={period.id}>
+              <span
+                className="period-pill is-devotional"
+                key={period.id}
+                title={period.name}
+              >
                 Devotional
+                <span className="sr-only">: {period.name}</span>
               </span>
             ))}
           </div>
@@ -246,7 +279,11 @@ export default function CalendarTester({ initialDate }: { initialDate: string })
       </div>
 
       {visibleNominalExceptions.length > 0 ? (
-        <div className="exceptions" aria-label="Nominal observance exceptions">
+        <div
+          className="exceptions"
+          role="group"
+          aria-label="Nominal observance exceptions"
+        >
           {visibleNominalExceptions.map((event) => (
             <TransferDetails observance={event} key={event.id} />
           ))}
