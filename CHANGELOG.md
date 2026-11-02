@@ -2,11 +2,15 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
-## [Unreleased]
+## [Unreleased] — Ivory Delta (planned v0.1.0-beta.2)
 
 ### Added
 
 - Added release dates beside the status of each reader-facing Release Notes entry, matching the Weekly Penguin Timeline presentation and covering both existing releases.
+
+### Changed
+
+- Prepared the application and npm package for the next beta version without publishing it or assigning a release date.
 
 ### Security
 
