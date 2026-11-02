@@ -49,8 +49,19 @@ function isSundayInRange(value: string, start: string, end: string) {
   return dayOfWeek(value) === 0 && isBetweenInclusive(value, start, end)
 }
 
+const seasonDatesCache = new Map<number, ReturnType<typeof seasonDates>>()
+
+function cachedSeasonDates(year: number) {
+  let dates = seasonDatesCache.get(year)
+  if (!dates) {
+    dates = seasonDates(year)
+    seasonDatesCache.set(year, dates)
+  }
+  return dates
+}
+
 function baselinePrecedence(value: string, year: number): { precedence: number; label: string } {
-  const dates = seasonDates(year)
+  const dates = cachedSeasonDates(year)
   const christmas = dateFromParts(year, 12, 25)
   const epiphany = dateFromParts(year, 1, 6)
 
@@ -100,7 +111,7 @@ function baselinePrecedence(value: string, year: number): { precedence: number; 
 }
 
 function applySpecialTransfers(events: CalendarObservance[], year: number) {
-  const dates = seasonDates(year)
+  const dates = cachedSeasonDates(year)
 
   return events.map((event) => {
     if (event.id === 'st-joseph') {
@@ -178,6 +189,33 @@ function categoryTieBreak(category: ObservanceCategory): number {
   }
 }
 
+// Strict order for celebrations on the same date: precedence, then the
+// Lord–Mary–saints tie-break, then id, so equal ranks never depend on list order.
+function outranks(a: CalendarObservance, b: CalendarObservance): boolean {
+  if (a.precedence !== b.precedence) return a.precedence < b.precedence
+  const tieBreak = categoryTieBreak(a.category) - categoryTieBreak(b.category)
+  if (tieBreak !== 0) return tieBreak < 0
+  return a.id < b.id
+}
+
+function strongestCompetitor(
+  event: CalendarObservance,
+  events: CalendarObservance[],
+  precedenceLimit: number
+): CalendarObservance | null {
+  return (
+    events
+      .filter(
+        (other) =>
+          other.id !== event.id &&
+          other.observedDate === event.observedDate &&
+          other.precedence <= precedenceLimit &&
+          outranks(other, event)
+      )
+      .sort((a, b) => (outranks(a, b) ? -1 : 1))[0] ?? null
+  )
+}
+
 function findTransferDate(
   event: CalendarObservance,
   events: CalendarObservance[],
@@ -187,7 +225,10 @@ function findTransferDate(
     for (const direction of [-1, 1]) {
       const candidate = addDays(event.observedDate ?? event.nominalDate, distance * direction)
       const candidateYear = Number(candidate.slice(0, 4))
-      if (candidateYear < MIN_SUPPORTED_YEAR || candidateYear > MAX_SUPPORTED_YEAR) {
+      if (
+        candidateYear < MIN_SUPPORTED_YEAR ||
+        candidateYear > Math.max(MAX_SUPPORTED_YEAR, year)
+      ) {
         continue
       }
 
@@ -257,29 +298,21 @@ function resolveImpediments(events: CalendarObservance[]) {
         baseline.precedence === 9 &&
         (event.rank === 'memorial' || event.rank === 'optional-memorial')
 
+      // Name the selected celebration that wins the day when there is one,
+      // otherwise the liturgical day itself.
+      const winner = strongestCompetitor(event, resolved, baseline.precedence)
       resolved[index] = canBeCommemorated
         ? markCommemorationEligible(
             event,
             `The ${baseline.label} retains liturgical precedence; the memorial may be commemorated according to GIRM 355.`
           )
-        : impede(event, baseline.label)
+        : impede(event, winner?.name ?? baseline.label)
       continue
     }
 
-    const competitors = resolved
-      .filter(
-        (other) =>
-          other.id !== event.id &&
-          other.observedDate === event.observedDate &&
-          other.precedence <= event.precedence
-      )
-      .sort((a, b) => {
-        if (a.precedence !== b.precedence) return a.precedence - b.precedence
-        return categoryTieBreak(a.category) - categoryTieBreak(b.category)
-      })
-
-    if (competitors.length > 0) {
-      resolved[index] = impede(event, competitors[0].name)
+    const winner = strongestCompetitor(event, resolved, event.precedence)
+    if (winner) {
+      resolved[index] = impede(event, winner.name)
     }
   }
 
