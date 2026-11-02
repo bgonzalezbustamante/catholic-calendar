@@ -155,6 +155,15 @@ export default function CalendarTester({
                 value={draftDate}
                 onChange={(event) => setCommittedDate(event.target.value)}
                 onBlur={() => setDraftDate(date)}
+                onClick={(event) => {
+                  // A click on the hidden input otherwise only focuses a
+                  // date segment; open the calendar wherever the box is clicked.
+                  try {
+                    event.currentTarget.showPicker?.()
+                  } catch {
+                    // Unsupported, or the browser refused; focusing still works.
+                  }
+                }}
               />
             </label>
             <button

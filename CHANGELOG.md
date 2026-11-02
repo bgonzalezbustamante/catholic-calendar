@@ -25,6 +25,7 @@ Planned as v0.1.0-beta.2 “Ivory Delta”. The full audit behind this release i
 - The “Return to today” control names its time zone (Europe/Amsterdam).
 - The footer credits the Flaticon favicon, shows © instead of a Creative Commons glyph and computes its year in Europe/Amsterdam.
 - Recoloured the favicon and re-encoded it without editor metadata (104 KB → 14 KB).
+- Polished the phone layout and date picking: “Model scope” becomes a rounded box below 820 px, inactive Return to today and Current year controls turn grey, Year Overview tables show a shadow on the side with hidden columns, clicking the date box opens the calendar, and keyboard users see the date field while typing.
 - Added `metadataBase`, Open Graph and Twitter metadata, and set the document language to `en-GB`.
 - CI now pins actions by commit SHA, runs on Node 22 and 24 with npm caching, cancels superseded runs and audits production dependencies.
 - Updated `react` and `react-dom` to 19.3.1 and `vitest` to 4.1.12, and refreshed the lockfile.

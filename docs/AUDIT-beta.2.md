@@ -83,6 +83,10 @@
 | A14 | Low | `app/globals.css` | No colour-scheme declaration. | Fixed (C5): `color-scheme: light`. |
 | A15 | Info | `components/year-overview.tsx` | The January part of Christmas Time carried over from the previous year was not listed. | Fixed (C5). |
 | A16 | Low | `app/icon.png` | The recoloured favicon, exported from Fireworks, is 104 KB against 23.5 KB before, mostly editor data and XMP metadata. | Fixed: recoloured by the maintainer, then re-encoded losslessly as an indexed PNG without editor metadata (104 KB → 14 KB, pixel-identical). |
+| A17 | Low | `app/globals.css` | Found in the 320 px browser check: the “Model scope” pill wrapped to two lines and became a large oval. | Fixed: rounded box below 820 px. |
+| A18 | Low | `app/globals.css` | Inactive Return to today and Current year controls were faded coral and looked washed out. | Fixed: solid grey (5.5:1) when inactive. |
+| A19 | Low | `app/globals.css` | On phones, nothing showed that Year Overview tables had more columns to the right. | Fixed: CSS scroll shadows on the side with hidden content. |
+| A20 | Medium | `components/calendar-tester.tsx`, `app/globals.css` | The native date input is invisible: on desktop a click only focused a hidden segment, and keyboard users typed into segments they could not see. | Fixed: clicking opens the calendar with `showPicker()`; the field becomes visible while focused from the keyboard. |
 
 ## Release setup
 
