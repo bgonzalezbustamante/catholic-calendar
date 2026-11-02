@@ -7,12 +7,27 @@ export type ReleaseNote = {
   version: string
   codename: string
   status: string
-  releasedOn: string
+  releasedOn?: string
   summary: string
   sections: ReleaseNoteSection[]
 }
 
 export const releases: ReleaseNote[] = [
+  {
+    version: 'v0.1.0-beta.2',
+    codename: 'Ivory Delta',
+    status: 'In development',
+    summary:
+      'Ivory Delta improves the release history with clear dates for earlier versions. More changes may follow before this beta is published.',
+    sections: [
+      {
+        title: 'Release notes',
+        items: [
+          'Shows release dates alongside the status of earlier versions, making the release history easier to follow.',
+        ],
+      },
+    ],
+  },
   {
     version: 'v0.1.0-beta.1',
     codename: 'Crystal Falcon',
