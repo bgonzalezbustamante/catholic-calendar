@@ -44,7 +44,7 @@ Planned as v0.1.0-beta.2 “Ivory Delta”. The full audit behind this release i
 ### Security
 
 - Updated `next` and `eslint-config-next` from 16.3.8 to 16.4.4, resolving GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr and GHSA-p3m5-59mp-jv5r in the demonstration application. The npm package has no runtime dependencies and is unaffected.
-- Updated `zod` within the development lint tooling, resolving its high-severity advisory. Sixteen moderate advisories remain in `minimatch` within ESLint 9, which only ESLint 10 resolves; this major upgrade is deferred.
+- Updated `zod` within the development lint tooling, resolving its high-severity advisory. One moderate advisory remains in development tooling: GHSA-g3hv-75wg-m249 in `minimatch` below 11.0.1, reported 16 times through ESLint and its plugins. No ESLint release depends on the fixed `minimatch` yet, so it waits on upstream; `npm audit fix --force` would downgrade ESLint and must not be used.
 - Declared the `fsevents` install script as reviewed and not required.
 
 ## [0.1.0-beta.1] — Crystal Falcon — 2026-10-05

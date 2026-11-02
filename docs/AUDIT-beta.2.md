@@ -95,7 +95,7 @@
 | R5 | Medium | `.github/workflows/ci.yml` | No `permissions` block; actions pinned by tag and on retiring majors. | Fixed (C9): `contents: read`; v7 actions pinned by SHA. |
 | R6 | Low | `.github/workflows/ci.yml` | Node 22 only; no cache, concurrency or timeout. | Fixed (C9): Node 22 and 24. |
 | R7 | Moderate | development dependencies | `vite` and `@vitest/mocker` (moderate), `zod` (high) via lint tooling. | Fixed (C8). |
-| R8 | Moderate | development dependencies | Sixteen moderate `minimatch` advisories in ESLint 9 and its plugins. | Deferred: needs ESLint 10, a major upgrade. Development tooling only. |
+| R8 | Moderate | development dependencies | One advisory, GHSA-g3hv-75wg-m249 (denial of service through attacker-controlled glob patterns), in `minimatch` below 11.0.1, reported 16 times through ESLint 9 and its plugins. No ESLint release uses `minimatch` 11 yet: ESLint 10 depends on `^10.2.6` and the import, jsx-a11y and react plugins on `^3`. ESLint reads only this repository’s own configuration. | Accepted: waits on upstream ESLint packages; Dependabot will raise the update. Do not run `npm audit fix --force`, which downgrades ESLint. |
 | R9 | Low | `package.json` | `fsevents` install script not reviewed under `strict-allow-scripts`. | Fixed (C8). |
 | R10 | Low | `scripts/check-package.mjs` | Smoke test did not cover ESM import, the display constant or the tarball contents. | Fixed (C10). |
 | R11 | Low | `scripts/clean-package.mjs` | Path relative to the working directory. | Fixed (C10). |
