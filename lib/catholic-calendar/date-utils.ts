@@ -1,7 +1,9 @@
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/
 
 export function dateFromParts(year: number, month: number, day: number): string {
-  const date = new Date(Date.UTC(year, month - 1, day))
+  // setUTCFullYear keeps years 0–99 literal; Date.UTC would map them to 1900–1999.
+  const date = new Date(0)
+  date.setUTCFullYear(year, month - 1, day)
   const value = date.toISOString().slice(0, 10)
   const expected = `${String(year).padStart(4, '0')}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
 
@@ -41,7 +43,8 @@ export function yearOf(value: string): number {
 }
 
 export function compareDates(a: string, b: string): number {
-  return a.localeCompare(b)
+  if (a === b) return 0
+  return a < b ? -1 : 1
 }
 
 export function daysBetween(from: string, to: string): number {

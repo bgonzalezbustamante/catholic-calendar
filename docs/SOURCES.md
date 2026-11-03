@@ -46,7 +46,7 @@ The First Sunday of Advent is derived as the Sunday occurring from 27 November t
 
 ### Memorials on privileged weekdays
 
-GIRM 355 permits an Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemoration-eligible` status rather than asserting that the optional commemoration was actually chosen. For continuity, the demonstration UI renders this state with the existing “Commemorated” label and leaves the composed display unchanged.
+GIRM 355 permits an Obligatory or Optional Memorial on weekdays of Lent (except Ash Wednesday and Holy Week), on 17–24 December, and within the Christmas Octave to be commemorated while the liturgical weekday retains precedence. The Collect may be taken from the memorial. The PoC therefore uses a distinct `commemoration-eligible` status rather than asserting that the commemoration was actually chosen. For continuity, the demonstration UI renders this state with the existing “Commemorated” label and leaves the composed display unchanged.
 
 References:
 - USCCB, General Instruction of the Roman Missal, no. 355: https://www.usccb.org/prayer-and-worship/the-mass/general-instruction-of-the-roman-missal/girm-chapter-7
@@ -56,7 +56,9 @@ References:
 
 ### General rule
 
-Universal Norms no. 60 provide that a solemnity impeded by a higher-ranking liturgical day is transferred to the nearest eligible day; other lower-ranking celebrations are omitted for that year. The PoC preserves those lower-ranking selected dates as `impeded` diagnostic entries rather than deleting them from the data model.
+Universal Norms no. 60 provide that a solemnity impeded by a higher-ranking liturgical day is transferred to the nearest eligible day; other lower-ranking celebrations are omitted for that year. The PoC preserves those lower-ranking selected dates as `impeded` diagnostic entries rather than deleting them from the data model, and `impededBy` names the selected celebration that takes the day when there is one (for example, Ash Wednesday or Most Holy Trinity), otherwise the kind of liturgical day.
+
+The engine does not implement Universal Norms no. 60 as a general transfer rule. It transfers only Saint Joseph, the Annunciation and the Immaculate Conception by rule, plus the selected solemnity collisions described below. A regression test checks that no selected solemnity is left impeded in any year from 2000 to 2100, so adding a movable solemnity will fail the suite until a transfer rule is written for it.
 
 ### Saint Joseph
 
@@ -87,7 +89,7 @@ In 2022 the Sacred Heart and the Nativity of Saint John the Baptist both fell on
 
 Reference: https://www.liturgyoffice.org.uk/Calendar/2022/Ordo-2022.pdf
 
-The engine generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
+The engine generalises this pattern only within the selected solemnity set by preferring celebrations of the Lord, then Marian solemnities, then saints, and transferring the lower selected solemnity to the closest eligible date, preferring the preceding date on an equal-distance tie. Within the supported range this rule also moves Saint John the Baptist to 23 June in 2033 and 2044 (Sacred Heart) and in 2038 (Corpus Christi), and Saints Peter and Paul to 28 June in 2057 and 2068 (Sacred Heart). These cases follow the 2022 pattern but have no Holy See precedent of their own, so they remain unverified; the Peter and Paul cases are the furthest extension of it. This is a pragmatic PoC rule and should be reviewed before the engine is presented as a complete canonical calendar library.
 
 ## Selected saints
 
@@ -120,7 +122,7 @@ Holy See reference:
 
 ## Saint Francis of Assisi
 
-Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. Verdant Orchard keeps this canonical rank even when the day is described colloquially as the feast of Saint Francis. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.
+Saint Francis of Assisi is included on 4 October with the rank of memorial in the General Roman Calendar baseline. The engine keeps this canonical rank even when the day is described colloquially as the feast of Saint Francis. In years when 4 October falls on a Sunday, the Sunday takes precedence and the memorial remains available as an impeded nominal entry in this PoC.
 
 Holy See references:
 - Pope Leo XIV, *Dilexi te* (4 October 2025), issued on the Memorial of Saint Francis of Assisi: https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html
@@ -166,9 +168,9 @@ Franciscan references:
 - Secular Franciscan Order – USA: https://www.secularfranciscansusa.org/2022/08/st-michaels-lent-august-15th-to-september-29th/
 - Franciscan Tradition: https://www.franciscantradition.org/blog/the-five-lents-of-francis-vjkyuy/
 
-## Intentional limits of v0.1.0-beta.1
+## Intentional limits
 
-The beta does **not** yet implement:
+The engine does **not** yet implement:
 
 - national, diocesan, parish or religious-order proper calendars;
 - conference-level transfers of Epiphany, Ascension or Corpus Christi;

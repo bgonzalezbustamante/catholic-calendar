@@ -1,15 +1,27 @@
-import { addDays, dateFromParts } from './date-utils'
+import { addDays, dateFromParts, yearOf } from './date-utils'
 import { baptismOfTheLord, firstSundayOfAdvent, gregorianEasterSunday } from './computus'
 import type { CalendarPeriod } from './types'
 
 export const MIN_SUPPORTED_YEAR = 2000
 export const MAX_SUPPORTED_YEAR = 2100
 
+function isSupportedYear(year: number) {
+  return Number.isInteger(year) && year >= MIN_SUPPORTED_YEAR && year <= MAX_SUPPORTED_YEAR
+}
+
 export function assertSupportedYear(year: number) {
-  if (!Number.isInteger(year) || year < MIN_SUPPORTED_YEAR || year > MAX_SUPPORTED_YEAR) {
+  if (!isSupportedYear(year)) {
     throw new RangeError(
       `Catholic Calendar supports years ${MIN_SUPPORTED_YEAR}–${MAX_SUPPORTED_YEAR}.`
     )
+  }
+}
+
+export function isSupportedCalendarDate(value: string): boolean {
+  try {
+    return isSupportedYear(yearOf(value))
+  } catch {
+    return false
   }
 }
 

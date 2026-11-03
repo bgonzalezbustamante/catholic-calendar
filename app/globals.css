@@ -7,9 +7,12 @@
   --stone: #d9d8d6;
   --off-white: #f2f0f0;
   --coral: #fe615a;
+  --coral-text: #c0392f;
   --aqua: #00aab4;
+  --teal-text: #00747b;
   --paper: #ffffff;
   --max-width: 1180px;
+  color-scheme: light;
 }
 
 * {
@@ -43,7 +46,7 @@ input:focus-visible,
 select:focus-visible,
 summary:focus-visible,
 .table-scroll:focus-visible {
-  outline: 2px solid var(--aqua);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
@@ -69,7 +72,7 @@ code {
 
 .eyebrow {
   margin: 0 0 0.55rem;
-  color: var(--coral);
+  color: var(--coral-text);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -79,7 +82,8 @@ code {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   color: var(--blue);
   font-family: var(--font-roboto), Arial, sans-serif;
 }
@@ -164,7 +168,7 @@ h1 {
 
 .date-control-row {
   display: grid;
-  grid-template-columns: 38px minmax(235px, 1fr) 38px;
+  grid-template-columns: 38px minmax(0, 1fr) 38px;
   gap: 0.35rem;
 }
 
@@ -181,6 +185,11 @@ h1 {
 .date-control button {
   cursor: pointer;
   font-weight: 700;
+}
+
+.date-control button[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.45;
 }
 
 .date-picker-field {
@@ -201,7 +210,7 @@ h1 {
 }
 
 .date-picker-field:focus-within {
-  outline: 2px solid var(--aqua);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
@@ -228,6 +237,15 @@ h1 {
   cursor: pointer;
 }
 
+.date-picker-field input:focus-visible {
+  opacity: 1;
+  outline: none;
+  background: var(--paper);
+  padding: 0 0.6rem;
+  color: var(--blue);
+  font: inherit;
+}
+
 .today-button {
   min-height: 32px !important;
   width: fit-content;
@@ -238,14 +256,20 @@ h1 {
   border: 0 !important;
   background: transparent !important;
   padding-inline: 0 !important;
-  color: var(--coral) !important;
+  color: var(--coral-text) !important;
   font-size: 0.68rem;
   font-weight: 700;
   text-decoration: none;
 }
 
-.today-button:hover,
-.today-button:focus-visible {
+.today-button[aria-disabled='true'],
+.year-current-button[aria-disabled='true'] {
+  cursor: default;
+  color: var(--ash) !important;
+}
+
+.today-button:not([aria-disabled='true']):hover,
+.today-button:not([aria-disabled='true']):focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
@@ -337,7 +361,7 @@ h1 {
   font-weight: 400;
 }
 
-.state-quotation footer {
+.state-quotation figcaption {
   position: relative;
   z-index: 1;
   margin: 0 0 0.7rem;
@@ -371,7 +395,7 @@ h1 {
   z-index: 1;
   display: block;
   margin-bottom: 0.48rem;
-  color: var(--aqua);
+  color: var(--teal-text);
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -570,8 +594,7 @@ h1 {
   font-weight: 700;
 }
 
-.year-pagination button:disabled,
-.year-current-button:disabled {
+.year-pagination button[aria-disabled='true'] {
   cursor: default;
   opacity: 0.45;
 }
@@ -586,14 +609,14 @@ h1 {
   border: 0 !important;
   background: transparent !important;
   padding-inline: 0 !important;
-  color: var(--coral) !important;
+  color: var(--coral-text) !important;
   font-size: 0.68rem;
   font-weight: 700;
   text-decoration: none;
 }
 
-.year-current-button:not(:disabled):hover,
-.year-current-button:not(:disabled):focus-visible {
+.year-current-button:not([aria-disabled='true']):hover,
+.year-current-button:not([aria-disabled='true']):focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
@@ -608,7 +631,13 @@ h1 {
   overflow-x: auto;
   border: 1px solid var(--stone);
   border-radius: 0.65rem;
-  background: var(--paper);
+  /* Covers scroll with the content and hide the edge shadows at either end. */
+  background:
+    linear-gradient(to right, var(--paper) 30%, rgba(255, 255, 255, 0)) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--paper) 30%, rgba(255, 255, 255, 0)) right center / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(0, 33, 71, 0.18), transparent) left center / 0.9rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 33, 71, 0.18), transparent) right center / 0.9rem 100% no-repeat scroll,
+    var(--paper);
   scrollbar-width: thin;
 }
 
@@ -672,7 +701,7 @@ td strong {
 .celebration-translation {
   display: block;
   margin-top: 0.08rem;
-  color: #8a8987;
+  color: var(--ash);
   font-family: var(--font-noto-serif), Georgia, serif;
   font-size: 0.7rem;
   line-height: 1.35;
@@ -833,7 +862,7 @@ tbody tr:last-child td {
   padding: 1rem;
 }
 
-.notes-grid h2 {
+.notes-grid h3 {
   margin: 0;
   font-size: 1rem;
 }
@@ -864,7 +893,7 @@ tbody tr:last-child td {
   gap: 0.55rem 0.8rem;
 }
 
-.release-heading h2 {
+.release-heading h3 {
   margin: 0;
   font-size: 1.2rem;
 }
@@ -878,6 +907,12 @@ tbody tr:last-child td {
   font-family: var(--font-roboto), Arial, sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
+}
+
+.release-tag.is-in-development {
+  border: 1px dashed var(--ash);
+  background: transparent;
+  color: var(--ash);
 }
 
 .release-summary {
@@ -895,7 +930,7 @@ tbody tr:last-child td {
   margin-top: 1.1rem;
 }
 
-.release-sections h3 {
+.release-sections h4 {
   margin: 0;
   font-size: 0.84rem;
 }
@@ -955,15 +990,12 @@ tbody tr:last-child td {
   color: var(--paper);
 }
 
-.release-page-nav:hover:not(:disabled),
-.release-page-number:hover:not(.is-selected),
-.release-page-nav:focus-visible,
-.release-page-number:focus-visible {
-  border-color: var(--aqua);
-  outline: none;
+.release-page-nav:hover:not([aria-disabled='true']),
+.release-page-number:hover:not(.is-selected) {
+  border-color: var(--blue);
 }
 
-.release-page-nav:disabled {
+.release-page-nav[aria-disabled='true'] {
   opacity: 0.36;
   cursor: not-allowed;
 }
@@ -1011,7 +1043,7 @@ tbody tr:last-child td {
 
 .footer-credit a:hover,
 .footer-credit a:focus-visible {
-  color: var(--coral);
+  color: var(--coral-text);
   text-decoration-color: currentColor;
 }
 
@@ -1027,14 +1059,7 @@ tbody tr:last-child td {
 
 .footer-license:hover,
 .footer-license:focus-visible {
-  color: var(--coral);
-}
-
-.footer-license svg {
-  width: 0.82rem;
-  height: 0.82rem;
-  flex: 0 0 0.82rem;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .sr-only {
@@ -1050,6 +1075,14 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 820px) {
+  .rule-note {
+    width: 100%;
+    display: grid;
+    gap: 0.2rem;
+    border-radius: 0.65rem;
+    padding: 0.7rem 0.85rem;
+  }
+
   .tester-heading,
   .overview-heading {
     align-items: stretch;

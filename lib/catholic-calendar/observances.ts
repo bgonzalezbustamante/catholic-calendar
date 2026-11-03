@@ -1,6 +1,10 @@
 import { compareDates, dateFromParts } from './date-utils'
 import { baptismOfTheLord, holyFamily } from './computus'
-import { assertSupportedYear, seasonDates } from './calendar'
+import {
+  assertSupportedYear,
+  MAX_SUPPORTED_YEAR,
+  seasonDates,
+} from './calendar'
 import { applyCalendarRules } from './rules'
 import type { CalendarObservance, LiturgicalRank, ObservanceCategory } from './types'
 
@@ -50,7 +54,7 @@ const SPANISH_OBSERVANCE_NAMES: Record<string, string> = {
   'immaculate-conception': 'Inmaculada Concepción',
   'our-lady-of-loreto': 'Nuestra Señora de Loreto',
   'our-lady-of-guadalupe': 'Nuestra Señora de Guadalupe',
-  'christmas': 'Navidad',
+  'christmas': 'Natividad del Señor',
   'holy-family': 'Sagrada Familia de Jesús, María y José',
 }
 
@@ -91,6 +95,17 @@ function fixed(
 
 export function buildYearObservances(year: number): CalendarObservance[] {
   assertSupportedYear(year)
+  return buildObservancesForYear(year)
+}
+
+// Resolver-only context permits the year after the supported range so the
+// countdown from late December of the final supported year has a target.
+export function buildObservanceContext(year: number): CalendarObservance[] {
+  if (year !== MAX_SUPPORTED_YEAR + 1) assertSupportedYear(year)
+  return buildObservancesForYear(year)
+}
+
+function buildObservancesForYear(year: number): CalendarObservance[] {
   const dates = seasonDates(year)
 
   let events: CalendarObservance[] = [
@@ -348,7 +363,7 @@ export function buildYearObservances(year: number): CalendarObservance[] {
       name: 'Our Lady of Sorrows',
       category: 'marian',
       rank: 'memorial',
-     precedence: 10,
+      precedence: 10,
     }),
     fixed(year, 9, 29, {
       id: 'archangels',

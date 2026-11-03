@@ -25,6 +25,33 @@ console.log(display.text)
 
 The package exposes the same engine used by the demonstration application, including computus helpers, selected liturgical observances, periods, calendar-state resolution, Year Overview data and compact display summaries.
 
+It is published as CommonJS with TypeScript declarations. ESM projects can use the named imports shown above in Node.
+
+## API
+
+| Export | Purpose |
+| --- | --- |
+| `getCatholicCalendarState(date)` | Primary observance, observed and nominal observances, active periods, countdown and calculation details for an ISO date (`YYYY-MM-DD`). |
+| `getCalendarDisplaySummary(state)` | Fixed two-item composed display with icon metadata. |
+| `formatCalendarStateSummary(state)` | The composed display as plain text. |
+| `getYearOverview(year)` | Every selected observance for a year, sorted by observed date. |
+| `buildYearObservances(year)` | The same observances in engine order. |
+| `buildPeriods(year)` | Liturgical and devotional periods that start in a year. |
+| `isSupportedCalendarDate(value)` | Whether a value is a real ISO date within 2000–2100. |
+| `todayInTimeZone(timeZone)` | Today's civil date in an IANA time zone. |
+| `gregorianEasterSunday`, `firstSundayOfAdvent`, `baptismOfTheLord`, `holyFamily` | Computus helpers for Gregorian years 1583–4099. |
+| `getObservanceDisplayIcon`, `getPeriodDisplayIcon` | Semantic Christicons ids for observances and periods. |
+| `CALENDAR_DISPLAY_MAX_ITEMS`, `MIN_SUPPORTED_YEAR`, `MAX_SUPPORTED_YEAR` | Constants: 2, 2000 and 2100. |
+
+Dates outside 2000–2100, and values that are not real ISO dates, throw a `RangeError`.
+
+## Observance statuses
+
+- `observed` — observed on its nominal date.
+- `commemoration-eligible` — may be commemorated on a privileged weekday while the seasonal weekday retains precedence.
+- `transferred` — observed on another date; `transferReason` explains why.
+- `impeded` — not observed this year; `impededBy` names the day or celebration that takes precedence.
+
 ## Scope
 
 - Supported civil years: **2000–2100**.

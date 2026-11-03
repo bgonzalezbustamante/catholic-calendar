@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  assertCalendarDate,
+  todayInTimeZone,
+} from '@/lib/catholic-calendar/date-utils'
+import {
+  baptismOfTheLord,
   buildPeriods,
+  buildYearObservances,
   firstSundayOfAdvent,
   formatCalendarStateSummary,
   getCalendarDisplaySummary,
@@ -11,7 +17,43 @@ import {
   getYearOverview,
   gregorianEasterSunday,
   holyFamily,
+  isSupportedCalendarDate,
+  MAX_SUPPORTED_YEAR,
+  MIN_SUPPORTED_YEAR,
 } from '@/lib/catholic-calendar'
+
+const SUPPORTED_YEARS = Array.from(
+  { length: MAX_SUPPORTED_YEAR - MIN_SUPPORTED_YEAR + 1 },
+  (_, index) => MIN_SUPPORTED_YEAR + index
+)
+
+// Oudin's algorithm, independent of the anonymous Gregorian algorithm in the engine.
+function oudinEaster(year: number): string {
+  const g = year % 19
+  const c = Math.floor(year / 100)
+  const h =
+    (c - Math.floor(c / 4) - Math.floor((8 * c + 13) / 25) + 19 * g + 15) % 30
+  const i =
+    h -
+    Math.floor(h / 28) *
+      (1 - Math.floor(h / 28) * Math.floor(29 / (h + 1)) * Math.floor((21 - g) / 11))
+  const j = (year + Math.floor(year / 4) + i + 2 - c + Math.floor(c / 4)) % 7
+  const l = i - j
+  const month = 3 + Math.floor((l + 40) / 44)
+  const day = l + 28 - 31 * Math.floor(month / 4)
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+}
+
+function findObservance(year: number, id: string) {
+  return buildYearObservances(year).find((event) => event.id === id)
+}
+
+function activePeriodIds(date: string) {
+  const state = getCatholicCalendarState(date)
+  return [...state.liturgicalPeriods, ...state.devotionalPeriods].map(
+    (period) => period.id
+  )
+}
 
 describe('computus', () => {
   it('calculates known Gregorian Easter dates', () => {
@@ -19,6 +61,30 @@ describe('computus', () => {
     expect(gregorianEasterSunday(2025)).toBe('2025-04-20')
     expect(gregorianEasterSunday(2026)).toBe('2026-04-05')
     expect(gregorianEasterSunday(2027)).toBe('2027-03-28')
+  })
+
+  it('matches an independent Easter algorithm across the supported range', () => {
+    for (const year of SUPPORTED_YEARS) {
+      expect(gregorianEasterSunday(year)).toBe(oudinEaster(year))
+    }
+  })
+
+  it('places the Baptism of the Lord on the Sunday after 6 January', () => {
+    expect(baptismOfTheLord(2030)).toBe('2030-01-13')
+    expect(baptismOfTheLord(2024)).toBe('2024-01-07')
+  })
+
+  it('rejects years outside the Gregorian range in every date helper', () => {
+    for (const helper of [
+      gregorianEasterSunday,
+      firstSundayOfAdvent,
+      baptismOfTheLord,
+      holyFamily,
+    ]) {
+      expect(() => helper(1582)).toThrow(RangeError)
+      expect(() => helper(99)).toThrow('1583–4099')
+      expect(() => helper(4100)).toThrow(RangeError)
+    }
   })
 
   it('calculates the Holy Family within the Christmas Octave', () => {
@@ -312,6 +378,46 @@ describe('transfers', () => {
     })
   })
 
+  it('moves the Annunciation to Monday when 25 March is a Lenten Sunday', () => {
+    for (const year of [2001, 2012]) {
+      expect(findObservance(year, 'annunciation')).toMatchObject({
+        status: 'transferred',
+        observedDate: `${year}-03-26`,
+      })
+    }
+  })
+
+  it('moves the Annunciation after the Easter Octave when 25 March is Easter Sunday', () => {
+    expect(findObservance(2035, 'annunciation')).toMatchObject({
+      nominalDate: '2035-03-25',
+      observedDate: '2035-04-02',
+      status: 'transferred',
+    })
+  })
+
+  it('anticipates Saint Joseph when 19 March is Palm Sunday', () => {
+    expect(findObservance(2062, 'st-joseph')).toMatchObject({
+      observedDate: '2062-03-18',
+      status: 'transferred',
+    })
+  })
+
+  it('moves Saints Peter and Paul when the Sacred Heart falls on 29 June', () => {
+    expect(findObservance(2057, 'sacred-heart')?.observedDate).toBe('2057-06-29')
+    expect(findObservance(2057, 'peter-and-paul')).toMatchObject({
+      observedDate: '2057-06-28',
+      status: 'transferred',
+    })
+  })
+
+  it('moves Saint John the Baptist when Corpus Christi falls on 24 June', () => {
+    expect(findObservance(2038, 'corpus-christi')?.observedDate).toBe('2038-06-24')
+    expect(findObservance(2038, 'nativity-john-baptist')).toMatchObject({
+      observedDate: '2038-06-23',
+      status: 'transferred',
+    })
+  })
+
   it('resolves the 2022 Sacred Heart and Saint John the Baptist collision', () => {
     expect(getCatholicCalendarState('2022-06-23').primaryObservance).toMatchObject({
       id: 'nativity-john-baptist',
@@ -325,16 +431,55 @@ describe('transfers', () => {
 })
 
 describe('impeded selected observances', () => {
-  it('still impedes memorials on Sundays and Ash Wednesday', () => {
-    expect(
-      getCatholicCalendarState('2026-10-04').nominalObservances.find(
-        (event) => event.id === 'st-francis-assisi'
-      )
-    ).toMatchObject({
+  it('impedes memorials on Ash Wednesday and names the winning day', () => {
+    expect(findObservance(2032, 'our-lady-of-lourdes')).toMatchObject({
       status: 'impeded',
       observedDate: null,
-      impededBy: 'Sunday',
+      impededBy: 'Ash Wednesday',
     })
+  })
+
+  it('names the selected celebration that outranks an impeded one', () => {
+    expect(findObservance(2010, 'our-lady-of-fatima')?.impededBy).toBe(
+      'Ascension of the Lord'
+    )
+    expect(findObservance(2026, 'visitation')?.impededBy).toBe('Most Holy Trinity')
+    expect(findObservance(2055, 'presentation-of-mary')?.impededBy).toBe(
+      'Our Lord Jesus Christ, King of the Universe'
+    )
+  })
+
+  it('impedes the Immaculate Heart when a higher-ranking celebration coincides', () => {
+    expect(findObservance(2008, 'immaculate-heart')).toMatchObject({
+      status: 'impeded',
+      impededBy: 'Visitation of the Blessed Virgin Mary',
+    })
+    expect(findObservance(2028, 'immaculate-heart')?.impededBy).toBe(
+      'Nativity of Saint John the Baptist'
+    )
+    expect(findObservance(2030, 'immaculate-heart')?.impededBy).toBe(
+      'Saints Peter and Paul, Apostles'
+    )
+  })
+
+  it('introduces Mary, Mother of the Church in 2018 and lets the Visitation outrank it', () => {
+    expect(findObservance(2017, 'mary-mother-of-church')).toBeUndefined()
+    expect(findObservance(2018, 'mary-mother-of-church')).toMatchObject({
+      status: 'observed',
+      observedDate: '2018-05-21',
+    })
+    expect(findObservance(2066, 'mary-mother-of-church')).toMatchObject({
+      status: 'impeded',
+      impededBy: 'Visitation of the Blessed Virgin Mary',
+    })
+  })
+
+  it('applies the start years of later additions to the calendar', () => {
+    expect(findObservance(2001, 'our-lady-of-fatima')).toBeUndefined()
+    expect(findObservance(2002, 'our-lady-of-fatima')).toBeDefined()
+    expect(findObservance(2001, 'our-lady-of-guadalupe')).toBeUndefined()
+    expect(findObservance(2002, 'our-lady-of-guadalupe')).toBeDefined()
+    expect(findObservance(2000, 'divine-mercy-sunday')).toBeDefined()
   })
 
 
@@ -640,5 +785,86 @@ describe('display summary', () => {
     expect(getCatholicCalendarState('2026-12-25').primaryObservance?.name).toBe(
       'Christmas'
     )
+  })
+})
+
+describe('period boundaries', () => {
+  it('ends Christmas Time on the Baptism of the Lord', () => {
+    expect(activePeriodIds('2030-01-13')).toContain('christmas-time')
+    expect(activePeriodIds('2030-01-14')).not.toContain('christmas-time')
+  })
+
+  it('moves from Advent to Christmas Time between 24 and 25 December', () => {
+    expect(activePeriodIds('2026-12-24')).toEqual(['advent'])
+    expect(activePeriodIds('2026-12-25')).toEqual(['christmas-time'])
+  })
+
+  it('ends Easter Time on Pentecost', () => {
+    expect(activePeriodIds('2026-05-24')).toContain('easter-time')
+    expect(activePeriodIds('2026-05-25')).not.toContain('easter-time')
+  })
+})
+
+describe('supported range', () => {
+  it('builds every supported year without duplicate ids or competing observed celebrations', () => {
+    for (const year of SUPPORTED_YEARS) {
+      const events = buildYearObservances(year)
+      const ids = events.map((event) => event.id)
+      expect(new Set(ids).size).toBe(ids.length)
+
+      const observedDates = events
+        .map((event) => event.observedDate)
+        .filter((date): date is string => date !== null)
+      expect(new Set(observedDates).size).toBe(observedDates.length)
+
+      // Only selected solemnities have transfer rules, so none may be left impeded.
+      expect(
+        events.filter(
+          (event) => event.rank === 'solemnity' && event.status === 'impeded'
+        )
+      ).toEqual([])
+    }
+  })
+
+  it('counts down into the following year from the end of the supported range', () => {
+    const state = getCatholicCalendarState('2100-12-31')
+
+    expect(state.countdown).toMatchObject({
+      date: '2101-01-01',
+      daysUntil: 1,
+      observance: expect.objectContaining({ id: 'mary-mother-of-god' }),
+    })
+    expect(state.observedObservances).toEqual([])
+    expect(formatCalendarStateSummary(state)).toBe(
+      'Christmas Time · 1 day until Mary, the Holy Mother of God'
+    )
+  })
+
+  it('accepts only real ISO dates within the supported range', () => {
+    expect(isSupportedCalendarDate('2000-01-01')).toBe(true)
+    expect(isSupportedCalendarDate('2100-12-31')).toBe(true)
+
+    for (const value of [
+      '0002-11-02',
+      '1999-12-31',
+      '2101-01-01',
+      '2026-02-30',
+      '2026-1-1',
+      '',
+    ]) {
+      expect(isSupportedCalendarDate(value)).toBe(false)
+    }
+
+    expect(() => assertCalendarDate('2026-02-30')).toThrow(RangeError)
+    expect(() => assertCalendarDate('2026-1-1')).toThrow('YYYY-MM-DD')
+    expect(assertCalendarDate('0050-01-01')).toBe('0050-01-01')
+    expect(() => getCatholicCalendarState('1999-12-31')).toThrow('2000–2100')
+  })
+
+  it('reads the civil date in the requested time zone', () => {
+    const now = new Date('2026-11-01T23:30:00Z')
+
+    expect(todayInTimeZone('Europe/Amsterdam', now)).toBe('2026-11-02')
+    expect(todayInTimeZone('America/Santiago', now)).toBe('2026-11-01')
   })
 })

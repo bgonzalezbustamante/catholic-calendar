@@ -21,7 +21,7 @@ Copyright and other rights in the Christicons assets remain with their respectiv
 
 ## Flaticon favicon
 
-The application favicon at `app/icon.png` is a 512 × 512 rosary icon sourced from **Flaticon.com** and used under Flaticon's free-use terms requiring attribution.
+The application favicon at `app/icon.png` is a 512 × 512 rosary icon sourced from **Flaticon.com** and used under Flaticon's free-use terms requiring attribution. It has been recoloured for this site.
 
 - Platform: https://www.flaticon.com/
 - Source category: https://www.flaticon.com/free-icons/rosary

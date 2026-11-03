@@ -1,6 +1,6 @@
 # Catholic Calendar
 
-**Current release: v0.1.0-beta.1 “Crystal Falcon” — released 5 October 2026**
+**Current published release: v0.1.0-beta.2 “Ivory Delta” — released 3 November 2026**
 
 A reusable Roman Catholic calendar proof of concept built in TypeScript. It derives selected movable celebrations and periods, applies a curated set of General Roman Calendar precedence and transfer rules, and exposes the resulting state through a compact display API, an interactive tester and a Year Overview.
 
@@ -65,13 +65,13 @@ The publishable npm package is defined in `packages/catholic-calendar/`. Its gen
 
 ## npm package
 
-The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Once published, consumers can install it with:
+The package is prepared as `@bgonzalezbustamante/catholic-calendar` with zero runtime dependencies. Install the beta channel with:
 
 ```bash
 npm install @bgonzalezbustamante/catholic-calendar@beta
 ```
 
-Crystal Falcon is distributed through the `beta` npm channel. The previous alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
+Beta releases are distributed through the `beta` npm channel, and the alpha remains available through `@alpha`. Prerelease consumers should use an explicit channel or exact version rather than relying on `latest`. The package publishes CommonJS JavaScript together with TypeScript declarations; ESM projects can import its named exports in Node. Package contents are restricted to the compiled engine, package README and MIT licence; the Next.js demonstration application is not included.
 
 Validate the package locally with:
 
@@ -115,7 +115,7 @@ A date without a selected discrete celebration can expose the countdown independ
 
 ```ts
 getCatholicCalendarState('2026-10-03').countdown
-// Our Lady of the Rosary — 4 days
+// { observance: { id: 'our-lady-of-the-rosary', ... }, date: '2026-10-07', daysUntil: 4 }
 ```
 
 ## Observance states
@@ -123,13 +123,13 @@ getCatholicCalendarState('2026-10-03').countdown
 - `observed` — observed on the nominal date.
 - `commemoration-eligible` — may be commemorated on a privileged weekday while the seasonal weekday retains liturgical precedence. The demonstration UI presents this state as **Commemorated**.
 - `transferred` — nominal and observed dates differ; the transfer reason is retained.
-- `impeded` — retained for inspection but has no observed date because a higher-ranking day has precedence.
+- `impeded` — retained for inspection but has no observed date because a higher-ranking day has precedence; `impededBy` names that day or celebration.
 
 ## Period and historical semantics
 
 The engine resolves civil dates rather than hours of the liturgical day. This permits intentional date-level overlaps, including Lent with the beginning of the Sacred Paschal Triduum on Holy Thursday and the Triduum with Easter Time on Easter Sunday.
 
-The supported civil-date range is **2000–2100**. Christmas Time beginning on 25 December 1999 is carried into the first supported January without otherwise exposing 1999 as a supported public year.
+The supported civil-date range is **2000–2100**. Christmas Time beginning on 25 December 1999 is carried into the first supported January without otherwise exposing 1999 as a supported public year. In the same way, the countdown from 27 to 31 December 2100 points to the first celebration of 2101. Dates outside the range throw a `RangeError`; `isSupportedCalendarDate()` checks a value first.
 
 The project is intended for current and forward-looking application use, not complete historical reconstruction of every revision to the Roman Calendar.
 
@@ -161,7 +161,9 @@ The repository does not require environment variables, an API connection or a da
 ## Documentation
 
 - `CHANGELOG.md` is the canonical technical release history.
-- `lib/releases.ts` contains the short reader-facing Release Notes displayed by the demonstration app.
+- `lib/releases.ts` contains the short, dated reader-facing Release Notes displayed by the demonstration app.
+- `docs/RELEASING.md` is the release checklist.
+- `docs/AUDIT-beta.2.md` records the full audit carried out for Ivory Delta and how each finding was resolved.
 - `docs/SOURCES.md` documents liturgical sources, rule choices and intentional limitations.
 - `THIRD_PARTY_NOTICES.md` records third-party asset licensing and attribution.
 

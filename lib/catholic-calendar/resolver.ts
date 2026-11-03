@@ -11,7 +11,7 @@ import {
   MAX_SUPPORTED_YEAR,
   MIN_SUPPORTED_YEAR,
 } from './calendar'
-import { buildYearObservances } from './observances'
+import { buildObservanceContext, buildYearObservances } from './observances'
 import type {
   CalendarObservance,
   CatholicCalendarState,
@@ -44,6 +44,11 @@ export function getCatholicCalendarState(value: string): CatholicCalendarState {
   const periodYears =
     year === MIN_SUPPORTED_YEAR ? [MIN_SUPPORTED_YEAR - 1, ...years] : years
   const observances = years.flatMap(buildYearObservances)
+  // Observances beyond the supported range only serve as countdown targets.
+  const countdownCandidates =
+    year === MAX_SUPPORTED_YEAR
+      ? [...observances, ...buildObservanceContext(MAX_SUPPORTED_YEAR + 1)]
+      : observances
   const periods = periodYears.flatMap(buildPeriodContext)
 
   const observedObservances = sortObserved(
@@ -57,7 +62,7 @@ export function getCatholicCalendarState(value: string): CatholicCalendarState {
     isBetweenInclusive(date, period.startDate, period.endDate)
   )
 
-  const nextEvent = observances
+  const nextEvent = countdownCandidates
     .filter(
       (event) =>
         event.observedDate !== null && compareDates(event.observedDate, date) > 0

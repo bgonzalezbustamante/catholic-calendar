@@ -4,21 +4,52 @@ import { useState } from 'react'
 
 import { releases } from '@/lib/releases'
 
+function formatReleaseDate(value: string) {
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${value}T00:00:00Z`))
+}
+
 export default function ReleaseNotes() {
   const [pageIndex, setPageIndex] = useState(0)
   const release = releases[pageIndex]
 
   if (!release) return null
 
+  const isNewest = pageIndex === 0
+  const isOldest = pageIndex === releases.length - 1
+
   return (
     <section className="release-notes" aria-labelledby="release-notes-title">
-      <p className="eyebrow">Release notes</p>
-      <div className="release-card">
+      <h2 className="eyebrow" id="release-notes-title">
+        Release notes
+      </h2>
+      <div className="release-card" aria-live="polite">
         <div className="release-heading">
-          <h2 id="release-notes-title">
+          <h3>
             {release.version} “{release.codename}”
-          </h2>
-          <span className="release-tag">{release.status}</span>
+          </h3>
+          <span
+            className={[
+              'release-tag',
+              release.status === 'In development' ? 'is-in-development' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            {release.status}
+          </span>
+          {release.releasedOn ? (
+            <span className="release-tag">
+              <span className="sr-only">Released on </span>
+              <time dateTime={release.releasedOn}>
+                {formatReleaseDate(release.releasedOn)}
+              </time>
+            </span>
+          ) : null}
         </div>
 
         <p className="release-summary">{release.summary}</p>
@@ -26,7 +57,7 @@ export default function ReleaseNotes() {
         <div className="release-sections">
           {release.sections.map((section) => (
             <div key={section.title}>
-              <h3>{section.title}</h3>
+              <h4>{section.title}</h4>
               <ul>
                 {section.items.map((item) => (
                   <li key={item}>{item}</li>
@@ -45,10 +76,12 @@ export default function ReleaseNotes() {
           <button
             className="release-page-nav"
             type="button"
-            onClick={() => setPageIndex((index) => Math.max(0, index - 1))}
-            disabled={pageIndex === 0}
+            onClick={() => {
+              if (!isNewest) setPageIndex((index) => index - 1)
+            }}
+            aria-disabled={isNewest}
           >
-            Previous
+            <span aria-hidden="true">← </span>Newer
           </button>
 
           <div className="release-page-numbers">
@@ -64,9 +97,11 @@ export default function ReleaseNotes() {
                 key={item.version}
                 onClick={() => setPageIndex(index)}
                 aria-current={index === pageIndex ? 'page' : undefined}
-                aria-label={`Show release ${item.version} ${item.codename}`}
               >
                 {index + 1}
+                <span className="sr-only">
+                  : {item.version} {item.codename}
+                </span>
               </button>
             ))}
           </div>
@@ -74,14 +109,12 @@ export default function ReleaseNotes() {
           <button
             className="release-page-nav"
             type="button"
-            onClick={() =>
-              setPageIndex((index) =>
-                Math.min(releases.length - 1, index + 1)
-              )
-            }
-            disabled={pageIndex === releases.length - 1}
+            onClick={() => {
+              if (!isOldest) setPageIndex((index) => index + 1)
+            }}
+            aria-disabled={isOldest}
           >
-            Next
+            Older<span aria-hidden="true"> →</span>
           </button>
         </nav>
       ) : null}

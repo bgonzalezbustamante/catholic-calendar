@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 
 import {
   buildPeriods,
+  getCatholicCalendarState,
   getObservanceDisplayIcon,
   getPeriodDisplayIcon,
   getYearOverview,
@@ -12,21 +13,34 @@ import {
 } from '@/lib/catholic-calendar'
 import CalendarIcon from './calendar-icon'
 
+// Fixed month names keep server and browser output identical; ICU versions
+// disagree on en-GB short months ("Sep" or "Sept").
+const SHORT_MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+
 function formatShortDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
+  const [, month, day] = value.split('-')
+  return `${day} ${SHORT_MONTHS[Number(month) - 1]}`
 }
 
 function formatPeriodDate(value: string) {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${value}T00:00:00Z`))
+  return `${formatShortDate(value)} ${value.slice(0, 4)}`
+}
+
+function iconLabel(icon: string) {
+  return `${icon.replace(/-\d+$/, '').replaceAll('-', ' ')} icon`
 }
 
 function titleCase(value: string) {
@@ -43,10 +57,20 @@ function statusLabel(status: string) {
 export default function YearOverview({ initialYear }: { initialYear: number }) {
   const [year, setYear] = useState(initialYear)
   const entries = useMemo(() => getYearOverview(year), [year])
-  const periods = useMemo(
-    () => [...buildPeriods(year)].sort((a, b) => a.startDate.localeCompare(b.startDate)),
-    [year]
-  )
+  // Include periods carried over from the previous year, such as the January
+  // part of Christmas Time, which buildPeriods(year) lists under their start year.
+  const periods = useMemo(() => {
+    const yearStart = `${year}-01-01`
+    const carriedOver = getCatholicCalendarState(yearStart).liturgicalPeriods.filter(
+      (period) => period.startDate < yearStart
+    )
+    return [...carriedOver, ...buildPeriods(year)].sort((a, b) =>
+      a.startDate.localeCompare(b.startDate)
+    )
+  }, [year])
+  const isFirstYear = year === MIN_SUPPORTED_YEAR
+  const isLastYear = year === MAX_SUPPORTED_YEAR
+  const isCurrentYear = year === initialYear
 
   return (
     <section className="year-overview" aria-labelledby="year-overview-title">
@@ -59,32 +83,40 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             semantics for the selected year.
           </p>
         </div>
-        <div className="year-control" aria-label="Year pagination">
+        <div className="year-control" role="group" aria-label="Year pagination">
           <span>Year</span>
           <div className="year-pagination">
             <button
               type="button"
-              disabled={year === MIN_SUPPORTED_YEAR}
-              onClick={() => setYear((value) => Math.max(MIN_SUPPORTED_YEAR, value - 1))}
+              aria-disabled={isFirstYear}
+              onClick={() => {
+                if (!isFirstYear) setYear((value) => value - 1)
+              }}
               aria-label="Previous year"
             >
-              ←
+              <span aria-hidden="true">←</span>
             </button>
-            <strong>{year}</strong>
+            <strong aria-live="polite" aria-atomic="true">
+              {year}
+            </strong>
             <button
               type="button"
-              disabled={year === MAX_SUPPORTED_YEAR}
-              onClick={() => setYear((value) => Math.min(MAX_SUPPORTED_YEAR, value + 1))}
+              aria-disabled={isLastYear}
+              onClick={() => {
+                if (!isLastYear) setYear((value) => value + 1)
+              }}
               aria-label="Next year"
             >
-              →
+              <span aria-hidden="true">→</span>
             </button>
           </div>
           <button
             className="year-current-button"
             type="button"
-            disabled={year === initialYear}
-            onClick={() => setYear(initialYear)}
+            aria-disabled={isCurrentYear}
+            onClick={() => {
+              if (!isCurrentYear) setYear(initialYear)
+            }}
           >
             <svg
               aria-hidden="true"
@@ -113,12 +145,19 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           </div>
           <p>
             These are the liturgical and devotional periods currently exposed by the
-            calendar engine for the selected year.
+            calendar engine for the selected year. Periods that cross the turn of
+            the year appear in both years.
           </p>
         </div>
 
-        <div className="table-scroll" tabIndex={0}>
+        <div
+          className="table-scroll"
+          tabIndex={0}
+          role="region"
+          aria-labelledby="period-overview-title"
+        >
           <table className="period-table">
+            <caption className="sr-only">Periods in {year}</caption>
             <thead>
               <tr>
                 <th>Icon</th>
@@ -130,12 +169,15 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
             </thead>
             <tbody>
               {periods.map((period) => (
-                <tr key={period.id}>
+                <tr key={`${period.id}-${period.startDate}`}>
                   <td className="year-icon-cell">
                     <CalendarIcon
                       className="year-overview-icon"
                       icon={getPeriodDisplayIcon(period.id)}
                     />
+                    <span className="sr-only">
+                      {iconLabel(getPeriodDisplayIcon(period.id))}
+                    </span>
                   </td>
                   <td>
                     <strong>{period.name}</strong>
@@ -175,8 +217,14 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
           </p>
         </div>
 
-        <div className="table-scroll" tabIndex={0}>
+        <div
+          className="table-scroll"
+          tabIndex={0}
+          role="region"
+          aria-labelledby="celebrations-overview-title"
+        >
           <table>
+          <caption className="sr-only">Celebrations in {year}</caption>
           <thead>
             <tr>
               <th>Date</th>
@@ -196,6 +244,9 @@ export default function YearOverview({ initialYear }: { initialYear: number }) {
                     className="year-overview-icon"
                     icon={getObservanceDisplayIcon(observance)}
                   />
+                  <span className="sr-only">
+                    {iconLabel(getObservanceDisplayIcon(observance))}
+                  </span>
                 </td>
                 <td>
                   <strong>{observance.name}</strong>
