@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
+## [Unreleased]
+
+### Changed
+
+- Dependabot no longer raises major-version upgrades, groups minor and patch npm updates into one weekly pull request and checks GitHub Actions monthly.
+
 ## [0.1.0-beta.2] — Ivory Delta — 2026-11-03
 
 The full audit behind this release is recorded in `docs/AUDIT-beta.2.md`.
@@ -124,6 +130,7 @@ The full audit behind this release is recorded in `docs/AUDIT-beta.2.md`.
 - Period boundaries are date-level approximations; Holy Thursday and Easter Sunday intentionally expose overlapping contextual periods.
 - The selected observance set is curated rather than a complete General Roman Calendar or local proper calendar.
 
+[Unreleased]: https://github.com/bgonzalezbustamante/catholic-calendar/compare/v0.1.0-beta.2...HEAD
 [0.1.0-beta.2]: https://github.com/bgonzalezbustamante/catholic-calendar/compare/v0.1.0-beta.1...v0.1.0-beta.2
 [0.1.0-beta.1]: https://github.com/bgonzalezbustamante/catholic-calendar/compare/v0.1.0-alpha.1...v0.1.0-beta.1
 [0.1.0-alpha.1]: https://github.com/bgonzalezbustamante/catholic-calendar/releases/tag/v0.1.0-alpha.1
