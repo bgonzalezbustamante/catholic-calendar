@@ -7,6 +7,8 @@ All notable changes to this project are documented here. The format follows Keep
 ### Changed
 
 - Dependabot no longer raises major-version upgrades, groups minor and patch npm updates into one weekly pull request and checks GitHub Actions monthly.
+- Dependabot security updates for npm now arrive grouped in one pull request, still as soon as an advisory is published, and Dependabot commits and pull request titles carry `[skip netlify]`.
+- The repository now requires the CI checks to pass before anything merges into `main` (a "Protect main" ruleset that also blocks force-pushes and deletion), runs CodeQL code scanning and accepts private vulnerability reports.
 
 ## [0.1.0-beta.2] — Ivory Delta — 2026-11-03
 
