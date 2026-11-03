@@ -19,7 +19,8 @@ export const releases: ReleaseNote[] = [
   {
     version: 'v0.1.0-beta.2',
     codename: 'Ivory Delta',
-    status: 'In development',
+    status: 'Released',
+    releasedOn: '2026-11-03',
     summary:
       'Ivory Delta follows a full audit of the calendar engine, the demonstration app and the release process. It fixes a date-entry crash, makes the interface more accessible and dates the release history.',
     sections: [
