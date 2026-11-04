@@ -7,6 +7,7 @@ All notable changes to this project are documented here. The format follows Keep
 ### Changed
 
 - Dependabot no longer raises major-version upgrades, groups minor and patch npm updates into one weekly pull request and checks GitHub Actions monthly.
+- Added `.nvmrc` (Node 24, the version used locally and the upper CI version; `engines` still allows 22) and `.gitattributes` to keep LF line endings on every platform, as in organisation-site-template.
 - Dependabot security updates for npm now arrive grouped in one pull request, still as soon as an advisory is published, and Dependabot commits and pull request titles carry `[skip netlify]`.
 - The repository now requires the CI checks to pass before anything merges into `main` (a "Protect main" ruleset that also blocks force-pushes and deletion), runs CodeQL code scanning and accepts private vulnerability reports.
 
