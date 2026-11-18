@@ -17,7 +17,7 @@
     "check:package": "npm pack --dry-run ./packages/catholic-calendar && node scripts/check-package.mjs"
   },
   "dependencies": {
-    "next": "16.4.4",
+    "next": "16.4.5",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
