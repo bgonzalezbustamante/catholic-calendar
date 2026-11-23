@@ -1074,6 +1074,99 @@ tbody tr:last-child td {
   border: 0;
 }
 
+/* Not found: the 404 layout shared with the owner's other sites. */
+
+.not-found-section {
+  display: flex;
+  align-items: center;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem) 0;
+}
+
+.not-found-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  align-items: center;
+  gap: clamp(1.25rem, 3.5vw, 3rem);
+}
+
+.not-found-copy {
+  min-width: 0;
+}
+
+.not-found-copy h1 {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.not-found-lead {
+  max-width: 720px;
+  margin: 0 0 0.9rem;
+  color: var(--ash);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.not-found-copy .button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  border: 1px solid var(--stone);
+  border-radius: 0.48rem;
+  background: var(--paper);
+  padding: 0.4rem 0.9rem;
+  color: var(--blue);
+  font-family: var(--font-roboto), Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.not-found-copy .button:hover {
+  border-color: var(--blue);
+}
+
+.not-found-copy .button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.not-found-illustration {
+  width: min(100%, 480px);
+  justify-self: center;
+}
+
+.not-found-illustration img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .not-found-section {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .not-found-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .not-found-illustration {
+    width: min(72vw, 340px);
+  }
+}
+
+@media (max-width: 560px) {
+  .not-found-layout {
+    gap: 1.2rem;
+  }
+
+  .not-found-illustration {
+    width: min(78vw, 300px);
+  }
+}
+
 @media (max-width: 820px) {
   .rule-note {
     width: 100%;
