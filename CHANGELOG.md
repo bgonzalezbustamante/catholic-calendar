@@ -4,12 +4,22 @@ All notable changes to this project are documented here. The format follows Keep
 
 ## [Unreleased]
 
+### Added
+
+- Added a 404 page with the penguin illustration used across the owner's other sites; the artwork is credited in `THIRD_PARTY_NOTICES.md` under CC BY-NC 4.0.
+- Added security headers on every route: `X-Frame-Options: DENY`, `Content-Security-Policy: frame-ancestors 'none'`, `Referrer-Policy: strict-origin-when-cross-origin` and a restrictive `Permissions-Policy`, with a regression test; the `X-Powered-By` header is no longer sent.
+
 ### Changed
 
 - Dependabot no longer raises major-version upgrades, groups minor and patch npm updates into one weekly pull request and checks GitHub Actions monthly.
 - Added `.nvmrc` (Node 24, the version used locally and the upper CI version; `engines` still allows 22) and `.gitattributes` to keep LF line endings on every platform, as in organisation-site-template.
 - Dependabot security updates for npm now arrive grouped in one pull request, still as soon as an advisory is published, and Dependabot commits and pull request titles carry `[skip netlify]`.
 - The repository now requires the CI checks to pass before anything merges into `main` (a "Protect main" ruleset that also blocks force-pushes and deletion), runs CodeQL code scanning and accepts private vulnerability reports.
+
+### Security
+
+- Updated `next` and `eslint-config-next` from 16.4.4 to 16.4.6, resolving GHSA-mfr8-8qww-v76h, GHSA-vc7v-qv4w-wrv8, GHSA-vvgp-ww4w-46vf, GHSA-f3mh-rxg3-f5g2, GHSA-7qx7-33qx-rqx2, GHSA-pc58-hwjq-p385 and GHSA-rhh4-g77r-r9qj. Most concern `use cache`, Edge runtime or image-optimisation features that the demonstration app does not use. The npm package has no runtime dependencies and is unaffected.
+- Updated `typescript-eslint` to 8.73.0 in the lockfile, which depends on `minimatch` 11 and resolves GHSA-g3hv-75wg-m249; `npm audit` now reports no vulnerabilities, development tooling included.
 
 ## [0.1.0-beta.2] — Ivory Delta — 2026-11-03
 
