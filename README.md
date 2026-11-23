@@ -58,6 +58,7 @@ The demonstration shell is separate:
 - `components/calendar-display.tsx` — reusable visual renderer.
 - `components/release-notes.tsx` and `lib/releases.ts` — short reader-facing release notes.
 - `app/page.tsx` — demonstration page.
+- `app/not-found.tsx` — 404 page with the penguin illustration.
 
 This separation keeps the engine independent of React, Next.js, network calls and database state.
 
@@ -169,4 +170,4 @@ The repository does not require environment variables, an API connection or a da
 
 ## Licence
 
-Source code and repository documentation are released under the MIT License. See `LICENSE`. Selected third-party assets retain their own licence terms; see `THIRD_PARTY_NOTICES.md`.
+Source code and repository documentation are released under the MIT License. See `LICENSE`. Selected third-party assets and the 404 illustration retain their own licence terms; see `THIRD_PARTY_NOTICES.md`.

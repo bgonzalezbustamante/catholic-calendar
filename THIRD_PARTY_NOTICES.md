@@ -32,3 +32,12 @@ The application favicon at `app/icon.png` is a 512 × 512 rosary icon sourced fr
 Flaticon's free downloads require attribution. The repository preserves the supplied creator-specific credit and source-category link for the favicon.
 
 Copyright and other rights in the favicon remain with Magnific and/or the applicable Flaticon rightsholder.
+
+## 404 illustration
+
+The penguin illustration on the 404 page (`public/errors/404_penguin.webp`) is original artwork by the site owner, shared with the owner's other websites.
+
+- © 2026 Bastián González-Bustamante
+- Licence: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0), https://creativecommons.org/licenses/by-nc/4.0/
+
+The illustration is not covered by this repository's MIT License.
